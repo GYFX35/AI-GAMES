@@ -1,4 +1,4 @@
-const CACHE_NAME = 'game-portal-cache-v1';
+const CACHE_NAME = 'game-portal-cache-v2';
 const URLS_TO_CACHE = [
   '/',
   '/index.html',
@@ -13,10 +13,8 @@ const URLS_TO_CACHE = [
   '/instant_games.html',
   '/partnerships.html',
   '/camera_features.html',
-  // Add other important pages/assets if any
-  // Note: Icon paths from manifest.json should also be cached if they are critical for offline display.
-  // e.g., '/icons/icon-192x192.png', '/icons/icon-512x512.png'
-  // However, ensure these files exist or the install step will fail.
+  '/icons/icon-192x192.png', // Added
+  '/icons/icon-512x512.png'  // Added
 ];
 
 // Install a service worker
