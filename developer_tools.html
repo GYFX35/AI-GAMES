@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Tools - Screen Recorder - Game Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Tools for developers, including a client-side screen recorder to capture gameplay or app demonstrations running in the PWA.">
+    <style>
+        #recordingPreview {
+            max-width: 500px;
+            max-height: 300px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            background-color: #f0f0f0;
+        }
+        .controls button {
+            padding: 8px 15px;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+        #downloadLink {
+            display: block;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Developer Tools - Screen Recorder</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
+            <li><a href="manga_games.html">Manga Games</a></li>
+            <li><a href="casino_games.html">Casino Games</a></li>
+            <li><a href="global_gambles.html">Global Gambles</a></li>
+            <li><a href="forums.html">Forums</a></li>
+            <li><a href="affiliates.html">Affiliates</a></li>
+            <li><a href="esport_games.html">E-sport Games</a></li>
+            <li><a href="instant_games.html">Instant Games</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="camera_features.html">Camera Features</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+            <li><a href="cloud_gaming.html">Cloud Gaming</a></li>
+            <li><a href="sponsorship.html">Sponsor Us</a></li>
+            <li><a href="monetization.html">Monetization Info</a></li>
+            <li><a href="role_playing_games.html">Role-Playing Games</a></li>
+            <li><a href="developer_tools.html">Developer Tools</a></li>
+            <li><a href="github_explorer.html">GitHub Explorer</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="screen-recorder">
+            <h2>Record Your Screen / App Window</h2>
+            <p>Use the controls below to record your screen, an application window (e.g., your game), or a browser tab. The recording will be available for download as a WebM video file.</p>
+
+            <div class="controls">
+                <button id="startRecordBtn">Start Recording</button>
+                <button id="stopRecordBtn" disabled>Stop Recording</button>
+            </div>
+
+            <video id="recordingPreview" muted playsinline></video>
+            <p><small>Your screen recording will preview here (if a display surface is chosen that can be previewed). Audio is not recorded in this version.</small></p>
+
+            <a id="downloadLink" style="display:none;">Download Recording</a>
+        </section>
+
+        <script>
+            const startRecordBtn = document.getElementById('startRecordBtn');
+            const stopRecordBtn = document.getElementById('stopRecordBtn');
+            const recordingPreview = document.getElementById('recordingPreview');
+            const downloadLink = document.getElementById('downloadLink');
+
+            let mediaRecorder;
+            let recordedChunks = [];
+            let mediaStream;
+
+            if (startRecordBtn) {
+                startRecordBtn.addEventListener('click', async () => {
+                    recordedChunks = []; // Reset chunks for new recording
+                    downloadLink.style.display = 'none'; // Hide old download link
+                    downloadLink.href = '#'; // Reset href
+
+                    try {
+                        mediaStream = await navigator.mediaDevices.getDisplayMedia({
+                            video: {
+                                mediaSource: "screen", // or "window" or "tab"
+                                cursor: "always" // "always", "motion", "never"
+                            },
+                            audio: false // For simplicity, audio can be enabled with: { audio: true }
+                                         // but requires careful handling of audio output from screen vs mic.
+                        });
+
+                        if (recordingPreview) {
+                            recordingPreview.srcObject = mediaStream;
+                            recordingPreview.play().catch(e => console.error("Preview play error:", e));
+                        }
+
+                        mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp9' });
+
+                        mediaRecorder.ondataavailable = (event) => {
+                            if (event.data.size > 0) {
+                                recordedChunks.push(event.data);
+                            }
+                        };
+
+                        mediaRecorder.onstop = () => {
+                            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                            const url = URL.createObjectURL(blob);
+                            downloadLink.href = url;
+                            downloadLink.download = 'screen-recording-' + new Date().toISOString().slice(0,19).replace(/:/g,'-') + '.webm';
+                            downloadLink.style.display = 'block';
+                            downloadLink.textContent = 'Download Recording (WebM)';
+
+                            // Optional: Revoke object URL after some time or on next recording
+                            // setTimeout(() => { URL.revokeObjectURL(url); }, 60000);
+                        };
+
+                        // Add event listener for when user stops sharing via browser UI
+                        mediaStream.getTracks().forEach(track => {
+                            track.onended = () => {
+                                console.log("Screen sharing stopped via browser UI");
+                                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                                    mediaRecorder.stop();
+                                }
+                                stopRecordBtn.disabled = true;
+                                startRecordBtn.disabled = false;
+                                if (recordingPreview) {
+                                    recordingPreview.srcObject = null;
+                                }
+                            };
+                        });
+
+                        mediaRecorder.start();
+                        startRecordBtn.disabled = true;
+                        stopRecordBtn.disabled = false;
+                        console.log('Screen recording started.');
+
+                    } catch (err) {
+                        console.error("Error starting screen recording:", err);
+                        alert("Could not start screen recording. Error: " + err.message + "\nEnsure you grant permission and that your browser supports screen capture.");
+                        startRecordBtn.disabled = false;
+                        stopRecordBtn.disabled = true;
+                    }
+                });
+            }
+
+            if (stopRecordBtn) {
+                stopRecordBtn.addEventListener('click', () => {
+                    if (mediaRecorder && mediaRecorder.state === 'recording') {
+                        mediaRecorder.stop();
+                    }
+                    // Stop all tracks on the mediaStream to release the screen share
+                    if (mediaStream) {
+                        mediaStream.getTracks().forEach(track => track.stop());
+                    }
+                    if (recordingPreview) {
+                        recordingPreview.srcObject = null;
+                    }
+                    startRecordBtn.disabled = false;
+                    stopRecordBtn.disabled = true;
+                    console.log('Screen recording stopped by button.');
+                });
+            }
+        </script>
+    </main>
+    <footer>
+        <p>&copy; 2023 Game Portal</p>
+    </footer>
+</body>
+</html>

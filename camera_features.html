@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Features - Game Portal</title>
+    <meta name="description" content="Learn about upcoming camera features in Game Portal, including profile picture capture, video chat, and QR code scanning (under development).">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Camera Features (Under Development)</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
+            <li><a href="manga_games.html">Manga Games</a></li>
+            <li><a href="casino_games.html">Casino Games</a></li>
+            <li><a href="global_gambles.html">Global Gambles</a></li>
+            <li><a href="forums.html">Forums</a></li>
+            <li><a href="affiliates.html">Affiliates</a></li>
+            <li><a href="esport_games.html">E-sport Games</a></li>
+            <li><a href="instant_games.html">Instant Games</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="camera_features.html">Camera Features</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+            <li><a href="cloud_gaming.html">Cloud Gaming</a></li>
+            <li><a href="sponsorship.html">Sponsor Us</a></li>
+            <li><a href="monetization.html">Monetization Info</a></li>
+            <li><a href="role_playing_games.html">Role-Playing Games</a></li>
+            <li><a href="developer_tools.html">Developer Tools</a></li>
+            <li><a href="github_explorer.html">GitHub Explorer</a></li>
+        </ul>
+    </nav>
+    <main>
+        <p>This page outlines planned camera-based features. Implementation requires JavaScript and potentially backend support.</p>
+
+        <section id="profile-picture">
+            <h2>Profile Picture Capture</h2>
+            <p>Allow users to capture a profile picture using their device camera.</p>
+            <!--
+                JavaScript Implementation Notes:
+                - Use navigator.mediaDevices.getUserMedia({ video: true }) to access camera.
+                - Display stream in a <video id="cameraFeedProfile" autoplay></video> element.
+                - Use a <button id="captureProfileBtn">Capture</button> to draw current frame to a <canvas id="imageCanvasProfile"></canvas>.
+                - Convert canvas to image (e.g., PNG/JPEG) for display or upload.
+                - Placeholder for captured image: <img id="profilePreview" src="#" alt="Profile Preview" style="display:none; width: 200px; height: 150px;">
+            -->
+            <div style="border: 1px dashed #ccc; padding: 10px; margin-top: 10px;">
+                <p><strong>UI Placeholder:</strong></p>
+                <p>[Camera feed would appear here]</p>
+                <button>Capture Profile Photo</button>
+                <p>[Captured image preview would appear here]</p>
+            </div>
+        </section>
+
+        <section id="video-chat">
+            <h2>Video Chat</h2>
+            <p>Enable users to engage in video conversations.</p>
+            <!--
+                JavaScript Implementation Notes:
+                - Requires WebRTC (RTCPeerConnection).
+                - Use getUserMedia for camera and microphone access.
+                - Needs a signaling server (e.g., using WebSockets) for connection setup.
+                - UI elements for local video <video id="localVideo" autoplay muted></video>, remote video <video id="remoteVideo" autoplay></video>.
+                - Buttons for call initiation, answer, hang up, mute audio/video.
+            -->
+            <div style="border: 1px dashed #ccc; padding: 10px; margin-top: 10px;">
+                <p><strong>UI Placeholder:</strong></p>
+                <p>[Local video feed]</p>
+                <p>[Remote video feed]</p>
+                <button>Start Call</button> <button>End Call</button>
+            </div>
+        </section>
+
+        <section id="qr-scanner">
+            <h2>QR Code Scanner</h2>
+            <p>Allow users to scan QR codes using their device camera.</p>
+            <!--
+                JavaScript Implementation Notes:
+                - Use getUserMedia for camera access.
+                - Display stream in a <video id="cameraFeedQR" autoplay></video> element.
+                - Continuously draw video frames to a hidden <canvas id="qrCanvas"></canvas>.
+                - Use a QR decoding library (e.g., jsQR, zxing-js) to process canvas image data.
+                - Display decoded QR content in <p id="qrResult">Scanned QR Code: </p>.
+            -->
+            <div style="border: 1px dashed #ccc; padding: 10px; margin-top: 10px;">
+                <p><strong>UI Placeholder:</strong></p>
+                <p>[Camera feed for QR scanning]</p>
+                <p>Scanned QR Code: [Result would appear here]</p>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <p>&copy; 2023 Game Portal</p>
+    </footer>
+</body>
+</html>
