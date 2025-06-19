@@ -28,10 +28,14 @@
             <li><a href="cloud_gaming.html">Cloud Gaming</a></li>
         </ul>
     </nav>
+    <div style="text-align: center; padding: 20px;">
+        <button id="nativeShareBtn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer;">Share this Portal!</button>
+    </div>
     <footer>
         <p>&copy; 2023 Game Portal</p>
     </footer>
     <script>
+      // Service Worker Registration (existing code)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
@@ -42,6 +46,32 @@
               console.log('ServiceWorker registration failed: ', err);
             });
         });
+      }
+
+      // Web Share API Implementation (new code)
+      const nativeShareButton = document.getElementById('nativeShareBtn');
+
+      if (nativeShareButton) { // Check if button exists on the page
+        if (navigator.share) {
+          nativeShareButton.addEventListener('click', async () => {
+            try {
+              await navigator.share({
+                title: document.title,
+                text: 'Check out the Game Portal - your hub for AI MMO, Manga, Casino games and more!',
+                url: window.location.href
+              });
+              console.log('Game Portal shared successfully!');
+            } catch (error) {
+              console.error('Error sharing Game Portal:', error);
+            }
+          });
+        } else {
+          console.log('Web Share API not supported in this browser.');
+          // Fallback: Hide the button if Web Share API is not supported
+          nativeShareButton.style.display = 'none';
+          // Optionally, you could implement other fallback sharing methods here
+          // e.g., display direct links to Twitter, Facebook share intents.
+        }
       }
     </script>
 </body>
