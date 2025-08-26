@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sponsor Game Portal - Support Our Growth</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
     <meta name="description" content="Support the Game Portal PWA! Learn how you can contribute to our development, feature enhancements, and hosting costs. Contact us to become a sponsor.">
 </head>
 <body>
@@ -53,6 +54,11 @@
             <p>We are currently exploring various ways to make sponsorship easy and accessible. Our long-term vision includes a direct sponsorship model, potentially integrating services like Google Pay for seamless contributions, similar to platforms like GitHub Sponsors.</p>
 
             <h3>Current Sponsorship Options:</h3>
+
+            <div style="text-align: center; margin: 25px 0;">
+                <button id="sponsorBtn" class="modal-trigger-btn">Sponsor with QR Code</button>
+            </div>
+
             <div style="border: 1px solid #ddd; padding: 15px; margin-top: 15px; background-color: #f9f9f9;">
                 <h4>Direct Inquiry via Email</h4>
                 <p>For direct sponsorship inquiries, collaborations, or to discuss how you or your organization can support Game Portal, please contact us at:</p>
@@ -74,8 +80,43 @@
         </section>
 
     </main>
+
+    <!-- The Modal -->
+    <div id="sponsorshipModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close-btn">&times;</span>
+          <h2>Sponsor Game Portal</h2>
+        </div>
+        <div class="modal-body">
+          <p>We appreciate your support! You can sponsor us directly using one of the methods below. Your contribution helps us cover server costs and continue development.</p>
+          <div class="qr-codes">
+            <div class="qr-code-item">
+              <p>Bitcoin</p>
+              <img src="https://placehold.co/120x120/F7931A/white?text=BTC+QR" alt="Bitcoin QR Code">
+              <p><small>bc1q...xyz (placeholder)</small></p>
+            </div>
+            <div class="qr-code-item">
+              <p>Ethereum</p>
+              <img src="https://placehold.co/120x120/627EEA/white?text=ETH+QR" alt="Ethereum QR Code">
+              <p><small>0x...abc (placeholder)</small></p>
+            </div>
+            <div class="qr-code-item">
+              <p>Cash App</p>
+              <img src="https://placehold.co/120x120/00C244/white?text=CashApp" alt="Cash App QR Code">
+              <p><small>$YourCashtag (placeholder)</small></p>
+            </div>
+          </div>
+          <p style="text-align:center; margin-top: 20px;">For other methods, please <a href="mailto:gountantexavier@gmail.com">contact us via email</a>.</p>
+          <p style="text-align:center; font-size: 0.8em; color: #777;">NOTE: The QR codes and addresses above are placeholders and must be replaced with real payment information.</p>
+        </div>
+      </div>
+    </div>
+
     <footer>
         <p>&copy; 2023 Game Portal</p>
     </footer>
+    <script src="modal.js" defer></script>
 </body>
 </html>
