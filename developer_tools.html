@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="Tools for developers, including a client-side screen recorder to capture gameplay or app demonstrations running in the PWA.">
     <link rel="stylesheet" href="modal.css">
+    <script src="https://connect.facebook.net/en_US/fbinstant.6.3.js"></script>
     <style>
         #recordingPreview {
             max-width: 500px;
@@ -56,6 +57,11 @@
         </ul>
     </nav>
     <main>
+        <section id="premium-tools">
+            <h2>Premium Developer Tools</h2>
+            <p>Unlock premium developer tools to enhance your game development workflow.</p>
+            <button id="purchaseBtn">Purchase Premium Tools</button>
+        </section>
         <section id="screen-recorder">
             <h2>Record Your Screen / App Window</h2>
             <p>Use the controls below to record your screen, an application window (e.g., your game), or a browser tab. The recording will be available for download as a WebM video file.</p>
@@ -174,5 +180,6 @@
         <p>&copy; 2023 Game Portal</p>
     </footer>
     <script src="modal.js" defer></script>
+    <script src="iap.js" defer></script>
 </body>
 </html>
