@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Games - Games Universe</title>
-    <meta name="description" content="Browse all games available on the Games Universe platform.">
+    <title>All Games - Search and Discover on Games Universe</title>
+    <meta name="description" content="Search and discover a wide variety of games on the Games Universe platform. Find games by name or category, and get resources for game development and research.">
+    <meta name="keywords" content="all games, game search, discover games, game categories, game development, game research">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -16,6 +17,7 @@
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="games.html">Games</a></li>
+                    <li><a href="ai_agent.html">AI Assistant</a></li>
                     <li><a href="forums.html">Forums</a></li>
                     <li><a href="sponsorship.html">Sponsor Us</a></li>
                 </ul>
@@ -26,44 +28,10 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>All Games</h2>
-                <div class="category-grid">
-                    <div class="category-card">
-                        <h3>AI MMO Games</h3>
-                        <a href="ai_mmo_games.html">Explore</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Manga Games</h3>
-                        <a href="manga_games.html">Discover</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Casino Games</h3>
-                        <a href="casino_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Global Gambles</h3>
-                        <a href="global_gambles.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>E-sport Games</h3>
-                        <a href="esport_games.html">Watch Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Instant Games</h3>
-                        <a href="instant_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Role-Playing Games</h3>
-                        <a href="role_playing_games.html">Explore</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>AR Rugby</h3>
-                        <a href="rugby_game.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Africa AR</h3>
-                        <a href="africa_ar_game.html">Play Now</a>
-                    </div>
+                <h2>Search for Games</h2>
+                <input type="text" id="searchInput" placeholder="Enter game name or category..." onkeyup="searchGames()">
+                <div id="searchResults" class="category-grid">
+                    <!-- Search results will be displayed here -->
                 </div>
             </div>
         </section>
@@ -76,17 +44,63 @@
     </footer>
 
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-              console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            })
-            .catch(err => {
-              console.log('ServiceWorker registration failed: ', err);
+        let games = [];
+
+        async function fetchGames() {
+            try {
+                const response = await fetch('data/games.json');
+                games = await response.json();
+                displayGames(games);
+            } catch (error) {
+                console.error('Error fetching games:', error);
+            }
+        }
+
+        function displayGames(gamesToDisplay) {
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = '';
+
+            if (gamesToDisplay.length === 0) {
+                searchResults.innerHTML = '<p>No games found.</p>';
+                return;
+            }
+
+            gamesToDisplay.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'category-card';
+                gameCard.innerHTML = `
+                    <h3>${game.name}</h3>
+                    <p>${game.category}</p>
+                    <a href="${game.link}">Play Now</a>
+                `;
+                searchResults.appendChild(gameCard);
             });
-        });
-      }
+        }
+
+        function searchGames() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.toLowerCase();
+
+            const filteredGames = games.filter(game => {
+                return game.name.toLowerCase().includes(searchTerm) || game.category.toLowerCase().includes(searchTerm);
+            });
+
+            displayGames(filteredGames);
+        }
+
+        window.onload = fetchGames;
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
     </script>
 </body>
 </html>

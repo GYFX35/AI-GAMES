@@ -1,0 +1,47 @@
+[
+    {
+        "name": "AI MMO Adventure",
+        "category": "AI MMO Games",
+        "link": "ai_mmo_games.html"
+    },
+    {
+        "name": "Manga Mayhem",
+        "category": "Manga Games",
+        "link": "manga_games.html"
+    },
+    {
+        "name": "Casino Royale",
+        "category": "Casino Games",
+        "link": "casino_games.html"
+    },
+    {
+        "name": "Global Gamble",
+        "category": "Global Gambles",
+        "link": "global_gambles.html"
+    },
+    {
+        "name": "Esports Arena",
+        "category": "E-sport Games",
+        "link": "esport_games.html"
+    },
+    {
+        "name": "Instant Fun",
+        "category": "Instant Games",
+        "link": "instant_games.html"
+    },
+    {
+        "name": "RPG Quest",
+        "category": "Role-Playing Games",
+        "link": "role_playing_games.html"
+    },
+    {
+        "name": "AR Rugby Challenge",
+        "category": "AR Rugby",
+        "link": "rugby_game.html"
+    },
+    {
+        "name": "Africa AR Explorer",
+        "category": "Africa AR",
+        "link": "africa_ar_game.html"
+    }
+]
