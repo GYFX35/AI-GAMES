@@ -1,10 +1,87 @@
 import os
 import shutil
-from fastapi import FastAPI, File, UploadFile, HTTPException
+import json
+from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Security
+from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse
 from typing import List
+from pydantic import BaseModel
 
 app = FastAPI()
+
+# --- Models ---
+
+class Game(BaseModel):
+    name: str
+    category: str
+    link: str
+
+class ChatRequest(BaseModel):
+    message: str
+
+# --- API Key Authentication ---
+
+API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
+
+def get_api_keys():
+    with open("api_keys.json", "r") as f:
+        return json.load(f)
+
+def get_api_key(api_key_header: str = Security(API_KEY_HEADER)):
+    api_keys = get_api_keys()
+    if api_key_header not in api_keys:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or missing API Key",
+        )
+    return api_key_header
+
+# --- Endpoints ---
+
+@app.get("/api/games/search", response_model=List[Game], dependencies=[Depends(get_api_key)])
+async def search_games(q: str = ""):
+    """
+    Search for games by name or category.
+    """
+    with open("../data/games.json", "r") as f:
+        games = json.load(f)
+
+    if not q:
+        return games
+
+    q = q.lower()
+    results = [
+        game for game in games
+        if q in game["name"].lower() or q in game["category"].lower()
+    ]
+    return results
+
+def get_bot_response(user_input: str) -> str:
+    """
+    A simple rule-based chatbot logic.
+    """
+    lower_case_input = user_input.lower()
+
+    if 'hello' in lower_case_input or 'hi' in lower_case_input:
+        return 'Hello! How can I help you today?'
+    elif 'games' in lower_case_input:
+        return 'You can find all our games on the Games page. Is there a specific game you are looking for?'
+    elif 'search' in lower_case_input:
+        return 'You can search for games on the Games page. Just type in the name or category of the game you are looking for.'
+    elif 'help' in lower_case_input:
+        return 'I can help you with questions about our games, the platform, and more. What do you need help with?'
+    elif 'how are you' in lower_case_input:
+        return 'I am just a bot, but I am doing great! Thanks for asking.'
+    else:
+        return 'I am sorry, I do not understand. Can you please rephrase your question?'
+
+@app.post("/api/ai/chat", dependencies=[Depends(get_api_key)])
+async def ai_chat(chat_request: ChatRequest):
+    """
+    Get a response from the AI assistant.
+    """
+    response = get_bot_response(chat_request.message)
+    return {"response": response}
 
 # The 'uploads' directory is at the root of the project.
 # The API is run from the 'api' directory.
