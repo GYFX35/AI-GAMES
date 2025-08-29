@@ -15,6 +15,9 @@ class Game(BaseModel):
     name: str
     category: str
     link: str
+    description: str
+    rating: float
+    player_count: int
 
 class ChatRequest(BaseModel):
     message: str
@@ -38,13 +41,20 @@ def get_api_key(api_key_header: str = Security(API_KEY_HEADER)):
 
 # --- Endpoints ---
 
+def get_games():
+    with open("../data/games.json", "r") as f:
+        return json.load(f)
+
+def save_games(games: List[dict]):
+    with open("../data/games.json", "w") as f:
+        json.dump(games, f, indent=4)
+
 @app.get("/api/games/search", response_model=List[Game], dependencies=[Depends(get_api_key)])
 async def search_games(q: str = ""):
     """
     Search for games by name or category.
     """
-    with open("../data/games.json", "r") as f:
-        games = json.load(f)
+    games = get_games()
 
     if not q:
         return games
@@ -56,24 +66,84 @@ async def search_games(q: str = ""):
     ]
     return results
 
+@app.post("/api/games", status_code=201, dependencies=[Depends(get_api_key)])
+async def create_game(game: Game):
+    """
+    Add a new game to the platform.
+    """
+    games = get_games()
+    if any(g["name"] == game.name for g in games):
+        raise HTTPException(status_code=409, detail="Game with this name already exists.")
+
+    games.append(game.dict())
+    save_games(games)
+    return game
+
+@app.put("/api/games/{game_name}", response_model=Game, dependencies=[Depends(get_api_key)])
+async def update_game(game_name: str, updated_game: Game):
+    """
+    Update an existing game.
+    """
+    games = get_games()
+    for i, game in enumerate(games):
+        if game["name"] == game_name:
+            games[i] = updated_game.dict()
+            save_games(games)
+            return updated_game
+    raise HTTPException(status_code=404, detail="Game not found.")
+
+@app.delete("/api/games/{game_name}", status_code=204, dependencies=[Depends(get_api_key)])
+async def delete_game(game_name: str):
+    """
+    Delete a game from the platform.
+    """
+    games = get_games()
+    game_to_delete = None
+    for game in games:
+        if game["name"] == game_name:
+            game_to_delete = game
+            break
+
+    if not game_to_delete:
+        raise HTTPException(status_code=404, detail="Game not found.")
+
+    games.remove(game_to_delete)
+    save_games(games)
+
+def mock_llm_call(prompt: str) -> str:
+    """
+    This is a mock function to simulate a call to a Large Language Model.
+    In a real application, this would be replaced with a call to an external LLM service.
+    """
+    lower_case_prompt = prompt.lower()
+
+    if 'game idea' in lower_case_prompt:
+        return "How about a puzzle game where you play as a time-traveling detective who has to solve crimes by manipulating events in the past? Each level could be a different case with unique paradoxes to resolve."
+    elif 'python code' in lower_case_prompt:
+        return """Sure, here is a simple Python code snippet to get you started with our API:
+
+import requests
+
+API_KEY = "test-api-key"
+BASE_URL = "http://localhost:8000"
+
+def search_games(query):
+    headers = {"X-API-Key": API_KEY}
+    response = requests.get(f"{BASE_URL}/api/games/search?q={query}", headers=headers)
+    return response.json()
+
+print(search_games("AI"))
+"""
+    elif 'monetization' in lower_case_prompt:
+        return "There are many ways to monetize a game. Some popular options include in-app purchases for cosmetic items, a subscription model for access to exclusive content, or a one-time purchase on an app store. The best model depends on your game's genre and target audience."
+    else:
+        return "I am a powerful AI assistant, ready to help you with your game development journey. Ask me for game ideas, code snippets, or anything else you need to bring your vision to life!"
+
 def get_bot_response(user_input: str) -> str:
     """
-    A simple rule-based chatbot logic.
+    A simple rule-based chatbot logic that now calls a mock LLM.
     """
-    lower_case_input = user_input.lower()
-
-    if 'hello' in lower_case_input or 'hi' in lower_case_input:
-        return 'Hello! How can I help you today?'
-    elif 'games' in lower_case_input:
-        return 'You can find all our games on the Games page. Is there a specific game you are looking for?'
-    elif 'search' in lower_case_input:
-        return 'You can search for games on the Games page. Just type in the name or category of the game you are looking for.'
-    elif 'help' in lower_case_input:
-        return 'I can help you with questions about our games, the platform, and more. What do you need help with?'
-    elif 'how are you' in lower_case_input:
-        return 'I am just a bot, but I am doing great! Thanks for asking.'
-    else:
-        return 'I am sorry, I do not understand. Can you please rephrase your question?'
+    return mock_llm_call(user_input)
 
 @app.post("/api/ai/chat", dependencies=[Depends(get_api_key)])
 async def ai_chat(chat_request: ChatRequest):

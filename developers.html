@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Developer API - Games Universe</title>
-    <meta name="description" content="Documentation for the Games Universe API. Learn how to use our API to search for games and interact with our AI assistant.">
-    <meta name="keywords" content="developer API, game API, search API, AI API, game development, documentation">
+    <meta name="description" content="Documentation for the Games Universe API. Learn how to use our API to search for games, interact with our AI assistant, and manage your game submissions.">
+    <meta name="keywords" content="developer API, game API, search API, AI API, game submission, game development, documentation">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,7 +28,7 @@
     <main>
         <div class="container">
             <h2>Developer API</h2>
-            <p>Welcome to the Games Universe API! Our API allows you to programmatically access our platform's features, including game search and our AI assistant.</p>
+            <p>Welcome to the Games Universe API! Our API allows you to programmatically access our platform's features, including game search, our AI assistant, and game submission.</p>
 
             <h3>Getting Started</h3>
             <p>To get started, you will need an API key. You can use the following test key for now:</p>
@@ -41,7 +41,7 @@
 
             <h4>Game Search API</h4>
             <p><strong>Endpoint:</strong> <code>GET /api/games/search</code></p>
-            <p><strong>Description:</strong> Search for games by name or category.</p>
+            <p><strong>Description:</strong> Search for games by name or category. The response now includes richer data for each game.</p>
             <p><strong>Query Parameters:</strong></p>
             <ul>
                 <li><code>q</code> (string, optional): The search query. If not provided, all games will be returned.</li>
@@ -53,23 +53,35 @@
     {
         "name": "AI MMO Adventure",
         "category": "AI MMO Games",
-        "link": "ai_mmo_games.html"
+        "link": "ai_mmo_games.html",
+        "description": "An open-world adventure powered by a dynamic AI storyteller.",
+        "rating": 4.5,
+        "player_count": 12000
     }
 ]</code></pre>
 
             <h4>AI Assistant API</h4>
             <p><strong>Endpoint:</strong> <code>POST /api/ai/chat</code></p>
-            <p><strong>Description:</strong> Get a response from the AI assistant.</p>
+            <p><strong>Description:</strong> Get a response from our advanced AI assistant. You can ask for game ideas, code snippets, and more.</p>
             <p><strong>Request Body:</strong></p>
             <pre><code>{
-    "message": "hello"
+    "message": "Give me a game idea"
 }</code></pre>
             <p><strong>Example Request:</strong></p>
-            <pre><code>curl -X POST "http://localhost:8000/api/ai/chat" -H "X-API-Key: test-api-key" -H "Content-Type: application/json" -d '{"message": "hello"}'</code></pre>
+            <pre><code>curl -X POST "http://localhost:8000/api/ai/chat" -H "X-API-Key: test-api-key" -H "Content-Type: application/json" -d '{"message": "Give me a game idea"}'</code></pre>
             <p><strong>Example Response:</strong></p>
             <pre><code>{
-    "response": "Hello! How can I help you today?"
+    "response": "How about a puzzle game where you play as a time-traveling detective who has to solve crimes by manipulating events in the past? Each level could be a different case with unique paradoxes to resolve."
 }</code></pre>
+
+            <h4>Game Submission API</h4>
+            <p>Manage your games on the platform with the following endpoints:</p>
+            <ul>
+                <li><strong>Create Game:</strong> <code>POST /api/games</code></li>
+                <li><strong>Update Game:</strong> <code>PUT /api/games/{game_name}</code></li>
+                <li><strong>Delete Game:</strong> <code>DELETE /api/games/{game_name}</code></li>
+            </ul>
+            <p>See the API reference for more details on the request and response formats for these endpoints.</p>
         </div>
     </main>
 
