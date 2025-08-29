@@ -22,6 +22,22 @@ class Game(BaseModel):
 class ChatRequest(BaseModel):
     message: str
 
+class ForumReply(BaseModel):
+    author: str
+    timestamp: str
+    content: str
+
+class ForumTopic(BaseModel):
+    id: int
+    title: str
+    author: str
+    timestamp: str
+    replies: List[ForumReply]
+
+class LeaderboardScore(BaseModel):
+    player: str
+    score: int
+
 # --- API Key Authentication ---
 
 API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
@@ -109,6 +125,82 @@ async def delete_game(game_name: str):
 
     games.remove(game_to_delete)
     save_games(games)
+
+# --- Forum Endpoints ---
+
+def get_forum_topics():
+    with open("../data/forum.json", "r") as f:
+        return json.load(f)
+
+def save_forum_topics(topics: List[dict]):
+    with open("../data/forum.json", "w") as f:
+        json.dump(topics, f, indent=4)
+
+@app.get("/api/forums", response_model=List[ForumTopic], dependencies=[Depends(get_api_key)])
+async def get_forums():
+    """
+    Get all forum topics.
+    """
+    return get_forum_topics()
+
+@app.post("/api/forums", status_code=201, dependencies=[Depends(get_api_key)])
+async def create_topic(topic: ForumTopic):
+    """
+    Create a new forum topic.
+    """
+    topics = get_forum_topics()
+    if any(t["id"] == topic.id for t in topics):
+        raise HTTPException(status_code=409, detail="Topic with this ID already exists.")
+
+    topics.append(topic.dict())
+    save_forum_topics(topics)
+    return topic
+
+@app.post("/api/forums/{topic_id}/replies", status_code=201, dependencies=[Depends(get_api_key)])
+async def create_reply(topic_id: int, reply: ForumReply):
+    """
+    Add a reply to a forum topic.
+    """
+    topics = get_forum_topics()
+    for i, topic in enumerate(topics):
+        if topic["id"] == topic_id:
+            topics[i]["replies"].append(reply.dict())
+            save_forum_topics(topics)
+            return reply
+    raise HTTPException(status_code=404, detail="Topic not found.")
+
+# --- Leaderboard Endpoints ---
+
+def get_leaderboards():
+    with open("../data/leaderboards.json", "r") as f:
+        return json.load(f)
+
+def save_leaderboards(leaderboards: dict):
+    with open("../data/leaderboards.json", "w") as f:
+        json.dump(leaderboards, f, indent=4)
+
+@app.get("/api/leaderboards/{game_name}", response_model=List[LeaderboardScore], dependencies=[Depends(get_api_key)])
+async def get_leaderboard(game_name: str):
+    """
+    Get the leaderboard for a specific game.
+    """
+    leaderboards = get_leaderboards()
+    leaderboard = leaderboards.get(game_name, [])
+    leaderboard.sort(key=lambda x: x["score"], reverse=True)
+    return leaderboard
+
+@app.post("/api/leaderboards/{game_name}", status_code=201, dependencies=[Depends(get_api_key)])
+async def add_score(game_name: str, score: LeaderboardScore):
+    """
+    Add a new score to a leaderboard.
+    """
+    leaderboards = get_leaderboards()
+    if game_name not in leaderboards:
+        leaderboards[game_name] = []
+
+    leaderboards[game_name].append(score.dict())
+    save_leaderboards(leaderboards)
+    return score
 
 def mock_llm_call(prompt: str) -> str:
     """

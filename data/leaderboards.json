@@ -1,0 +1,16 @@
+{
+    "Test Game": [
+        {
+            "player": "Player1",
+            "score": 1000
+        },
+        {
+            "player": "Player2",
+            "score": 900
+        },
+        {
+            "player": "NewPlayer",
+            "score": 1100
+        }
+    ]
+}

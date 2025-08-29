@@ -7,42 +7,156 @@
     <meta name="description" content="Join the Games Universe forums to discuss game development, research, and collaborate with a global community of developers, researchers, and companies.">
     <meta name="keywords" content="game development forums, game research community, gamedev, indie games, AI in games, game design">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="modal.css">
+    <style>
+        .forum-topic {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .forum-reply {
+            border-top: 1px solid #eee;
+            padding: 10px;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Forums</h1>
+        <div class="container">
+            <h1 class="logo">Games Universe</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="ai_agent.html">AI Assistant</a></li>
+                    <li><a href="developers.html">Developers</a></li>
+                    <li><a href="forums.html">Forums</a></li>
+                    <li><a href="sponsorship.html">Sponsor Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
-            <li><a href="manga_games.html">Manga Games</a></li>
-            <li><a href="casino_games.html">Casino Games</a></li>
-            <li><a href="global_gambles.html">Global Gambles</a></li>
-            <li class="nav-item"><a href="affiliates.html">Affiliates</a></li>
-            <li><a href="esport_games.html">E-sport Games</a></li>
-            <li><a href="instant_games.html">Instant Games</a></li>
-            <li><a href="partnerships.html">Partnerships</a></li>
-            <li><a href="camera_features.html">Camera Features</a></li>
-            <li><a href="paywell.html">Paywell Wallet</a></li>
-            <li><a href="cloud_gaming.html">Cloud Gaming</a></li>
-            <li><a href="sponsorship.html">Sponsor Us</a></li>
-            <li><a href="monetization.html">Monetization Info</a></li>
-            <li><a href="role_playing_games.html">Role-Playing Games</a></li>
-            <li><a href="developer_tools.html">Developer Tools</a></li>
-            <li><a href="ai_agent.html">AI Agent</a></li>
-            <li><a href="github_explorer.html">GitHub Explorer</a></li>
-            <li><a href="rugby_game.html">AR Rugby</a></li>
-        </ul>
-    </nav>
+
     <main>
-        <p>Join the discussion in our forums.</p>
-        <!-- TODO: Add content for forums -->
+        <div class="container">
+            <h2>Community Forums</h2>
+            <div id="forum-topics"></div>
+
+            <hr>
+
+            <h3>Create a New Topic</h3>
+            <form id="new-topic-form">
+                <input type="text" id="new-topic-title" placeholder="Topic Title" required>
+                <input type="text" id="new-topic-author" placeholder="Your Name" required>
+                <textarea id="new-topic-content" placeholder="Your message..." required></textarea>
+                <button type="submit">Create Topic</button>
+            </form>
+        </div>
     </main>
+
     <footer>
-        <p>&copy; 2023 Game Portal</p>
+        <div class="container">
+            <p>&copy; 2024 Games Universe. All rights reserved.</p>
+        </div>
     </footer>
-    <script src="modal.js" defer></script>
+
+    <script>
+        const API_KEY = "test-api-key";
+        const API_URL = "http://localhost:8000/api";
+
+        async function fetchTopics() {
+            const response = await fetch(`${API_URL}/forums`, {
+                headers: { "X-API-Key": API_KEY }
+            });
+            const topics = await response.json();
+            displayTopics(topics);
+        }
+
+        function displayTopics(topics) {
+            const topicsContainer = document.getElementById('forum-topics');
+            topicsContainer.innerHTML = '';
+            topics.forEach(topic => {
+                const topicElement = document.createElement('div');
+                topicElement.className = 'forum-topic';
+                topicElement.innerHTML = `
+                    <h3>${topic.title}</h3>
+                    <p>by <strong>${topic.author}</strong> on ${new Date(topic.timestamp).toLocaleString()}</p>
+                    <div class="replies">
+                        ${topic.replies.map(reply => `
+                            <div class="forum-reply">
+                                <p><strong>${reply.author}</strong> on ${new Date(reply.timestamp).toLocaleString()}</p>
+                                <p>${reply.content}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <form class="reply-form" data-topic-id="${topic.id}">
+                        <input type="text" class="reply-author" placeholder="Your Name" required>
+                        <textarea class="reply-content" placeholder="Your reply..." required></textarea>
+                        <button type="submit">Add Reply</button>
+                    </form>
+                `;
+                topicsContainer.appendChild(topicElement);
+            });
+        }
+
+        document.getElementById('new-topic-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('new-topic-title').value;
+            const author = document.getElementById('new-topic-author').value;
+            const content = document.getElementById('new-topic-content').value;
+
+            const newTopic = {
+                id: Date.now(),
+                title: title,
+                author: author,
+                timestamp: new Date().toISOString(),
+                replies: [{
+                    author: author,
+                    timestamp: new Date().toISOString(),
+                    content: content
+                }]
+            };
+
+            await fetch(`${API_URL}/forums`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify(newTopic)
+            });
+
+            fetchTopics();
+        });
+
+        document.getElementById('forum-topics').addEventListener('submit', async (e) => {
+            if (e.target.classList.contains('reply-form')) {
+                e.preventDefault();
+                const topicId = e.target.dataset.topicId;
+                const author = e.target.querySelector('.reply-author').value;
+                const content = e.target.querySelector('.reply-content').value;
+
+                const newReply = {
+                    author: author,
+                    timestamp: new Date().toISOString(),
+                    content: content
+                };
+
+                await fetch(`${API_URL}/forums/${topicId}/replies`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': API_KEY
+                    },
+                    body: JSON.stringify(newReply)
+                });
+
+                fetchTopics();
+            }
+        });
+
+        window.onload = fetchTopics;
+    </script>
 </body>
 </html>

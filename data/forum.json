@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "title": "Welcome to the Games Universe Forums!",
+        "author": "Admin",
+        "timestamp": "2024-08-29T10:00:00Z",
+        "replies": [
+            {
+                "author": "Jules",
+                "timestamp": "2024-08-29T10:05:00Z",
+                "content": "Glad to be here!"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "What are you working on?",
+        "author": "DeveloperJane",
+        "timestamp": "2024-08-29T11:30:00Z",
+        "replies": []
+    },
+    {
+        "id": 3,
+        "title": "New Test Topic",
+        "author": "Tester",
+        "timestamp": "2024-08-29T12:00:00Z",
+        "replies": [
+            {
+                "author": "Replier",
+                "timestamp": "2024-08-29T12:05:00Z",
+                "content": "This is a reply."
+            }
+        ]
+    }
+]
