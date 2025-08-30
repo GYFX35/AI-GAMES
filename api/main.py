@@ -42,11 +42,11 @@ def get_api_key(api_key_header: str = Security(API_KEY_HEADER)):
 # --- Endpoints ---
 
 def get_games():
-    with open("../data/games.json", "r") as f:
+    with open("/app/data/games.json", "r") as f:
         return json.load(f)
 
 def save_games(games: List[dict]):
-    with open("../data/games.json", "w") as f:
+    with open("/app/data/games.json", "w") as f:
         json.dump(games, f, indent=4)
 
 @app.get("/api/games/search", response_model=List[Game], dependencies=[Depends(get_api_key)])
@@ -153,10 +153,8 @@ async def ai_chat(chat_request: ChatRequest):
     response = get_bot_response(chat_request.message)
     return {"response": response}
 
-# The 'uploads' directory is at the root of the project.
-# The API is run from the 'api' directory.
-# So we need to go one level up.
-UPLOADS_DIR = "../uploads"
+# The 'uploads' directory is mapped to /app/uploads in the container
+UPLOADS_DIR = "/app/uploads"
 
 @app.post("/models", status_code=201)
 async def upload_model(file: UploadFile = File(...)):

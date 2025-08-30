@@ -54,3 +54,31 @@ The API provides the following endpoints for managing 3D models:
 ### API Documentation
 
 The API comes with automatic interactive documentation (Swagger UI). Once the server is running, you can access it at `http://127.0.0.1:8000/docs`.
+
+## Deployment
+
+This application is containerized using Docker and orchestrated with Docker Compose.
+
+### Prerequisites
+
+*   [Docker](https://docs.docker.com/get-docker/)
+*   [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Running the Application
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/games-universe.git
+    cd games-universe
+    ```
+
+2.  **Run the application using Docker Compose:**
+    ```bash
+    docker-compose up --build
+    ```
+
+The application will be available at `http://localhost`.
+
+*   The frontend is served by Nginx on port 80.
+*   The backend API is available on port 8000.
+*   The Nginx server is configured to proxy requests to the `/api` and `/models` endpoints to the backend service.
