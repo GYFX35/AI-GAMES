@@ -112,19 +112,21 @@
       console.log('Welcome!  Fetching your information.... ');
       FB.api('/me', {fields: 'name, email, picture'}, function(response) {
         console.log('Successful login for: ' + response.name);
+        // Save user data to Firebase
+        database.ref('users/' + response.id).set({
+          name: response.name,
+          email: response.email,
+          picture: response.picture.data.url
+        });
         document.getElementById('auth-container').innerHTML = `
           <img src="${response.picture.data.url}" alt="${response.name}" style="border-radius: 50%; width: 50px; height: 50px;">
           <span>${response.name}</span>
           <button onclick="logout()">Logout</button>
         `;
-        // Store user data in local storage
-        localStorage.setItem('fb_user', JSON.stringify(response));
       });
     } else {
       // The person is not logged into your app or we are unable to tell.
       console.log('User not logged in.');
-      // Clear user data from local storage
-      localStorage.removeItem('fb_user');
     }
   }
 
@@ -158,23 +160,11 @@
       document.getElementById('auth-container').innerHTML = `
         <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true"></div>
       `;
-      // Clear user data from local storage
-      localStorage.removeItem('fb_user');
       // Re-render the login button
       FB.XFBML.parse();
     });
   }
 
-  // Check for stored user data on page load
-  const storedUser = localStorage.getItem('fb_user');
-  if (storedUser) {
-    const user = JSON.parse(storedUser);
-    document.getElementById('auth-container').innerHTML = `
-      <img src="${user.picture.data.url}" alt="${user.name}" style="border-radius: 50%; width: 50px; height: 50px;">
-      <span>${user.name}</span>
-      <button onclick="logout()">Logout</button>
-    `;
-  }
 </script>
 </body>
 </html>
