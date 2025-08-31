@@ -1,14 +1,13 @@
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID"
+  apiKey: "AIzaSyA3y6bxzS5vQ4lpk6Ovwm9hkjFZlXJrrIQ",
+  authDomain: "supergame-4aa29.firebaseapp.com",
+  databaseURL: "https://supergame-4aa29-default-rtdb.firebaseio.com",
+  projectId: "supergame-4aa29",
+  storageBucket: "supergame-4aa29.appspot.com",
+  messagingSenderId: "232250821559",
+  appId: "1:232250821559:web:4ab1986d00c8afeff1b632",
+  measurementId: "G-C8H621V7TS"
 };
 
 // Initialize Firebase
