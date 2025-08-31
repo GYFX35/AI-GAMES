@@ -72,7 +72,8 @@
                 gameCard.innerHTML = `
                     <h3>${game.name}</h3>
                     <p>${game.category}</p>
-                    <a href="${game.link}">Play Now</a>
+                    <a href="${game.link}" target="_blank">Play Now</a>
+                    <a href="sponsorship.html?game=${game.name}" class="sponsor-button">Sponsor this game</a>
                 `;
                 searchResults.appendChild(gameCard);
             });

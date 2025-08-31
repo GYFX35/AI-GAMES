@@ -8,6 +8,16 @@
     <meta name="keywords" content="game monetization, PWA monetization, in-app purchases, game business models, game development, research">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
+    <style>
+        .sponsorship-message {
+            background-color: #e0f7fa;
+            border: 1px solid #00acc1;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -88,10 +98,31 @@
             <h3>Supporting Game Portal Now</h3>
             <p>Currently, Game Portal is a free PWA. If you'd like to support its development and growth, please see our <a href="sponsorship.html">Sponsor Us</a> page.</p>
         </section>
+
+        <section id="gyfx35-games">
+            <h3>New Games from GYFX35!</h3>
+            <p>We are excited to announce that we have integrated a new set of games from the GitHub user <a href="https://github.com/GYFX35" target="_blank">gyfx35</a>. You can check them out on our <a href="games.html">Games</a> page. If you would like to support the developer, you can do so through our <a href="sponsorship.html">Sponsor Us</a> page.</p>
+        </section>
     </main>
     <footer>
         <p>&copy; 2023 Game Portal</p>
     </footer>
     <script src="modal.js" defer></script>
+    <script>
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const game = params.get('game');
+            if (game) {
+                const main = document.querySelector('main');
+                const sponsorshipMessage = document.createElement('div');
+                sponsorshipMessage.className = 'sponsorship-message';
+                sponsorshipMessage.innerHTML = `
+                    <h2>Sponsor ${game}</h2>
+                    <p>You are about to sponsor the game "${game}". Thank you for your support!</p>
+                `;
+                main.prepend(sponsorshipMessage);
+            }
+        });
+    </script>
 </body>
 </html>
