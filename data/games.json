@@ -1,74 +1,50 @@
 [
     {
-        "name": "AI MMO Adventure",
-        "category": "AI MMO Games",
-        "link": "ai_mmo_games.html",
-        "description": "An open-world adventure powered by a dynamic AI storyteller.",
-        "rating": 4.5,
-        "player_count": 12000
+        "name": "AI-GAMES",
+        "category": "GitHub Games",
+        "link": "https://github.com/GYFX35/AI-GAMES",
+        "description": "Social networking",
+        "rating": 0,
+        "player_count": 0
     },
     {
-        "name": "Manga Mayhem",
-        "category": "Manga Games",
-        "link": "manga_games.html",
-        "description": "A fast-paced brawler featuring your favorite manga characters.",
-        "rating": 4.2,
-        "player_count": 8000
+        "name": "Finances",
+        "category": "GitHub Games",
+        "link": "https://github.com/GYFX35/Finances",
+        "description": "Payout assistant and financial manager.financial data development software and tools. payments apps and sites web AI assistant",
+        "rating": 1,
+        "player_count": 1
     },
     {
-        "name": "Casino Royale",
-        "category": "Casino Games",
-        "link": "casino_games.html",
-        "description": "A collection of classic casino games with a modern twist.",
-        "rating": 4.0,
-        "player_count": 5000
+        "name": "Game",
+        "category": "GitHub Games",
+        "link": "https://github.com/GYFX35/Game",
+        "description": "Games  canal for streaming and playing",
+        "rating": 0,
+        "player_count": 0
     },
     {
-        "name": "Global Gamble",
-        "category": "Global Gambles",
-        "link": "global_gambles.html",
-        "description": "A high-stakes play-to-earn game with a global leaderboard.",
-        "rating": 4.7,
-        "player_count": 25000
+        "name": "Games",
+        "category": "GitHub Games",
+        "link": "https://github.com/GYFX35/Games",
+        "description": null,
+        "rating": 0,
+        "player_count": 0
     },
     {
-        "name": "Esports Arena",
-        "category": "E-sport Games",
-        "link": "esport_games.html",
-        "description": "Compete against the best in this action-packed esports title.",
-        "rating": 4.6,
-        "player_count": 50000
+        "name": "Gamesplay",
+        "category": "GitHub Games",
+        "link": "https://github.com/GYFX35/Gamesplay",
+        "description": "Games  canal for streaming and playing",
+        "rating": 0,
+        "player_count": 0
     },
     {
-        "name": "Instant Fun",
-        "category": "Instant Games",
-        "link": "instant_games.html",
-        "description": "A collection of fun and addictive instant games.",
-        "rating": 4.1,
-        "player_count": 100000
-    },
-    {
-        "name": "RPG Quest",
-        "category": "Role-Playing Games",
-        "link": "role_playing_games.html",
-        "description": "Embark on an epic quest in this fantasy role-playing game.",
-        "rating": 4.4,
-        "player_count": 15000
-    },
-    {
-        "name": "AR Rugby Challenge",
-        "category": "AR Rugby",
-        "link": "rugby_game.html",
-        "description": "Experience the thrill of rugby in augmented reality.",
-        "rating": 4.3,
-        "player_count": 3000
-    },
-    {
-        "name": "Africa AR Explorer",
-        "category": "Africa AR",
-        "link": "africa_ar_game.html",
-        "description": "Explore the rich culture of Africa in this educational AR game.",
-        "rating": 4.8,
-        "player_count": 1000
+        "name": "GENERATIVE-AI-FOR-DESIGN-",
+        "category": "GitHub Games",
+        "link": "https://github.com/GYFX35/GENERATIVE-AI-FOR-DESIGN-",
+        "description": "GENERATIVE  AI for games, gaming,cinematography,photography designs  software. Global designs software.",
+        "rating": 0,
+        "player_count": 0
     }
 ]
