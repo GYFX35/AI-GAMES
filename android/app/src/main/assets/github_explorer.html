@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Explorer - Game Development Research - Games Universe</title>
+    <meta name="description" content="A tool for game developers and researchers to explore GitHub repositories. Analyze open source game projects, track issues, and discover new technologies.">
+    <meta name="keywords" content="GitHub explorer, open source games, game development, repository analysis, issue tracking, research tools">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <style>
+        #repoInput {
+            padding: 8px;
+            margin-right: 5px;
+            min-width: 250px;
+        }
+        #fetchRepoBtn {
+            padding: 8px 15px;
+        }
+        .repo-section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            background-color: #f9f9f9;
+        }
+        .repo-section h3 {
+            margin-top: 0;
+        }
+        #repoIssues ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        #repoIssues li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #ccc;
+        }
+        #repoIssues li:last-child {
+            border-bottom: none;
+        }
+        #loadingMessage {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GitHub Repository Explorer</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
+            <li><a href="manga_games.html">Manga Games</a></li>
+            <li><a href="casino_games.html">Casino Games</a></li>
+            <li><a href="global_gambles.html">Global Gambles</a></li>
+            <li><a href="forums.html">Forums</a></li>
+            <li><a href="affiliates.html">Affiliates</a></li>
+            <li><a href="esport_games.html">E-sport Games</a></li>
+            <li><a href="instant_games.html">Instant Games</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="camera_features.html">Camera Features</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+            <li><a href="cloud_gaming.html">Cloud Gaming</a></li>
+            <li><a href="sponsorship.html">Sponsor Us</a></li>
+            <li><a href="monetization.html">Monetization Info</a></li>
+            <li><a href="role_playing_games.html">Role-Playing Games</a></li>
+            <li><a href="developer_tools.html">Developer Tools</a></li>
+            <li><a href="ai_agent.html">AI Agent</a></li>
+            <li><a href="github_explorer.html">GitHub Explorer</a></li>
+            <li><a href="rugby_game.html">AR Rugby</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="github-input-section">
+            <p>Enter a GitHub repository in the format "owner/repository" (e.g., "twbs/bootstrap") and click fetch.</p>
+            <input type="text" id="repoInput" placeholder="owner/repository">
+            <button id="fetchRepoBtn">Fetch Repository Info</button>
+            <p id="loadingMessage" style="display:none;">Loading...</p>
+        </section>
+
+        <div id="repoDetails" class="repo-section" style="display:none;">
+            <h3>Repository Details</h3>
+            <div id="repoDetailsContent"></div>
+        </div>
+
+        <div id="repoIssues" class="repo-section" style="display:none;">
+            <h3>Open Issues</h3>
+            <div id="repoIssuesContent"></div>
+        </div>
+
+        <script>
+            const repoInput = document.getElementById('repoInput');
+            const fetchRepoBtn = document.getElementById('fetchRepoBtn');
+            const repoDetailsDiv = document.getElementById('repoDetails');
+            const repoDetailsContent = document.getElementById('repoDetailsContent');
+            const repoIssuesDiv = document.getElementById('repoIssues');
+            const repoIssuesContent = document.getElementById('repoIssuesContent');
+            const loadingMessage = document.getElementById('loadingMessage');
+
+            if (fetchRepoBtn) {
+                fetchRepoBtn.addEventListener('click', async () => {
+                    const repoPath = repoInput.value.trim();
+                    if (!repoPath || !repoPath.includes('/')) {
+                        alert('Please enter a valid repository path in the format "owner/repository".');
+                        return;
+                    }
+
+                    // Clear previous results and show loading
+                    repoDetailsDiv.style.display = 'none';
+                    repoDetailsContent.innerHTML = '';
+                    repoIssuesDiv.style.display = 'none';
+                    repoIssuesContent.innerHTML = '';
+                    loadingMessage.style.display = 'block';
+                    loadingMessage.textContent = 'Loading repository data...';
+
+                    const [owner, repo] = repoPath.split('/');
+
+                    try {
+                        // Fetch Repository Details
+                        const repoDetailsResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+                        if (!repoDetailsResponse.ok) {
+                            throw new Error(`Repository details not found or API error: ${repoDetailsResponse.status}`);
+                        }
+                        const details = await repoDetailsResponse.json();
+                        displayRepoDetails(details);
+
+                        // Fetch Repository Issues
+                        loadingMessage.textContent = 'Loading issues...';
+                        const issuesResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=20`); // Get top 20 open issues
+                        if (!issuesResponse.ok) {
+                            throw new Error(`Issues not found or API error: ${issuesResponse.status}`);
+                        }
+                        const issues = await issuesResponse.json();
+                        displayRepoIssues(issues, details.html_url + '/issues');
+
+                        loadingMessage.style.display = 'none';
+
+                    } catch (error) {
+                        console.error('Error fetching GitHub data:', error);
+                        loadingMessage.textContent = `Error: ${error.message}. Please check the repository path and your internet connection. API rate limits might also apply.`;
+                        // Keep loading message visible to show the error
+                    }
+                });
+            }
+
+            function displayRepoDetails(data) {
+                repoDetailsContent.innerHTML = `
+                    <h4><a href="${data.html_url}" target="_blank">${data.full_name}</a></h4>
+                    <p><strong>Owner:</strong> <a href="${data.owner.html_url}" target="_blank">${data.owner.login}</a></p>
+                    <p><strong>Description:</strong> ${data.description || 'No description provided.'}</p>
+                    <p><strong>Language:</strong> ${data.language || 'N/A'}</p>
+                    <p><strong>Stars:</strong> ${data.stargazers_count} | <strong>Forks:</strong> ${data.forks_count} | <strong>Open Issues:</strong> ${data.open_issues_count}</p>
+                    <p><strong>License:</strong> ${data.license ? data.license.name : 'N/A'}</p>
+                    <p><strong>Last Updated:</strong> ${new Date(data.updated_at).toLocaleDateString()}</p>
+                `;
+                repoDetailsDiv.style.display = 'block';
+            }
+
+            function displayRepoIssues(issues, issuesBaseUrl) {
+                if (issues.length === 0) {
+                    repoIssuesContent.innerHTML = '<p>No open issues found.</p>';
+                    repoIssuesDiv.style.display = 'block';
+                    return;
+                }
+
+                let issuesHtml = '<ul>';
+                issues.forEach(issue => {
+                    issuesHtml += \`
+                        <li>
+                            <strong><a href="\${issue.html_url}" target="_blank">#\${issue.number} \${issue.title}</a></strong>
+                            <br>
+                            <small>Opened by: <a href="\${issue.user.html_url}" target="_blank">\${issue.user.login}</a> on \${new Date(issue.created_at).toLocaleDateString()}</small>
+                            \${issue.labels.length > 0 ? '<br>Labels: ' + issue.labels.map(label => \`<span style="background-color:#\${label.color}; color: \${isLight(label.color) ? '#000' : '#fff'}; padding: 2px 5px; border-radius: 3px; font-size: 0.8em;">\${label.name}</span>\`).join(' ') : ''}
+                        </li>
+                    \`;
+                });
+                issuesHtml += '</ul>';
+                if (issues.length >= 20) {
+                     issuesHtml += \`<p><a href="\${issuesBaseUrl}" target="_blank">View all open issues on GitHub...</a></p>\`;
+                }
+                repoIssuesContent.innerHTML = issuesHtml;
+                repoIssuesDiv.style.display = 'block';
+            }
+
+            // Helper function to determine if a hex color is light or dark to set text color
+            function isLight(hexColor) {
+                if (!hexColor) return true; // Default to dark text if color is missing
+                const r = parseInt(hexColor.slice(0, 2), 16);
+                const g = parseInt(hexColor.slice(2, 4), 16);
+                const b = parseInt(hexColor.slice(4, 6), 16);
+                // Formula for perceived brightness
+                const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                return brightness > 128;
+            }
+
+        </script>
+    </main>
+    <footer>
+        <p>&copy; 2023 Game Portal</p>
+    </footer>
+    <script src="modal.js" defer></script>
+</body>
+</html>
