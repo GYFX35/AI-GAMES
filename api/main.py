@@ -8,6 +8,7 @@ from typing import List
 from pydantic import BaseModel
 from .ai_engine import HockeyAI
 from .blockchain import BlockchainManager
+from .xcode import XCodeManager
 
 app = FastAPI()
 
@@ -26,6 +27,9 @@ class ChatRequest(BaseModel):
 
 class HockeyGameState(BaseModel):
     puck_owner: str # "player", "ai", or "none"
+
+class XCodeRequest(BaseModel):
+    prompt: str
 
 # --- API Key Authentication ---
 
@@ -160,6 +164,17 @@ async def ai_chat(chat_request: ChatRequest):
     """
     response = get_bot_response(chat_request.message)
     return {"response": response}
+
+# --- XCode Endpoints ---
+xcode_manager = XCodeManager()
+
+@app.post("/api/xcode/generate", dependencies=[Depends(get_api_key)])
+async def xcode_generate(xcode_request: XCodeRequest):
+    """
+    Generate Xcode (Swift) code based on a prompt.
+    """
+    code = xcode_manager.generate_code(xcode_request.prompt)
+    return {"code": code}
 
 # --- Hockey Game Endpoints ---
 
