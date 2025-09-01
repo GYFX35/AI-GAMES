@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Games - Search and Discover on Games Universe</title>
+    <meta name="description" content="Search and discover a wide variety of games on the Games Universe platform. Find games by name or category, and get resources for game development and research.">
+    <meta name="keywords" content="all games, game search, discover games, game categories, game development, game research">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
+    <script src="firebase-init.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Games Universe</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="ai_agent.html">AI Assistant</a></li>
+                    <li><a href="developers.html">Developers</a></li>
+                    <li><a href="forums.html">Forums</a></li>
+                    <li><a href="sponsorship.html">Sponsor Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="all-games">
+            <div class="container">
+                <h2>Search for Games</h2>
+                <input type="text" id="searchInput" placeholder="Enter game name or category..." onkeyup="searchGames()">
+                <div id="searchResults" class="category-grid">
+                    <!-- Search results will be displayed here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Games Universe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let games = [];
+
+        async function fetchGames() {
+            try {
+                const response = await fetch('data/games.json');
+                games = await response.json();
+                displayGames(games);
+            } catch (error) {
+                console.error('Error fetching games:', error);
+            }
+        }
+
+        function displayGames(gamesToDisplay) {
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = '';
+
+            if (gamesToDisplay.length === 0) {
+                searchResults.innerHTML = '<p>No games found.</p>';
+                return;
+            }
+
+            gamesToDisplay.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'category-card';
+                gameCard.innerHTML = `
+                    <h3>${game.name}</h3>
+                    <p>${game.category}</p>
+                    <a href="${game.link}" target="_blank">Play Now</a>
+                    <a href="sponsorship.html?game=${game.name}" class="sponsor-button">Sponsor this game</a>
+                `;
+                searchResults.appendChild(gameCard);
+            });
+        }
+
+        function searchGames() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.toLowerCase();
+
+            const filteredGames = games.filter(game => {
+                return game.name.toLowerCase().includes(searchTerm) || game.category.toLowerCase().includes(searchTerm);
+            });
+
+            displayGames(filteredGames);
+        }
+
+        window.onload = fetchGames;
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
