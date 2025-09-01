@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR/VR Hockey Game - Development and Research - Games Universe</title>
+    <meta name="description" content="A project for developers and researchers exploring the intersection of AR, VR, AI, and blockchain in sports gaming. Discover the tech behind our AR/VR Hockey Game.">
+    <meta name="keywords" content="AR game, VR game, augmented reality, virtual reality, hockey game, blockchain gaming, AI in games, sports simulation, game development, research">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body>
+    <header>
+        <h1>AR/VR Hockey Game</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
+            <li><a href="manga_games.html">Manga Games</a></li>
+            <li><a href="casino_games.html">Casino Games</a></li>
+            <li><a href="global_gambles.html">Global Gambles</a></li>
+            <li><a href="forums.html">Forums</a></li>
+            <li class="nav-item"><a href="affiliates.html">Affiliates</a></li>
+            <li><a href="esport_games.html">E-sport Games</a></li>
+            <li><a href="instant_games.html">Instant Games</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="camera_features.html">Camera Features</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+            <li><a href="cloud_gaming.html">Cloud Gaming</a></li>
+            <li><a href="sponsorship.html">Sponsor Us</a></li>
+            <li><a href="monetization.html">Monetization Info</a></li>
+            <li><a href="role_playing_games.html">Role-Playing Games</a></li>
+            <li><a href="developer_tools.html">Developer Tools</a></li>
+            <li><a href="ai_agent.html">AI Agent</a></li>
+            <li><a href="github_explorer.html">GitHub Explorer</a></li>
+            <li><a href="rugby_game.html">AR Rugby</a></li>
+            <li><a href="hockey_ar_vr_game.html">AR/VR Hockey</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="game-overview">
+            <h2>Game Overview</h2>
+            <p>Welcome to the future of sports gaming. Our AR/VR Hockey game combines cutting-edge technology with the fast-paced excitement of ice hockey to deliver an unparalleled experience. Play in your world, build your team, and compete for glory.</p>
+        </section>
+
+        <section id="core-features">
+            <h3>Core Features</h3>
+            <ul>
+                <li><strong>Augmented & Virtual Reality:</strong> Transform any flat surface into a hockey rink, or immerse yourself in a virtual stadium.</li>
+                <li><strong>AI Opponents:</strong> Compete against intelligent AI teams that learn from your playstyle.</li>
+                <li><strong>Blockchain Integration:</strong> Own, trade, and manage your players as unique digital assets on the blockchain.</li>
+                <li><strong>Cross-Platform:</strong> Play on Meta Horizon, as a PWA on your desktop, or on your mobile device.</li>
+                <li><strong>Career Mode:</strong> Take your team from the local leagues to the world championship.</li>
+            </ul>
+        </section>
+
+        <section id="tech-stack">
+            <h3>Technology Stack</h3>
+            <p>This game will be built using a modern, web-first technology stack:</p>
+            <ul>
+                <li><strong>HTML5 & JavaScript:</strong> For a rich, interactive experience.</li>
+                <li><strong>WebXR API:</strong> To power the augmented reality features.</li>
+                <li><strong>Web3 Libraries:</strong> For seamless integration with blockchain networks.</li>
+                <li><strong>Advanced AI Models:</strong> For realistic opponent behavior and game simulation.</li>
+            </ul>
+        </section>
+
+        <section id="ai-demo">
+            <h3>AI Demo</h3>
+            <p>Test the hockey AI by simulating different game states.</p>
+            <button onclick="getAiAction('player')">Player has puck</button>
+            <button onclick="getAiAction('ai')">AI has puck</button>
+            <button onclick="getAiAction('none')">Puck is loose</button>
+            <p><strong>AI Action:</strong> <span id="ai-action"></span></p>
+        </section>
+
+        <section id="nft-viewer">
+            <h3>NFT Viewer</h3>
+            <p>Enter a player's token ID to view their NFT details.</p>
+            <input type="number" id="nft-token-id" placeholder="Enter Token ID (e.g., 1 or 2)">
+            <button onclick="getNftDetails()">View NFT</button>
+            <div id="nft-details"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Game Portal</p>
+    </footer>
+    <script src="modal.js" defer></script>
+    <script>
+        const API_KEY = "test-api-key";
+
+        async function getAiAction(puckOwner) {
+            const response = await fetch('/api/hockey/ai/action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({ puck_owner: puckOwner })
+            });
+            const data = await response.json();
+            document.getElementById('ai-action').textContent = data.action;
+        }
+
+        async function getNftDetails() {
+            const tokenId = document.getElementById('nft-token-id').value;
+            if (!tokenId) {
+                alert('Please enter a token ID.');
+                return;
+            }
+            const response = await fetch(`/api/hockey/nft/${tokenId}`, {
+                headers: {
+                    'X-API-Key': API_KEY
+                }
+            });
+            const nftDetailsDiv = document.getElementById('nft-details');
+            if (response.ok) {
+                const data = await response.json();
+                nftDetailsDiv.innerHTML = `
+                    <p><strong>Owner:</strong> ${data.owner}</p>
+                    <p><strong>Metadata URI:</strong> <a href="${data.uri}" target="_blank">${data.uri}</a></p>
+                `;
+            } else {
+                nftDetailsDiv.innerHTML = `<p>Error: NFT not found.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
