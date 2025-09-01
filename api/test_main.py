@@ -39,3 +39,24 @@ def test_get_nft_details():
     token_id = 999
     response = requests.get(f"{BASE_URL}/api/hockey/nft/{token_id}", headers=HEADERS)
     assert response.status_code == 404
+
+
+def test_xcode_generate():
+    """
+    Test the /api/xcode/generate endpoint.
+    """
+    # Test with a prompt that should trigger the "network" template
+    request_body = {"prompt": "network"}
+    response = requests.post(f"{BASE_URL}/api/xcode/generate", json=request_body, headers=HEADERS)
+    assert response.status_code == 200
+    response_json = response.json()
+    assert "code" in response_json
+    assert "URLSession" in response_json["code"]
+
+    # Test with a prompt that should trigger the "default" template
+    request_body = {"prompt": "unknown"}
+    response = requests.post(f"{BASE_URL}/api/xcode/generate", json=request_body, headers=HEADERS)
+    assert response.status_code == 200
+    response_json = response.json()
+    assert "code" in response_json
+    assert "Hello, World!" in response_json["code"]
