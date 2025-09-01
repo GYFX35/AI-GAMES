@@ -1,5 +1,13 @@
 [
     {
+        "name": "supergame",
+        "category": "Mobile Games",
+        "link": "supergame.html",
+        "description": "The supergame for iOS.",
+        "rating": 0,
+        "player_count": 0
+    },
+    {
         "name": "AI-GAMES",
         "category": "GitHub Games",
         "link": "https://github.com/GYFX35/AI-GAMES",
