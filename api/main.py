@@ -9,7 +9,22 @@ from pydantic import BaseModel
 from .ai_engine import HockeyAI
 from .blockchain import BlockchainManager
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- Models ---
 
@@ -160,6 +175,33 @@ async def ai_chat(chat_request: ChatRequest):
     """
     response = get_bot_response(chat_request.message)
     return {"response": response}
+
+@app.get("/api/horizon-worlds", response_model=List[dict], dependencies=[Depends(get_api_key)])
+async def get_horizon_worlds():
+    """
+    Get a list of Meta Horizon Worlds.
+    """
+    # TODO: Replace this with a real implementation that fetches data from the Meta Horizon API.
+    return [
+        {
+            "name": "Super Rumble",
+            "description": "A fast-paced shooter from the creators of Population: One.",
+            "genre": "Action",
+            "link": "https://www.meta.com/experiences/8749305011807922/"
+        },
+        {
+            "name": "Crayta",
+            "description": "A collaborative game creation platform.",
+            "genre": "Creative",
+            "link": "https://www.meta.com/experiences/7839302129415463/"
+        },
+        {
+            "name": "Beat Saber",
+            "description": "A VR rhythm game where you slash the beats of adrenaline-pumping music.",
+            "genre": "Music",
+            "link": "https://www.meta.com/experiences/2448060205267927/"
+        }
+    ]
 
 # --- Hockey Game Endpoints ---
 
