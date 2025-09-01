@@ -6,8 +6,10 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse
 from typing import List
 from pydantic import BaseModel
+import requests
 from .ai_engine import HockeyAI
 from .blockchain import BlockchainManager
+from epicstore_api import EpicGamesStoreAPI
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -202,6 +204,37 @@ async def get_horizon_worlds():
             "link": "https://www.meta.com/experiences/2448060205267927/"
         }
     ]
+
+@app.get("/api/epic-games/free-games", dependencies=[Depends(get_api_key)])
+async def get_epic_free_games():
+    """
+    Get the current free games from the Epic Games Store.
+    """
+    try:
+        api = EpicGamesStoreAPI()
+        free_games = api.get_free_games()
+        return free_games
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/fortnite/news", dependencies=[Depends(get_api_key)])
+async def get_fortnite_news():
+    """
+    Get the latest news from Fortnite.
+    """
+    try:
+        # I'm guessing the URL based on the info I found earlier.
+        # I might need to adjust this.
+        url = "https://fortnite-api.com/v2/news"
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an exception for bad status codes
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching Fortnite news: {e}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # --- Hockey Game Endpoints ---
 
