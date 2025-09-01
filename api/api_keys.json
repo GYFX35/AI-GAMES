@@ -1,3 +1,4 @@
-[
-    "test-api-key"
-]
+{
+    "test-api-key": "Test User",
+    "youtube_api_key": "YOUR_YOUTUBE_API_KEY"
+}

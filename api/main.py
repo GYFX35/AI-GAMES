@@ -8,6 +8,7 @@ from typing import List
 from pydantic import BaseModel
 from .ai_engine import HockeyAI
 from .blockchain import BlockchainManager
+from .track_games import track_games as track_games_script
 
 app = FastAPI()
 
@@ -238,3 +239,14 @@ async def delete_model(model_name: str):
         raise HTTPException(status_code=404, detail="Model not found.")
     os.remove(file_path)
     return {"message": f"Model '{model_name}' deleted successfully."}
+
+@app.post("/api/games/track", status_code=200, dependencies=[Depends(get_api_key)])
+async def track_games_endpoint(username: str = "godotengine", youtube_query: str = "game development"):
+    """
+    Track games from GitHub and YouTube.
+    """
+    try:
+        track_games_script(username, youtube_query)
+        return {"message": "Game tracking initiated successfully."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

@@ -1,5 +1,6 @@
 import pytest
 import requests
+import os
 
 BASE_URL = "http://127.0.0.1:8000"
 API_KEY = "test-api-key"
@@ -39,3 +40,17 @@ def test_get_nft_details():
     token_id = 999
     response = requests.get(f"{BASE_URL}/api/hockey/nft/{token_id}", headers=HEADERS)
     assert response.status_code == 404
+
+def test_track_games_endpoint():
+    """
+    Test the /api/games/track endpoint.
+    """
+    response = requests.post(f"{BASE_URL}/api/games/track", headers=HEADERS)
+    assert response.status_code == 200
+    assert response.json()["message"] == "Game tracking initiated successfully."
+
+    # Verify that the games.json file was created
+    script_dir = os.path.dirname(__file__)
+    data_dir = os.path.join(script_dir, "..", "data")
+    file_path = os.path.join(data_dir, "games.json")
+    assert os.path.exists(file_path)

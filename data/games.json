@@ -1,58 +1,26 @@
 [
     {
-        "name": "supergame",
-        "category": "Mobile Games",
-        "link": "supergame.html",
-        "description": "The supergame for iOS.",
-        "rating": 0,
-        "player_count": 0
+        "name": "awesome-godot",
+        "category": "GitHub Project",
+        "link": "https://github.com/godotengine/awesome-godot",
+        "description": "A curated list of free/libre plugins, scripts and add-ons for Godot",
+        "rating": 8515,
+        "player_count": 456
     },
     {
-        "name": "AI-GAMES",
-        "category": "GitHub Games",
-        "link": "https://github.com/GYFX35/AI-GAMES",
-        "description": "Social networking",
-        "rating": 0,
-        "player_count": 0
+        "name": "buildroot",
+        "category": "GitHub Project",
+        "link": "https://github.com/godotengine/buildroot",
+        "description": "Godot's buildroot soft-fork for generating toolchains to make portable Linux releases of Godot games.",
+        "rating": 29,
+        "player_count": 15
     },
     {
-        "name": "Finances",
-        "category": "GitHub Games",
-        "link": "https://github.com/GYFX35/Finances",
-        "description": "Payout assistant and financial manager.financial data development software and tools. payments apps and sites web AI assistant",
-        "rating": 1,
-        "player_count": 1
-    },
-    {
-        "name": "Game",
-        "category": "GitHub Games",
-        "link": "https://github.com/GYFX35/Game",
-        "description": "Games  canal for streaming and playing",
-        "rating": 0,
-        "player_count": 0
-    },
-    {
-        "name": "Games",
-        "category": "GitHub Games",
-        "link": "https://github.com/GYFX35/Games",
-        "description": null,
-        "rating": 0,
-        "player_count": 0
-    },
-    {
-        "name": "Gamesplay",
-        "category": "GitHub Games",
-        "link": "https://github.com/GYFX35/Gamesplay",
-        "description": "Games  canal for streaming and playing",
-        "rating": 0,
-        "player_count": 0
-    },
-    {
-        "name": "GENERATIVE-AI-FOR-DESIGN-",
-        "category": "GitHub Games",
-        "link": "https://github.com/GYFX35/GENERATIVE-AI-FOR-DESIGN-",
-        "description": "GENERATIVE  AI for games, gaming,cinematography,photography designs  software. Global designs software.",
-        "rating": 0,
-        "player_count": 0
+        "name": "godot",
+        "category": "GitHub Project",
+        "link": "https://github.com/godotengine/godot",
+        "description": "Godot Engine \u2013 Multi-platform 2D and 3D game engine",
+        "rating": 100776,
+        "player_count": 23079
     }
 ]
