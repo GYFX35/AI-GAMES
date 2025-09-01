@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Football League - Games Universe</title>
+    <meta name="description" content="Experience the thrill of football in augmented reality. Build your team, compete in leagues, and earn NFT rewards.">
+    <meta name="keywords" content="AR game, augmented reality, football, soccer, blockchain game, AI in games, NFT rewards, game development">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <style>
+        #game-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AR Football League</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
+            <li><a href="manga_games.html">Manga Games</a></li>
+            <li><a href="casino_games.html">Casino Games</a></li>
+            <li><a href="global_gambles.html">Global Gambles</a></li>
+            <li><a href="forums.html">Forums</a></li>
+            <li class="nav-item"><a href="affiliates.html">Affiliates</a></li>
+            <li><a href="esport_games.html">E-sport Games</a></li>
+            <li><a href="instant_games.html">Instant Games</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="camera_features.html">Camera Features</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+            <li><a href="cloud_gaming.html">Cloud Gaming</a></li>
+            <li><a href="sponsorship.html">Sponsor Us</a></li>
+            <li><a href="monetization.html">Monetization Info</a></li>
+            <li><a href="role_playing_games.html">Role-Playing Games</a></li>
+            <li><a href="developer_tools.html">Developer Tools</a></li>
+            <li><a href="ai_agent.html">AI Agent</a></li>
+            <li><a href="github_explorer.html">GitHub Explorer</a></li>
+            <li><a href="rugby_game.html">AR Rugby</a></li>
+            <li><a href="africa_ar_game.html">Africa AR</a></li>
+            <li><a href="hockey_ar_vr_game.html">AR/VR Hockey</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="game-overview">
+            <h2>Game Overview</h2>
+            <p>Welcome to the future of football. Our AR Football League game brings the stadium to your living room. Compete in thrilling matches, manage your dream team, and climb the ranks to become a legend.</p>
+        </section>
+
+        <section id="ar-game-container">
+            <h2>AR Football Game</h2>
+            <div id="game-container" style="height: 500px; position: relative;">
+                <div id="score-display" style="position: absolute; top: 10px; left: 10px; color: white; font-size: 24px; z-index: 1; background-color: rgba(0,0,0,0.5); padding: 5px;">
+                    Player: 0 - AI: 0
+                </div>
+                <a-scene
+                    webxr="optionalFeatures: dom-overlay; requiredFeatures: hit-test;"
+                    ar-hit-test="target: #ar-content;"
+                    renderer="colorManagement: true;"
+                    game-logic>
+
+                    <a-entity id="ar-content">
+                        <!-- Football Field -->
+                        <a-plane position="0 0 0" rotation="-90 0 0" width="2" height="3" color="#4CAF50"></a-plane>
+
+                        <!-- Goal Posts -->
+                        <a-box position="-0.5 0.5 -1.5" width="1" height="0.5" depth="0.1" color="#FFF"></a-box>
+                        <a-box position="0.5 0.5 1.5" width="1" height="0.5" depth="0.1" color="#FFF"></a-box>
+
+                        <!-- Players -->
+                        <a-box id="player" position="0 0.25 0.5" width="0.2" height="0.5" depth="0.2" color="blue"></a-box>
+                        <a-box id="ai-opponent" position="0 0.25 -0.5" width="0.2" height="0.5" depth="0.2" color="red"></a-box>
+
+                        <!-- Ball -->
+                        <a-sphere id="ball" position="0 0.1 -0.1" radius="0.05" color="white"></a-sphere>
+                    </a-entity>
+
+                    <a-camera position="0 1.6 0"></a-camera>
+
+                    <a-light type="ambient" color="#FFF"></a-light>
+                    <a-light type="directional" color="#FFF" intensity="0.5" position="-1 1 2"></a-light>
+                </a-scene>
+            </div>
+        </section>
+
+        <section id="core-features">
+            <h3>Core Features</h3>
+            <ul>
+                <li><strong>Augmented Reality Matches:</strong> Play football matches on any flat surface in your environment.</li>
+                <li><strong>AI Opponents:</strong> Compete against intelligent AI teams with unique playstyles.</li>
+                <li><strong>Blockchain-based Rewards:</strong> Earn and trade unique player NFTs on the blockchain.</li>
+                <li><strong>Cross-Platform:</strong> Experience the game on the web and mobile devices.</li>
+                <li><strong>League and Tournament Mode:</strong> Compete in leagues and tournaments to win exclusive prizes.</li>
+            </ul>
+        </section>
+
+        <section id="tech-stack">
+            <h3>Technology Stack</h3>
+            <p>This game will be built using a modern, web-first technology stack:</p>
+            <ul>
+                <li><strong>HTML5 & JavaScript:</strong> For a rich, interactive experience.</li>
+                <li><strong>WebXR API:</strong> To power the augmented reality features.</li>
+                <li><strong>Web3 Libraries:</strong> For seamless integration with blockchain networks.</li>
+                <li><strong>Advanced AI Models:</strong> For the AI opponents and team management.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Game Portal</p>
+    </footer>
+    <script src="modal.js" defer></script>
+    <script src="ar_football_game.js"></script>
+</body>
+</html>

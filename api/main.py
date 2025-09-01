@@ -6,7 +6,7 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse
 from typing import List
 from pydantic import BaseModel
-from .ai_engine import HockeyAI
+from .ai_engine import HockeyAI, FootballAI
 from .blockchain import BlockchainManager
 
 app = FastAPI()
@@ -26,6 +26,9 @@ class ChatRequest(BaseModel):
 
 class HockeyGameState(BaseModel):
     puck_owner: str # "player", "ai", or "none"
+
+class FootballGameState(BaseModel):
+    ball_owner: str # "player", "ai", or "none"
 
 # --- API Key Authentication ---
 
@@ -180,6 +183,28 @@ async def get_nft_details(token_id: int):
     Get the details of a player's NFT.
     """
     details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
+
+# --- Football Game Endpoints ---
+
+football_ai = FootballAI()
+
+@app.post("/api/football/ai/action", dependencies=[Depends(get_api_key)])
+async def get_football_ai_action(game_state: FootballGameState):
+    """
+    Get the next action from the football AI.
+    """
+    action = football_ai.decide_action(game_state.dict())
+    return {"action": action}
+
+@app.get("/api/football/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_football_nft_details(token_id: int):
+    """
+    Get the details of a player's football NFT.
+    """
+    details = blockchain_manager.get_football_nft_details(token_id)
     if not details:
         raise HTTPException(status_code=404, detail="NFT not found.")
     return details
