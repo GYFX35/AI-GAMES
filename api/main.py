@@ -6,6 +6,8 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse
 from typing import List
 from pydantic import BaseModel
+from .ai_engine import HockeyAI
+from .blockchain import BlockchainManager
 
 app = FastAPI()
 
@@ -22,12 +24,18 @@ class Game(BaseModel):
 class ChatRequest(BaseModel):
     message: str
 
+class HockeyGameState(BaseModel):
+    puck_owner: str # "player", "ai", or "none"
+
 # --- API Key Authentication ---
 
 API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
 
 def get_api_keys():
-    with open("api_keys.json", "r") as f:
+    # Build the path relative to the current file
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    keys_path = os.path.join(dir_path, "api_keys.json")
+    with open(keys_path, "r") as f:
         return json.load(f)
 
 def get_api_key(api_key_header: str = Security(API_KEY_HEADER)):
@@ -152,6 +160,29 @@ async def ai_chat(chat_request: ChatRequest):
     """
     response = get_bot_response(chat_request.message)
     return {"response": response}
+
+# --- Hockey Game Endpoints ---
+
+hockey_ai = HockeyAI()
+blockchain_manager = BlockchainManager()
+
+@app.post("/api/hockey/ai/action", dependencies=[Depends(get_api_key)])
+async def get_ai_action(game_state: HockeyGameState):
+    """
+    Get the next action from the hockey AI.
+    """
+    action = hockey_ai.decide_action(game_state.dict())
+    return {"action": action}
+
+@app.get("/api/hockey/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_nft_details(token_id: int):
+    """
+    Get the details of a player's NFT.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
 
 # The 'uploads' directory is mapped to /app/uploads in the container
 UPLOADS_DIR = "/app/uploads"

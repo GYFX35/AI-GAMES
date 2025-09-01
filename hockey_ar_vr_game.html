@@ -64,10 +64,66 @@
                 <li><strong>Advanced AI Models:</strong> For realistic opponent behavior and game simulation.</li>
             </ul>
         </section>
+
+        <section id="ai-demo">
+            <h3>AI Demo</h3>
+            <p>Test the hockey AI by simulating different game states.</p>
+            <button onclick="getAiAction('player')">Player has puck</button>
+            <button onclick="getAiAction('ai')">AI has puck</button>
+            <button onclick="getAiAction('none')">Puck is loose</button>
+            <p><strong>AI Action:</strong> <span id="ai-action"></span></p>
+        </section>
+
+        <section id="nft-viewer">
+            <h3>NFT Viewer</h3>
+            <p>Enter a player's token ID to view their NFT details.</p>
+            <input type="number" id="nft-token-id" placeholder="Enter Token ID (e.g., 1 or 2)">
+            <button onclick="getNftDetails()">View NFT</button>
+            <div id="nft-details"></div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2023 Game Portal</p>
     </footer>
     <script src="modal.js" defer></script>
+    <script>
+        const API_KEY = "test-api-key";
+
+        async function getAiAction(puckOwner) {
+            const response = await fetch('/api/hockey/ai/action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({ puck_owner: puckOwner })
+            });
+            const data = await response.json();
+            document.getElementById('ai-action').textContent = data.action;
+        }
+
+        async function getNftDetails() {
+            const tokenId = document.getElementById('nft-token-id').value;
+            if (!tokenId) {
+                alert('Please enter a token ID.');
+                return;
+            }
+            const response = await fetch(`/api/hockey/nft/${tokenId}`, {
+                headers: {
+                    'X-API-Key': API_KEY
+                }
+            });
+            const nftDetailsDiv = document.getElementById('nft-details');
+            if (response.ok) {
+                const data = await response.json();
+                nftDetailsDiv.innerHTML = `
+                    <p><strong>Owner:</strong> ${data.owner}</p>
+                    <p><strong>Metadata URI:</strong> <a href="${data.uri}" target="_blank">${data.uri}</a></p>
+                `;
+            } else {
+                nftDetailsDiv.innerHTML = `<p>Error: NFT not found.</p>`;
+            }
+        }
+    </script>
 </body>
 </html>
