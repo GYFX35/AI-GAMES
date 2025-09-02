@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Games - Search and Discover on Games Universe</title>
-    <meta name="description" content="Search and discover a wide variety of games on the Games Universe platform. Find games by name or category, and get resources for game development and research.">
-    <meta name="keywords" content="all games, game search, discover games, game categories, game development, game research">
+    <title>Dropshipping - Products on Games Universe</title>
+    <meta name="description" content="Find the best dropshipping products related to gaming on the Games Universe platform.">
+    <meta name="keywords" content="dropshipping, gaming products, merchandise, game accessories">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <!-- Firebase SDK -->
@@ -35,8 +35,8 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Search for Games</h2>
-                <input type="text" id="searchInput" placeholder="Enter game name or category..." onkeyup="searchGames()">
+                <h2>Dropshipping Products</h2>
+                <input type="text" id="searchInput" placeholder="Enter product name or category..." onkeyup="searchProducts()">
                 <div id="searchResults" class="category-grid">
                     <!-- Search results will be displayed here -->
                 </div>
@@ -51,61 +51,52 @@
     </footer>
 
     <script>
-        let games = [];
+        let products = [];
 
-        async function fetchGames() {
+        async function fetchProducts() {
             try {
-                const [localGamesResponse, nintendoGamesResponse, twitchGamesResponse] = await Promise.all([
-                    fetch('data/games.json'),
-                    fetch('/api/nintendo/games', { headers: { 'X-API-Key': 'test-api-key' } }),
-                    fetch('/api/twitch/games', { headers: { 'X-API-Key': 'test-api-key' } })
-                ]);
-
-                const localGames = await localGamesResponse.json();
-                const nintendoGames = await nintendoGamesResponse.json();
-                const twitchGames = await twitchGamesResponse.json();
-
-                games = [...localGames, ...nintendoGames, ...twitchGames];
-                displayGames(games);
+                const response = await fetch('/api/dropshipping.php');
+                products = await response.json();
+                displayProducts(products);
             } catch (error) {
-                console.error('Error fetching games:', error);
+                console.error('Error fetching products:', error);
             }
         }
 
-        function displayGames(gamesToDisplay) {
+        function displayProducts(productsToDisplay) {
             const searchResults = document.getElementById('searchResults');
             searchResults.innerHTML = '';
 
-            if (gamesToDisplay.length === 0) {
-                searchResults.innerHTML = '<p>No games found.</p>';
+            if (productsToDisplay.length === 0) {
+                searchResults.innerHTML = '<p>No products found.</p>';
                 return;
             }
 
-            gamesToDisplay.forEach(game => {
-                const gameCard = document.createElement('div');
-                gameCard.className = 'category-card';
-                gameCard.innerHTML = `
-                    <h3>${game.name}</h3>
-                    <p>${game.category}</p>
-                    <a href="${game.link}" target="_blank">Play Now</a>
-                    <a href="sponsorship.html?game=${game.name}" class="sponsor-button">Sponsor this game</a>
+            productsToDisplay.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'category-card';
+                productCard.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>${product.category}</p>
+                    <p>Price: $${product.price}</p>
+                    <a href="${product.link}" target="_blank">Buy Now</a>
                 `;
-                searchResults.appendChild(gameCard);
+                searchResults.appendChild(productCard);
             });
         }
 
-        function searchGames() {
+        function searchProducts() {
             const searchInput = document.getElementById('searchInput');
             const searchTerm = searchInput.value.toLowerCase();
 
-            const filteredGames = games.filter(game => {
-                return game.name.toLowerCase().includes(searchTerm) || game.category.toLowerCase().includes(searchTerm);
+            const filteredProducts = products.filter(product => {
+                return product.name.toLowerCase().includes(searchTerm) || product.category.toLowerCase().includes(searchTerm);
             });
 
-            displayGames(filteredGames);
+            displayProducts(filteredProducts);
         }
 
-        window.onload = fetchGames;
+        window.onload = fetchProducts;
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Gaming Mouse",
+        "category": "Peripherals",
+        "price": 49.99,
+        "link": "https://example.com/gaming-mouse"
+    },
+    {
+        "name": "Mechanical Keyboard",
+        "category": "Peripherals",
+        "price": 79.99,
+        "link": "https://example.com/mechanical-keyboard"
+    },
+    {
+        "name": "Gaming Headset",
+        "category": "Audio",
+        "price": 99.99,
+        "link": "https://example.com/gaming-headset"
+    },
+    {
+        "name": "Gaming Chair",
+        "category": "Furniture",
+        "price": 299.99,
+        "link": "https://example.com/gaming-chair"
+    },
+    {
+        "name": "LED Light Strip",
+        "category": "Accessories",
+        "price": 24.99,
+        "link": "https://example.com/led-light-strip"
+    }
+]
