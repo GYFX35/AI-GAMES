@@ -274,6 +274,14 @@ async def get_amazon_luna_games():
     """
     return amazon_luna.get_all_games()
 
+@app.get("/api/web3_games")
+async def get_web3_games():
+    """
+    Get a list of all web3 games.
+    """
+    with open("/app/data/web3_games.json", "r") as f:
+        return json.load(f)
+
 # --- Hockey Game Endpoints ---
 
 hockey_ai = HockeyAI()
