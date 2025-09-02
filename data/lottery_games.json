@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Powerball",
+        "description": "American lottery game offered by 45 states, the District of Columbia, Puerto Rico and the U.S. Virgin Islands.",
+        "link": "https://www.powerball.com/"
+    },
+    {
+        "name": "Mega Millions",
+        "description": "American multi-jurisdictional lottery game; it is offered in 45 states, the District of Columbia, and the U.S. Virgin Islands.",
+        "link": "https://www.megamillions.com/"
+    },
+    {
+        "name": "EuroMillions",
+        "description": "Transnational lottery that requires seven correct numbers to win the jackpot.",
+        "link": "https://www.euro-millions.com/"
+    }
+]
