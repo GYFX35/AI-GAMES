@@ -11,6 +11,7 @@ from .blockchain import BlockchainManager
 from .xcode import XCodeManager
 from . import unesco
 from . import unesco_ml
+from . import palm_store
 
 app = FastAPI()
 
@@ -203,6 +204,25 @@ async def unesco_ml_predict(request: UNESCOMLRequest):
     Run a mock prediction on a UNESCO dataset.
     """
     return unesco_ml.predict(request.dataset_id)
+
+# --- Palm Store Endpoints ---
+
+@app.get("/api/palm/games", dependencies=[Depends(get_api_key)])
+async def get_palm_store_games():
+    """
+    Get a list of all games from the Palm Store.
+    """
+    return palm_store.get_all_games()
+
+@app.get("/api/palm/games/{game_id}", dependencies=[Depends(get_api_key)])
+async def get_palm_store_game(game_id: int):
+    """
+    Get a single game from the Palm Store by its ID.
+    """
+    game = palm_store.get_game_by_id(game_id)
+    if not game:
+        raise HTTPException(status_code=404, detail="Game not found in Palm Store.")
+    return game
 
 # --- Hockey Game Endpoints ---
 
