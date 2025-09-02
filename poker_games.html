@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nintendo Games - Games Universe</title>
-    <meta name="description" content="Discover Nintendo games on the Games Universe platform.">
-    <meta name="keywords" content="nintendo, games, nintendo switch, nintendo games">
+    <title>Poker Games - Games Universe</title>
+    <meta name="description" content="Discover poker games on the Games Universe platform.">
+    <meta name="keywords" content="poker, poker games, card games, online poker">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <!-- Firebase SDK -->
@@ -35,8 +35,9 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Nintendo Games</h2>
-                <div id="gameResults" class="category-grid">
+                <h2>Poker Games</h2>
+                <input type="text" id="searchInput" placeholder="Enter game name or category..." onkeyup="searchGames()">
+                <div id="searchResults" class="category-grid">
                     <!-- Search results will be displayed here -->
                 </div>
             </div>
@@ -50,26 +51,24 @@
     </footer>
 
     <script>
-        async function fetchNintendoGames() {
+        let games = [];
+
+        async function fetchGames() {
             try {
-                const response = await fetch('/api/nintendo/games', {
-                    headers: {
-                        'X-API-Key': 'test-api-key'
-                    }
-                });
-                const games = await response.json();
+                const response = await fetch('data/poker_games.json');
+                games = await response.json();
                 displayGames(games);
             } catch (error) {
-                console.error('Error fetching Nintendo games:', error);
+                console.error('Error fetching games:', error);
             }
         }
 
         function displayGames(gamesToDisplay) {
-            const gameResults = document.getElementById('gameResults');
-            gameResults.innerHTML = '';
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = '';
 
             if (gamesToDisplay.length === 0) {
-                gameResults.innerHTML = '<p>No Nintendo games found.</p>';
+                searchResults.innerHTML = '<p>No games found.</p>';
                 return;
             }
 
@@ -79,13 +78,25 @@
                 gameCard.innerHTML = `
                     <h3>${game.name}</h3>
                     <p>${game.category}</p>
-                    <a href="${game.link}" target="_blank">More Info</a>
+                    <a href="${game.link}" target="_blank">Play Now</a>
+                    <a href="sponsorship.html?game=${game.name}" class="sponsor-button">Sponsor this game</a>
                 `;
-                gameResults.appendChild(gameCard);
+                searchResults.appendChild(gameCard);
             });
         }
 
-        window.onload = fetchNintendoGames;
+        function searchGames() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.toLowerCase();
+
+            const filteredGames = games.filter(game => {
+                return game.name.toLowerCase().includes(searchTerm) || game.category.toLowerCase().includes(searchTerm);
+            });
+
+            displayGames(filteredGames);
+        }
+
+        window.onload = fetchGames;
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

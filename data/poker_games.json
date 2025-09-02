@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Texas Hold'em",
+        "category": "Poker",
+        "link": "https://www.pokerstars.com/poker/games/texas-holdem/"
+    },
+    {
+        "name": "Omaha",
+        "category": "Poker",
+        "link": "https://www.pokerstars.com/poker/games/omaha/"
+    },
+    {
+        "name": "Seven Card Stud",
+        "category": "Poker",
+        "link": "https://www.pokerstars.com/poker/games/stud/"
+    },
+    {
+        "name": "Video Poker",
+        "category": "Poker",
+        "link": "https://www.videopoker.com/"
+    }
+]
