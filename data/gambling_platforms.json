@@ -13,5 +13,15 @@
         "name": "EuroMillions",
         "description": "Transnational lottery that requires seven correct numbers to win the jackpot.",
         "link": "https://www.euro-millions.com/"
+    },
+    {
+        "name": "Melbet",
+        "description": "Online betting platform with a wide range of sports betting, live betting, and casino games.",
+        "link": "https://melbet.mobi/"
+    },
+    {
+        "name": "1xBet",
+        "description": "One of the world's largest online casinos and sportsbooks, offering a wide variety of betting options.",
+        "link": "https://1xbet.com/en"
     }
 ]
