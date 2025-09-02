@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Gambling Platforms - Bet and Win - Games Universe</title>
-    <meta name="description" content="Explore a variety of global gambling platforms. Try your luck and win big with lotteries and betting sites from around the world.">
-    <meta name="keywords" content="global gambling, online betting, lottery games, sports betting, Powerball, Mega Millions, EuroMillions, Melbet, 1xBet">
+    <title>VR/AR Games - Immerse Yourself in New Worlds - Games Universe</title>
+    <meta name="description" content="Experience the future of gaming with our collection of VR and AR games. Step into new realities and interact with digital worlds like never before.">
+    <meta name="keywords" content="VR games, AR games, virtual reality, augmented reality, immersive gaming, Beat Saber, Half-Life: Alyx, Pokemon Go">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <header>
-        <h1>Global Gambling Platforms</h1>
+        <h1>VR/AR Games</h1>
     </header>
     <nav>
         <ul>
@@ -40,7 +40,7 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Global Gambling Platforms</h2>
+                <h2>VR/AR Games</h2>
                 <div id="gameResults" class="category-grid">
                     <!-- Game results will be displayed here -->
                 </div>
@@ -54,7 +54,7 @@
     <script>
         async function fetchGames() {
             try {
-                const response = await fetch('data/gambling_platforms.json');
+                const response = await fetch('data/vrar_games.json');
                 const games = await response.json();
                 displayGames(games);
             } catch (error) {

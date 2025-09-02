@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Beat Saber",
+        "description": "A VR rhythm game where you slash the beats of adrenaline-pumping music as they fly towards you.",
+        "link": "https://beatsaber.com/"
+    },
+    {
+        "name": "Half-Life: Alyx",
+        "description": "A 2020 virtual reality first-person shooter developed and published by Valve.",
+        "link": "https://www.half-life.com/alyx/"
+    },
+    {
+        "name": "Pokemon Go",
+        "description": "An augmented reality mobile game, part of the Pokémon franchise.",
+        "link": "https://pokemongolive.com/"
+    }
+]

@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Gambling Platforms - Bet and Win - Games Universe</title>
-    <meta name="description" content="Explore a variety of global gambling platforms. Try your luck and win big with lotteries and betting sites from around the world.">
-    <meta name="keywords" content="global gambling, online betting, lottery games, sports betting, Powerball, Mega Millions, EuroMillions, Melbet, 1xBet">
+    <title>Educational Games - Learn Through Play - Games Universe</title>
+    <meta name="description" content="Explore a collection of educational games that make learning fun. Engage with interactive content and develop new skills.">
+    <meta name="keywords" content="educational games, learning games, game-based learning, Kerbal Space Program, Minecraft, Duolingo">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <header>
-        <h1>Global Gambling Platforms</h1>
+        <h1>Educational Games</h1>
     </header>
     <nav>
         <ul>
@@ -40,7 +40,7 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Global Gambling Platforms</h2>
+                <h2>Educational Games</h2>
                 <div id="gameResults" class="category-grid">
                     <!-- Game results will be displayed here -->
                 </div>
@@ -54,7 +54,7 @@
     <script>
         async function fetchGames() {
             try {
-                const response = await fetch('data/gambling_platforms.json');
+                const response = await fetch('data/educational_games.json');
                 const games = await response.json();
                 displayGames(games);
             } catch (error) {
