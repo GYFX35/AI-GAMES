@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Games - Search and Discover on Games Universe</title>
-    <meta name="description" content="Search and discover a wide variety of games on the Games Universe platform. Find games by name or category, and get resources for game development and research.">
-    <meta name="keywords" content="all games, game search, discover games, game categories, game development, game research">
+    <title>Neuroscience & Psychotherapy Games - Games Universe</title>
+    <meta name="description" content="Discover neuroscience and psychotherapy games on the Games Universe platform.">
+    <meta name="keywords" content="neuroscience games, psychotherapy games, mental health games, cognitive games">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <!-- Firebase SDK -->
@@ -22,11 +22,11 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="games.html">Games</a></li>
                     <li><a href="health_fitness_games.html">Health & Fitness</a></li>
+                    <li><a href="neuroscience_psychotherapy_games.html">Neuroscience & Psychotherapy</a></li>
                     <li><a href="ai_agent.html">AI Assistant</a></li>
                     <li><a href="developers.html">Developers</a></li>
                     <li><a href="forums.html">Forums</a></li>
                     <li><a href="sponsorship.html">Sponsor Us</a></li>
-                    <li><a href="dropshipping.html">Dropshipping</a></li>
                 </ul>
             </nav>
         </div>
@@ -35,7 +35,7 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Search for Games</h2>
+                <h2>Neuroscience & Psychotherapy Games</h2>
                 <input type="text" id="searchInput" placeholder="Enter game name or category..." onkeyup="searchGames()">
                 <div id="searchResults" class="category-grid">
                     <!-- Search results will be displayed here -->
@@ -55,19 +55,8 @@
 
         async function fetchGames() {
             try {
-                const [localGamesResponse, nintendoGamesResponse, twitchGamesResponse, neuroscienceGamesResponse] = await Promise.all([
-                    fetch('data/games.json'),
-                    fetch('/api/nintendo/games', { headers: { 'X-API-Key': 'test-api-key' } }),
-                    fetch('/api/twitch/games', { headers: { 'X-API-Key': 'test-api-key' } }),
-                    fetch('data/neuroscience_psychotherapy_games.json')
-                ]);
-
-                const localGames = await localGamesResponse.json();
-                const nintendoGames = await nintendoGamesResponse.json();
-                const twitchGames = await twitchGamesResponse.json();
-                const neuroscienceGames = await neuroscienceGamesResponse.json();
-
-                games = [...localGames, ...nintendoGames, ...twitchGames, ...neuroscienceGames];
+                const response = await fetch('data/neuroscience_psychotherapy_games.json');
+                games = await response.json();
                 displayGames(games);
             } catch (error) {
                 console.error('Error fetching games:', error);

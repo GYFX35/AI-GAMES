@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Mindful Journey",
+        "category": "Psychotherapy",
+        "link": "https://example.com/mindful-journey"
+    },
+    {
+        "name": "Cognitive Adventure",
+        "category": "Neuroscience",
+        "link": "https://example.com/cognitive-adventure"
+    },
+    {
+        "name": "Anxiety Relief",
+        "category": "Psychotherapy",
+        "link": "https://example.com/anxiety-relief"
+    },
+    {
+        "name": "Brain Boost",
+        "category": "Neuroscience",
+        "link": "https://example.com/brain-boost"
+    }
+]
