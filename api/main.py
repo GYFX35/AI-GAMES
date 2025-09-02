@@ -11,6 +11,12 @@ from .blockchain import BlockchainManager
 from .xcode import XCodeManager
 from . import unesco
 from . import unesco_ml
+from . import palm_store
+from . import tencent_games
+from . import geforce_now
+from . import steam
+from . import playstation
+from . import amazon_luna
 
 app = FastAPI()
 
@@ -203,6 +209,70 @@ async def unesco_ml_predict(request: UNESCOMLRequest):
     Run a mock prediction on a UNESCO dataset.
     """
     return unesco_ml.predict(request.dataset_id)
+
+# --- Palm Store Endpoints ---
+
+@app.get("/api/palm/games", dependencies=[Depends(get_api_key)])
+async def get_palm_store_games():
+    """
+    Get a list of all games from the Palm Store.
+    """
+    return palm_store.get_all_games()
+
+@app.get("/api/palm/games/{game_id}", dependencies=[Depends(get_api_key)])
+async def get_palm_store_game(game_id: int):
+    """
+    Get a single game from the Palm Store by its ID.
+    """
+    game = palm_store.get_game_by_id(game_id)
+    if not game:
+        raise HTTPException(status_code=404, detail="Game not found in Palm Store.")
+    return game
+
+# --- Tencent Games Endpoints ---
+
+@app.get("/api/tencent/games", dependencies=[Depends(get_api_key)])
+async def get_tencent_games():
+    """
+    Get a list of all games from Tencent Games.
+    """
+    return tencent_games.get_all_games()
+
+# --- GeForce Now Endpoints ---
+
+@app.get("/api/geforce-now/games", dependencies=[Depends(get_api_key)])
+async def get_geforce_now_games():
+    """
+    Get a list of all games available on GeForce Now.
+    """
+    return geforce_now.get_all_games()
+
+# --- Steam Endpoints ---
+
+@app.get("/api/steam/games", dependencies=[Depends(get_api_key)])
+async def get_steam_games():
+    """
+    Get a list of all games from Steam.
+    """
+    return steam.get_all_games()
+
+# --- PlayStation Endpoints ---
+
+@app.get("/api/playstation/games", dependencies=[Depends(get_api_key)])
+async def get_playstation_games():
+    """
+    Get a list of all games from the PlayStation Store.
+    """
+    return playstation.get_all_games()
+
+# --- Amazon Luna Endpoints ---
+
+@app.get("/api/amazon-luna/games", dependencies=[Depends(get_api_key)])
+async def get_amazon_luna_games():
+    """
+    Get a list of all games from the Amazon Luna store.
+    """
+    return amazon_luna.get_all_games()
 
 # --- Hockey Game Endpoints ---
 

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Honor of Kings",
+    "developer": "TiMi Studio Group",
+    "publisher": "Tencent Games",
+    "release_date": "2015-11-26",
+    "platforms": ["iOS", "Android"]
+  },
+  {
+    "id": 2,
+    "name": "PUBG Mobile",
+    "developer": "LightSpeed & Quantum Studio",
+    "publisher": "Tencent Games",
+    "release_date": "2018-03-19",
+    "platforms": ["iOS", "Android"]
+  },
+  {
+    "id": 3,
+    "name": "League of Legends",
+    "developer": "Riot Games",
+    "publisher": "Riot Games",
+    "release_date": "2009-10-27",
+    "platforms": ["PC"]
+  }
+]

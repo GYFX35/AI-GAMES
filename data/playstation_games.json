@@ -1,0 +1,23 @@
+[
+  {
+    "id": "CUSA07350",
+    "name": "God of War",
+    "platform": "PS4",
+    "developer": "Santa Monica Studio",
+    "publisher": "Sony Interactive Entertainment"
+  },
+  {
+    "id": "CUSA17879",
+    "name": "The Last of Us Part II",
+    "platform": "PS4",
+    "developer": "Naughty Dog",
+    "publisher": "Sony Interactive Entertainment"
+  },
+  {
+    "id": "CUSA08013",
+    "name": "Horizon Zero Dawn",
+    "platform": "PS4",
+    "developer": "Guerrilla Games",
+    "publisher": "Sony Interactive Entertainment"
+  }
+]

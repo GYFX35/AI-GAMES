@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Cyberpunk 2077",
+    "publisher": "CD PROJEKT RED",
+    "supported_stores": ["Steam", "Epic Games Store", "GOG"]
+  },
+  {
+    "id": 2,
+    "title": "The Witcher 3: Wild Hunt",
+    "publisher": "CD PROJEKT RED",
+    "supported_stores": ["Steam", "Epic Games Store", "GOG"]
+  },
+  {
+    "id": 3,
+    "title": "Fortnite",
+    "publisher": "Epic Games",
+    "supported_stores": ["Epic Games Store"]
+  }
+]
