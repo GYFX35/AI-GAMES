@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Games - Search and Discover on Games Universe</title>
-    <meta name="description" content="Search and discover a wide variety of games on the Games Universe platform. Find games by name or category, and get resources for game development and research.">
-    <meta name="keywords" content="all games, game search, discover games, game categories, game development, game research">
+    <title>Nintendo Games - Games Universe</title>
+    <meta name="description" content="Discover Nintendo games on the Games Universe platform.">
+    <meta name="keywords" content="nintendo, games, nintendo switch, nintendo games">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <!-- Firebase SDK -->
@@ -33,9 +33,8 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Search for Games</h2>
-                <input type="text" id="searchInput" placeholder="Enter game name or category..." onkeyup="searchGames()">
-                <div id="searchResults" class="category-grid">
+                <h2>Nintendo Games</h2>
+                <div id="gameResults" class="category-grid">
                     <!-- Search results will be displayed here -->
                 </div>
             </div>
@@ -49,33 +48,26 @@
     </footer>
 
     <script>
-        let games = [];
-
-        async function fetchGames() {
+        async function fetchNintendoGames() {
             try {
-                const [localGamesResponse, nintendoGamesResponse, twitchGamesResponse] = await Promise.all([
-                    fetch('data/games.json'),
-                    fetch('/api/nintendo/games', { headers: { 'X-API-Key': 'test-api-key' } }),
-                    fetch('/api/twitch/games', { headers: { 'X-API-Key': 'test-api-key' } })
-                ]);
-
-                const localGames = await localGamesResponse.json();
-                const nintendoGames = await nintendoGamesResponse.json();
-                const twitchGames = await twitchGamesResponse.json();
-
-                games = [...localGames, ...nintendoGames, ...twitchGames];
+                const response = await fetch('/api/nintendo/games', {
+                    headers: {
+                        'X-API-Key': 'test-api-key'
+                    }
+                });
+                const games = await response.json();
                 displayGames(games);
             } catch (error) {
-                console.error('Error fetching games:', error);
+                console.error('Error fetching Nintendo games:', error);
             }
         }
 
         function displayGames(gamesToDisplay) {
-            const searchResults = document.getElementById('searchResults');
-            searchResults.innerHTML = '';
+            const gameResults = document.getElementById('gameResults');
+            gameResults.innerHTML = '';
 
             if (gamesToDisplay.length === 0) {
-                searchResults.innerHTML = '<p>No games found.</p>';
+                gameResults.innerHTML = '<p>No Nintendo games found.</p>';
                 return;
             }
 
@@ -85,25 +77,13 @@
                 gameCard.innerHTML = `
                     <h3>${game.name}</h3>
                     <p>${game.category}</p>
-                    <a href="${game.link}" target="_blank">Play Now</a>
-                    <a href="sponsorship.html?game=${game.name}" class="sponsor-button">Sponsor this game</a>
+                    <a href="${game.link}" target="_blank">More Info</a>
                 `;
-                searchResults.appendChild(gameCard);
+                gameResults.appendChild(gameCard);
             });
         }
 
-        function searchGames() {
-            const searchInput = document.getElementById('searchInput');
-            const searchTerm = searchInput.value.toLowerCase();
-
-            const filteredGames = games.filter(game => {
-                return game.name.toLowerCase().includes(searchTerm) || game.category.toLowerCase().includes(searchTerm);
-            });
-
-            displayGames(filteredGames);
-        }
-
-        window.onload = fetchGames;
+        window.onload = fetchNintendoGames;
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

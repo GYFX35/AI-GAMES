@@ -9,6 +9,8 @@ from pydantic import BaseModel
 from .ai_engine import HockeyAI
 from .blockchain import BlockchainManager
 from .xcode import XCodeManager
+from . import nintendo
+from . import twitch
 
 app = FastAPI()
 
@@ -77,6 +79,40 @@ async def search_games(q: str = ""):
         if q in game["name"].lower() or q in game["category"].lower()
     ]
     return results
+
+@app.get("/api/nintendo/games", response_model=List[Game], dependencies=[Depends(get_api_key)])
+async def get_nintendo_games_endpoint():
+    """
+    Get a list of Nintendo games.
+    """
+    return nintendo.get_nintendo_games()
+
+@app.get("/api/twitch/games", response_model=List[Game], dependencies=[Depends(get_api_key)])
+async def get_twitch_games_endpoint():
+    """
+    Get a list of top games from Twitch.
+    """
+    return twitch.get_top_games()
+
+@app.get("/api/twitch/streams", dependencies=[Depends(get_api_key)])
+async def get_twitch_streams_endpoint(game_id: str):
+    """
+    Get a list of active streams for a given game from Twitch.
+    """
+    return twitch.get_streams_for_game(game_id)
+
+@app.get("/api/twitch/auth")
+async def twitch_auth_callback(code: str):
+    """
+    Handles the Twitch OAuth 2.0 callback.
+    """
+    token_data = twitch.exchange_code_for_token(code)
+    if token_data:
+        # For now, just return the token data.
+        # In a real application, you would store this securely and create a session for the user.
+        return token_data
+    else:
+        raise HTTPException(status_code=400, detail="Failed to exchange code for token.")
 
 @app.post("/api/games", status_code=201, dependencies=[Depends(get_api_key)])
 async def create_game(game: Game):
