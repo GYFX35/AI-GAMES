@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Fitbit Adventure",
+        "category": "Fitness",
+        "link": "https://www.fitbit.com/global/us/products/services/premium-games"
+    },
+    {
+        "name": "Zombies, Run!",
+        "category": "Fitness",
+        "link": "https://zombiesrungame.com/"
+    },
+    {
+        "name": "Ring Fit Adventure",
+        "category": "Fitness",
+        "link": "https://www.nintendo.com/store/products/ring-fit-adventure-switch/"
+    },
+    {
+        "name": "Beat Saber",
+        "category": "VR Fitness",
+        "link": "https://beatsaber.com/"
+    }
+]
