@@ -1,0 +1,23 @@
+[
+  {
+    "product_id": "com.supergame.coins_100",
+    "name": "100 Gold Coins",
+    "description": "A pack of 100 gold coins to spend in the game.",
+    "price": 0.99,
+    "currency": "USD"
+  },
+  {
+    "product_id": "com.supergame.coins_500",
+    "name": "500 Gold Coins",
+    "description": "A pack of 500 gold coins to spend in the game.",
+    "price": 4.99,
+    "currency": "USD"
+  },
+  {
+    "product_id": "com.supergame.special_sword",
+    "name": "The Sword of a Thousand Truths",
+    "description": "A legendary sword that deals massive damage.",
+    "price": 9.99,
+    "currency": "USD"
+  }
+]
