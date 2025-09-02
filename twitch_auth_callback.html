@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitch Auth Callback - Games Universe</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js"></script>
+    <script src="firebase-init.js"></script>
 </head>
 <body>
     <header>
@@ -54,6 +59,8 @@
                     const data = await response.json();
                     statusElement.textContent = 'Authentication successful!';
                     responseElement.textContent = JSON.stringify(data, null, 2);
+                    // Log login event to Firebase Analytics
+                    analytics.logEvent('login', { method: 'Twitch' });
                 } catch (error) {
                     statusElement.textContent = 'Authentication failed.';
                     console.error('Error during authentication:', error);

@@ -11,6 +11,7 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js"></script>
     <script src="firebase-init.js"></script>
 </head>
 <body>
@@ -40,6 +41,7 @@
                     <li><a href="twitch.html">Twitch</a></li>
                     <li><a href="ai_agent.html">AI Assistant</a></li>
                     <li><a href="developers.html">Developers</a></li>
+                    <li><a href="analytics.html">Analytics</a></li>
                     <li><a href="forums.html">Forums</a></li>
                     <li><a href="sponsorship.html">Sponsor Us</a></li>
                     <li><a href="dropshipping.html">Dropshipping</a></li>
@@ -126,6 +128,8 @@
       console.log('Welcome!  Fetching your information.... ');
       FB.api('/me', {fields: 'name, email, picture'}, function(response) {
         console.log('Successful login for: ' + response.name);
+        // Log login event to Firebase Analytics
+        analytics.logEvent('login', { method: 'Facebook' });
         // Save user data to Firebase
         database.ref('users/' + response.id).set({
           name: response.name,

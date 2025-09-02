@@ -11,6 +11,7 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js"></script>
     <script src="firebase-init.js"></script>
 </head>
 <body>
@@ -79,9 +80,15 @@
                     <h3>${product.name}</h3>
                     <p>${product.category}</p>
                     <p>Price: $${product.price}</p>
-                    <a href="${product.link}" target="_blank">Buy Now</a>
+                    <a href="${product.link}" target="_blank" onclick="trackDropshippingClick('${product.link}')">Buy Now</a>
                 `;
                 searchResults.appendChild(productCard);
+            });
+        }
+
+        function trackDropshippingClick(link) {
+            analytics.logEvent('dropshipping_link_click', {
+                link_url: link
             });
         }
 

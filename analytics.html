@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Games Universe</title>
+    <meta name="description" content="Instructions on how to view and analyze user data and events using the Firebase Analytics console.">
+    <meta name="keywords" content="analytics, firebase, user data, event tracking, game analytics">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Analytics Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="games.html">Games</a></li>
+            <li><a href="developers.html">Developers</a></li>
+            <li><a href="forums.html">Forums</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="container">
+            <h2>Accessing Your Analytics Data</h2>
+            <p>
+                All user, player, and revenue-related events are now being tracked and sent to Firebase Analytics.
+                You can view and analyze this data in your Firebase project console.
+            </p>
+
+            <h3>How to View Your Data:</h3>
+            <ol>
+                <li>
+                    <strong>Go to the Firebase Console:</strong>
+                    <p>
+                        Navigate to the <a href="https://console.firebase.google.com/" target="_blank">Firebase Console</a> and select your project (<code>supergame-4aa29</code>).
+                    </p>
+                </li>
+                <li>
+                    <strong>Open the Analytics Dashboard:</strong>
+                    <p>
+                        In the left-hand menu, under the "Analytics" section, click on "Dashboard". This will give you a high-level overview of your user engagement, including active users, user retention, and more.
+                    </p>
+                </li>
+                <li>
+                    <strong>View Custom Events:</strong>
+                    <p>
+                        To see the custom events we've set up (like <code>play_game</code>, <code>login</code>, etc.), go to the "Events" tab in the Analytics section. Here you will see a list of all tracked events and their counts. You can click on any event to see more detailed reporting, including the parameters we're tracking (like game name or login method).
+                    </p>
+                </li>
+                <li>
+                    <strong>Use DebugView for Real-time Testing:</strong>
+                    <p>
+                        To see events in real-time as you test the website, use the "DebugView". You can find this at the bottom of the left-hand menu in the Analytics section. Events from your development machine should appear here within seconds, which is very useful for verifying that tracking is working correctly.
+                    </p>
+                </li>
+            </ol>
+
+            <h3>Key Events Being Tracked:</h3>
+            <ul>
+                <li><strong>login:</strong> When a user logs in with Facebook or Twitch.</li>
+                <li><strong>play_game:</strong> When a user clicks a "Play Now" button.</li>
+                <li><strong>sponsor_game:</strong> When a user clicks a "Sponsor this game" button.</li>
+                <li><strong>dropshipping_link_click:</strong> When a user clicks a "Buy Now" link on the dropshipping page.</li>
+                <li><strong>affiliate_link_click:</strong> When a user clicks on an affiliate link.</li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Game Portal</p>
+    </footer>
+</body>
+</html>

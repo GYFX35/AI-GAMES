@@ -11,6 +11,7 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js"></script>
     <script src="firebase-init.js"></script>
 </head>
 <body>
@@ -77,10 +78,24 @@
                 gameCard.innerHTML = `
                     <h3>${game.name}</h3>
                     <p>${game.category}</p>
-                    <a href="${game.link}" target="_blank">Play Now</a>
-                    <a href="sponsorship.html?game=${game.name}" class="sponsor-button">Sponsor this game</a>
+                    <a href="${game.link}" target="_blank" onclick="trackPlayGame('${game.name}', 'Health & Fitness', '${game.link}')">Play Now</a>
+                    <a href="sponsorship.html?game=${game.name}" class="sponsor-button" onclick="trackSponsorGame('${game.name}')">Sponsor this game</a>
                 `;
                 searchResults.appendChild(gameCard);
+            });
+        }
+
+        function trackSponsorGame(name) {
+            analytics.logEvent('sponsor_game', {
+                game_name: name
+            });
+        }
+
+        function trackPlayGame(name, category, link) {
+            analytics.logEvent('play_game', {
+                game_name: name,
+                game_category: category,
+                game_link: link
             });
         }
 
