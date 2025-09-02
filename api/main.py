@@ -9,8 +9,8 @@ from pydantic import BaseModel
 from .ai_engine import HockeyAI
 from .blockchain import BlockchainManager
 from .xcode import XCodeManager
-from . import nintendo
-from . import twitch
+from . import unesco
+from . import unesco_ml
 
 app = FastAPI()
 
@@ -32,6 +32,9 @@ class HockeyGameState(BaseModel):
 
 class XCodeRequest(BaseModel):
     prompt: str
+
+class UNESCOMLRequest(BaseModel):
+    dataset_id: str
 
 # --- API Key Authentication ---
 
@@ -79,40 +82,6 @@ async def search_games(q: str = ""):
         if q in game["name"].lower() or q in game["category"].lower()
     ]
     return results
-
-@app.get("/api/nintendo/games", response_model=List[Game], dependencies=[Depends(get_api_key)])
-async def get_nintendo_games_endpoint():
-    """
-    Get a list of Nintendo games.
-    """
-    return nintendo.get_nintendo_games()
-
-@app.get("/api/twitch/games", response_model=List[Game], dependencies=[Depends(get_api_key)])
-async def get_twitch_games_endpoint():
-    """
-    Get a list of top games from Twitch.
-    """
-    return twitch.get_top_games()
-
-@app.get("/api/twitch/streams", dependencies=[Depends(get_api_key)])
-async def get_twitch_streams_endpoint(game_id: str):
-    """
-    Get a list of active streams for a given game from Twitch.
-    """
-    return twitch.get_streams_for_game(game_id)
-
-@app.get("/api/twitch/auth")
-async def twitch_auth_callback(code: str):
-    """
-    Handles the Twitch OAuth 2.0 callback.
-    """
-    token_data = twitch.exchange_code_for_token(code)
-    if token_data:
-        # For now, just return the token data.
-        # In a real application, you would store this securely and create a session for the user.
-        return token_data
-    else:
-        raise HTTPException(status_code=400, detail="Failed to exchange code for token.")
 
 @app.post("/api/games", status_code=201, dependencies=[Depends(get_api_key)])
 async def create_game(game: Game):
@@ -211,6 +180,29 @@ async def xcode_generate(xcode_request: XCodeRequest):
     """
     code = xcode_manager.generate_code(xcode_request.prompt)
     return {"code": code}
+
+# --- UNESCO Endpoints ---
+
+@app.get("/api/unesco/datasets", dependencies=[Depends(get_api_key)])
+async def get_unesco_datasets():
+    """
+    Get a list of all datasets from the UNESCO API.
+    """
+    return unesco.get_datasets()
+
+@app.get("/api/unesco/datasets/{dataset_id}/records", dependencies=[Depends(get_api_key)])
+async def get_unesco_records(dataset_id: str):
+    """
+    Get records from a specific dataset from the UNESCO API.
+    """
+    return unesco.get_records(dataset_id)
+
+@app.post("/api/unesco/ml/predict", dependencies=[Depends(get_api_key)])
+async def unesco_ml_predict(request: UNESCOMLRequest):
+    """
+    Run a mock prediction on a UNESCO dataset.
+    """
+    return unesco_ml.predict(request.dataset_id)
 
 # --- Hockey Game Endpoints ---
 
