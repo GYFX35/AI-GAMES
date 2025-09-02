@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Axie Infinity",
+    "description": "A popular blockchain-based game where players collect, breed, raise, battle, and trade token-based creatures known as Axies.",
+    "link": "https://axieinfinity.com/"
+  },
+  {
+    "name": "The Sandbox",
+    "description": "A virtual world where players can build, own, and monetize their gaming experiences on the Ethereum blockchain.",
+    "link": "https://www.sandbox.game/en/"
+  },
+  {
+    "name": "Decentraland",
+    "description": "A decentralized 3D virtual reality platform powered by the Ethereum blockchain. Users can create, experience, and monetize content and applications.",
+    "link": "https://decentraland.org/"
+  },
+  {
+    "name": "Gods Unchained",
+    "description": "A collectible card game where players build decks and compete against each other. Cards are NFTs, giving players true ownership.",
+    "link": "https://godsunchained.com/"
+  }
+]
