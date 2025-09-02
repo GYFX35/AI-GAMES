@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitch Games - Games Universe</title>
+    <meta name="description" content="Discover Twitch games and streams on the Games Universe platform.">
+    <meta name="keywords" content="twitch, games, streams, twitch games">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
+    <script src="firebase-init.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Games Universe</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="nintendo.html">Nintendo</a></li>
+                    <li><a href="twitch.html">Twitch</a></li>
+                    <li><a href="ai_agent.html">AI Assistant</a></li>
+                    <li><a href="developers.html">Developers</a></li>
+                    <li><a href="forums.html">Forums</a></li>
+                    <li><a href="sponsorship.html">Sponsor Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="all-games">
+            <div class="container">
+                <h2>Top Twitch Games</h2>
+                <div id="gameResults" class="category-grid">
+                    <!-- Top games will be displayed here -->
+                </div>
+                <hr>
+                <h2>Streams</h2>
+                <div id="streamResults" class="category-grid">
+                    <!-- Stream results will be displayed here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Games Universe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        async function fetchTwitchGames() {
+            try {
+                const response = await fetch('/api/twitch/games', {
+                    headers: {
+                        'X-API-Key': 'test-api-key'
+                    }
+                });
+                const games = await response.json();
+                displayGames(games);
+            } catch (error) {
+                console.error('Error fetching Twitch games:', error);
+            }
+        }
+
+        function displayGames(gamesToDisplay) {
+            const gameResults = document.getElementById('gameResults');
+            gameResults.innerHTML = '';
+
+            if (gamesToDisplay.length === 0) {
+                gameResults.innerHTML = '<p>No Twitch games found.</p>';
+                return;
+            }
+
+            gamesToDisplay.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'category-card';
+                gameCard.innerHTML = `
+                    <h3>${game.name}</h3>
+                    <p>${game.category}</p>
+                    <a href="#" onclick="fetchStreams('${game.id}')">View Streams</a>
+                `;
+                gameResults.appendChild(gameCard);
+            });
+        }
+
+        async function fetchStreams(gameId) {
+            try {
+                const response = await fetch(`/api/twitch/streams?game_id=${gameId}`, {
+                    headers: {
+                        'X-API-Key': 'test-api-key'
+                    }
+                });
+                const streams = await response.json();
+                displayStreams(streams);
+            } catch (error) {
+                console.error('Error fetching Twitch streams:', error);
+            }
+        }
+
+        function displayStreams(streams) {
+            const streamResults = document.getElementById('streamResults');
+            streamResults.innerHTML = '';
+
+            if (streams.length === 0) {
+                streamResults.innerHTML = '<p>No live streams for this game.</p>';
+                return;
+            }
+
+            streams.forEach(stream => {
+                const streamCard = document.createElement('div');
+                streamCard.className = 'category-card';
+                streamCard.innerHTML = `
+                    <h3>${stream.title}</h3>
+                    <p>User: ${stream.user_name}</p>
+                    <p>Viewers: ${stream.viewer_count}</p>
+                    <a href="#" onclick="embedPlayer('${stream.user_login}')">Watch Now</a>
+                `;
+                streamResults.appendChild(streamCard);
+            });
+        }
+
+        function embedPlayer(channel) {
+            const streamResults = document.getElementById('streamResults');
+            streamResults.innerHTML = `
+                <iframe
+                    src="https://player.twitch.tv/?channel=${channel}&parent=localhost"
+                    height="480"
+                    width="100%"
+                    allowfullscreen>
+                </iframe>
+            `;
+        }
+
+
+        window.onload = fetchTwitchGames;
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
