@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Microsoft Flight Simulator",
+        "description": "A hyper-realistic flight simulator with a digital twin of the entire Earth.",
+        "link": "https://www.flightsimulator.com/"
+    },
+    {
+        "name": "Ship Simulator Extremes",
+        "description": "A realistic ship simulator where you can pilot a wide variety of vessels in challenging conditions.",
+        "link": "https://store.steampowered.com/app/48800/Ship_Simulator_Extremes/"
+    },
+    {
+        "name": "Euro Truck Simulator 2",
+        "description": "Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances.",
+        "link": "https://eurotrucksimulator2.com/"
+    }
+]
