@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VR/AR Games - Immerse Yourself in New Worlds - Games Universe</title>
-    <meta name="description" content="Experience the future of gaming with our collection of VR and AR games. Step into new realities and interact with digital worlds like never before.">
-    <meta name="keywords" content="VR games, AR games, virtual reality, augmented reality, immersive gaming, Beat Saber, Half-Life: Alyx, Pokemon Go">
+    <title>Human AR/VR Racing Competition - Games Universe</title>
+    <meta name="description" content="Join the ultimate human racing competition in AR and VR. Race against others in immersive environments and become a champion.">
+    <meta name="keywords" content="AR racing, VR racing, human racing game, multiplayer racing, AR/VR competition">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <header>
-        <h1>VR/AR Games</h1>
+        <h1>Human AR/VR Racing Competition</h1>
     </header>
     <nav>
         <ul>
@@ -35,13 +35,13 @@
             <li><a href="github_explorer.html">GitHub Explorer</a></li>
             <li><a href="rugby_game.html">AR Rugby</a></li>
             <li><a href="hockey_ar_vr_game.html">AR/VR Hockey</a></li>
-            <li><a href="human_racing_game.html">Human Racing</a></li>
+            <li><a href="vrar_games.html">VR/AR Games</a></li>
         </ul>
     </nav>
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>VR/AR Games</h2>
+                <h2>Human AR/VR Racing Games</h2>
                 <div id="gameResults" class="category-grid">
                     <!-- Game results will be displayed here -->
                 </div>
@@ -55,7 +55,7 @@
     <script>
         async function fetchGames() {
             try {
-                const response = await fetch('data/vrar_games.json');
+                const response = await fetch('data/human_racing_games.json');
                 const games = await response.json();
                 displayGames(games);
             } catch (error) {
