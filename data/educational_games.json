@@ -2,16 +2,19 @@
     {
         "name": "Kerbal Space Program",
         "description": "A game where the players create and manage their own nascent space program.",
-        "link": "https://www.kerbalspaceprogram.com/"
+        "link": "https://www.kerbalspaceprogram.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Minecraft: Education Edition",
         "description": "A game-based learning platform that promotes creativity, collaboration, and problem-solving in an immersive digital environment.",
-        "link": "https://education.minecraft.net/"
+        "link": "https://education.minecraft.net/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Duolingo",
         "description": "A platform that includes a language-learning website and mobile app, as well as a digital language proficiency assessment exam.",
-        "link": "https://www.duolingo.com/"
+        "link": "https://www.duolingo.com/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

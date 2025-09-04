@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Horizon Zero Dawn",
+        "description": "Aloy's journey to uncover her past in a world overrun by machines.",
+        "link": "https://www.playstation.com/en-us/games/horizon-zero-dawn/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Life is Strange",
+        "description": "A story-driven adventure game with a focus on choice and consequence.",
+        "link": "https://lifeisstrange.square-enix-games.com/en-us/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Control",
+        "description": "A third-person action-adventure game with a supernatural twist.",
+        "link": "https://www.controlgame.com/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

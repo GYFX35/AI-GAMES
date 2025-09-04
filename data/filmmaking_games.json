@@ -1,0 +1,20 @@
+[
+    {
+        "name": "The Movies",
+        "description": "A simulation game where you run your own movie studio.",
+        "link": "https://www.ironstar.com/the-movies",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Stuntman",
+        "description": "Perform dangerous stunts for a variety of movies.",
+        "link": "https://www.ign.com/games/stuntman",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Mad Max",
+        "description": "An action-adventure game with a focus on vehicular combat and cinematic action.",
+        "link": "https://www.madmaxgame.com/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

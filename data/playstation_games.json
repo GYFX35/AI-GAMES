@@ -4,20 +4,23 @@
     "name": "God of War",
     "platform": "PS4",
     "developer": "Santa Monica Studio",
-    "publisher": "Sony Interactive Entertainment"
+    "publisher": "Sony Interactive Entertainment",
+    "download_link": "games/placeholder_game.zip"
   },
   {
     "id": "CUSA17879",
     "name": "The Last of Us Part II",
     "platform": "PS4",
     "developer": "Naughty Dog",
-    "publisher": "Sony Interactive Entertainment"
+    "publisher": "Sony Interactive Entertainment",
+    "download_link": "games/placeholder_game.zip"
   },
   {
     "id": "CUSA08013",
     "name": "Horizon Zero Dawn",
     "platform": "PS4",
     "developer": "Guerrilla Games",
-    "publisher": "Sony Interactive Entertainment"
+    "publisher": "Sony Interactive Entertainment",
+    "download_link": "games/placeholder_game.zip"
   }
 ]

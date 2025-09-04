@@ -2,16 +2,19 @@
     {
         "name": "Guitar Hero Live",
         "description": "Become a rock star and play in front of real crowds.",
-        "link": "https://www.guitarhero.com/"
+        "link": "https://www.guitarhero.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Rock Band 4",
         "description": "The ultimate music game experience, with a huge library of songs.",
-        "link": "https://www.harmonixmusic.com/games/rock-band-4"
+        "link": "https://www.harmonixmusic.com/games/rock-band-4",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Dance Dance Revolution V",
         "description": "The classic dancing game, now available for PC.",
-        "link": "https://p.eagate.573.jp/game/eacddr/konaddr/index.html"
+        "link": "https://p.eagate.573.jp/game/eacddr/konaddr/index.html",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Simulation Games - Realistic Driving and Flying - Games Universe</title>
-    <meta name="description" content="Explore a collection of vehicle simulation games. Experience realistic driving, flying, and sailing.">
-    <meta name="keywords" content="vehicle simulation games, flight simulator, ship simulator, truck simulator, Microsoft Flight Simulator, Ship Simulator Extremes, Euro Truck Simulator 2">
+    <title>Adventure Games - Embark on Epic Journeys - Games Universe</title>
+    <meta name="description" content="Explore vast and immersive worlds in our collection of adventure games. Uncover secrets, solve puzzles, and experience unforgettable stories.">
+    <meta name="keywords" content="adventure games, story-driven games, exploration games, puzzle games, The Legend of Zelda, Tomb Raider, Uncharted">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <header>
-        <h1>Vehicle Simulation Games</h1>
+        <h1>Adventure Games</h1>
     </header>
     <nav>
         <ul>
@@ -40,7 +40,7 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Vehicle Simulation Games</h2>
+                <h2>Adventure Games</h2>
                 <div id="gameResults" class="category-grid">
                     <!-- Game results will be displayed here -->
                 </div>
@@ -54,7 +54,7 @@
     <script>
         async function fetchGames() {
             try {
-                const response = await fetch('data/vehicle_simulation_games.json');
+                const response = await fetch('data/adventure_games.json');
                 const games = await response.json();
                 displayGames(games);
             } catch (error) {

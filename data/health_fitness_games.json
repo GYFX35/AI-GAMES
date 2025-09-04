@@ -2,21 +2,25 @@
     {
         "name": "Fitbit Adventure",
         "category": "Fitness",
-        "link": "https://www.fitbit.com/global/us/products/services/premium-games"
+        "link": "https://www.fitbit.com/global/us/products/services/premium-games",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Zombies, Run!",
         "category": "Fitness",
-        "link": "https://zombiesrungame.com/"
+        "link": "https://zombiesrungame.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Ring Fit Adventure",
         "category": "Fitness",
-        "link": "https://www.nintendo.com/store/products/ring-fit-adventure-switch/"
+        "link": "https://www.nintendo.com/store/products/ring-fit-adventure-switch/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Beat Saber",
         "category": "VR Fitness",
-        "link": "https://beatsaber.com/"
+        "link": "https://beatsaber.com/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

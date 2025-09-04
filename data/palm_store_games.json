@@ -5,7 +5,8 @@
     "developer": "Palm Studios",
     "price": 4.99,
     "description": "A high-speed racing game set in a futuristic city.",
-    "icon": "https://example.com/palm_racer_icon.png"
+    "icon": "https://example.com/palm_racer_icon.png",
+    "download_link": "games/placeholder_game.zip"
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "developer": "Pixel Painters",
     "price": 1.99,
     "description": "Unleash your creativity and become a graffiti legend.",
-    "icon": "https://example.com/graffiti_master_icon.png"
+    "icon": "https://example.com/graffiti_master_icon.png",
+    "download_link": "games/placeholder_game.zip"
   },
   {
     "id": 3,
@@ -21,6 +23,7 @@
     "developer": "Adventure Co.",
     "price": 0.00,
     "description": "A classic endless runner with a twist.",
-    "icon": "https://example.com/jungle_run_icon.png"
+    "icon": "https://example.com/jungle_run_icon.png",
+    "download_link": "games/placeholder_game.zip"
   }
 ]

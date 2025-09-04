@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Kerbal Space Program",
+        "description": "A game where you create and manage your own space program.",
+        "link": "https://www.kerbalspaceprogram.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Universe Sandbox",
+        "description": "A physics-based space simulator.",
+        "link": "http://universesandbox.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Portal 2",
+        "description": "A puzzle-platform game with a focus on physics-based puzzles.",
+        "link": "https://www.thinkwithportals.com/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

@@ -2,16 +2,19 @@
     {
         "name": "Forza Horizon 5",
         "description": "An open-world racing game with a stunning recreation of Mexico.",
-        "link": "https://forza.net/horizon-5"
+        "link": "https://forza.net/horizon-5",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Gran Turismo 7",
         "description": "The real driving simulator, celebrating 25 years of the iconic series.",
-        "link": "https://www.gran-turismo.com/us/products/gt7/"
+        "link": "https://www.gran-turismo.com/us/products/gt7/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "MotoGP 23",
         "description": "Experience the thrill of the official MotoGP season.",
-        "link": "https://motogpvideogame.com/"
+        "link": "https://motogpvideogame.com/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]
