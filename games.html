@@ -55,19 +55,42 @@
 
         async function fetchGames() {
             try {
-                const [localGamesResponse, nintendoGamesResponse, twitchGamesResponse, neuroscienceGamesResponse] = await Promise.all([
+                const [
+                    localGamesResponse,
+                    nintendoGamesResponse,
+                    twitchGamesResponse,
+                    neuroscienceGamesResponse,
+                    palmGamesResponse,
+                    tencentGamesResponse
+                ] = await Promise.all([
                     fetch('data/games.json'),
                     fetch('/api/nintendo/games', { headers: { 'X-API-Key': 'test-api-key' } }),
                     fetch('/api/twitch/games', { headers: { 'X-API-Key': 'test-api-key' } }),
-                    fetch('data/neuroscience_psychotherapy_games.json')
+                    fetch('data/neuroscience_psychotherapy_games.json'),
+                    fetch('/api/palm/games', { headers: { 'X-API-Key': 'test-api-key' } }),
+                    fetch('/api/tencent/games', { headers: { 'X-API-Key': 'test-api-key' } })
                 ]);
 
                 const localGames = await localGamesResponse.json();
                 const nintendoGames = await nintendoGamesResponse.json();
                 const twitchGames = await twitchGamesResponse.json();
                 const neuroscienceGames = await neuroscienceGamesResponse.json();
+                const palmGamesData = await palmGamesResponse.json();
+                const tencentGamesData = await tencentGamesResponse.json();
 
-                games = [...localGames, ...nintendoGames, ...twitchGames, ...neuroscienceGames];
+                const palmGames = palmGamesData.map(game => ({
+                    name: game.name,
+                    category: game.developer,
+                    link: game.download_link
+                }));
+
+                const tencentGames = tencentGamesData.map(game => ({
+                    name: game.name,
+                    category: game.developer,
+                    link: game.download_link
+                }));
+
+                games = [...localGames, ...nintendoGames, ...twitchGames, ...neuroscienceGames, ...palmGames, ...tencentGames];
                 displayGames(games);
             } catch (error) {
                 console.error('Error fetching games:', error);
