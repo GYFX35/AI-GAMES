@@ -5,7 +5,8 @@
         "link": "supergame.html",
         "description": "The supergame for iOS.",
         "rating": 0,
-        "player_count": 0
+        "player_count": 0,
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "AI-GAMES",
@@ -13,7 +14,8 @@
         "link": "https://github.com/GYFX35/AI-GAMES",
         "description": "Social networking",
         "rating": 0,
-        "player_count": 0
+        "player_count": 0,
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Finances",
@@ -21,7 +23,8 @@
         "link": "https://github.com/GYFX35/Finances",
         "description": "Payout assistant and financial manager.financial data development software and tools. payments apps and sites web AI assistant",
         "rating": 1,
-        "player_count": 1
+        "player_count": 1,
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Game",
@@ -29,15 +32,17 @@
         "link": "https://github.com/GYFX35/Game",
         "description": "Games  canal for streaming and playing",
         "rating": 0,
-        "player_count": 0
+        "player_count": 0,
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Games",
         "category": "GitHub Games",
         "link": "https://github.com/GYFX35/Games",
-        "description": null,
+        "description": "",
         "rating": 0,
-        "player_count": 0
+        "player_count": 0,
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Gamesplay",
@@ -45,7 +50,8 @@
         "link": "https://github.com/GYFX35/Gamesplay",
         "description": "Games  canal for streaming and playing",
         "rating": 0,
-        "player_count": 0
+        "player_count": 0,
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "GENERATIVE-AI-FOR-DESIGN-",
@@ -53,6 +59,7 @@
         "link": "https://github.com/GYFX35/GENERATIVE-AI-FOR-DESIGN-",
         "description": "GENERATIVE  AI for games, gaming,cinematography,photography designs  software. Global designs software.",
         "rating": 0,
-        "player_count": 0
+        "player_count": 0,
+        "download_link": "games/placeholder_game.zip"
     }
 ]

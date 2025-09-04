@@ -2,16 +2,19 @@
     {
         "name": "Street Fighter 6",
         "description": "The latest installment in the iconic fighting game series.",
-        "link": "https://www.streetfighter.com/6/"
+        "link": "https://www.streetfighter.com/6/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Mortal Kombat 1",
         "description": "A new era of Kombat has begun. Discover a reborn Mortal Kombat Universe.",
-        "link": "https://www.mortalkombat.com/"
+        "link": "https://www.mortalkombat.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Tekken 8",
         "description": "The next chapter in the long-running fighting game franchise.",
-        "link": "https://tk8.tekken-official.jp/en/"
+        "link": "https://tk8.tekken-official.jp/en/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

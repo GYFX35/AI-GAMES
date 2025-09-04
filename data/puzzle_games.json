@@ -2,16 +2,19 @@
     {
         "name": "Tetris",
         "description": "The classic block-stacking puzzle game.",
-        "link": "https://tetris.com/"
+        "link": "https://tetris.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Sudoku.com",
         "description": "Play Sudoku online for free.",
-        "link": "https://sudoku.com/"
+        "link": "https://sudoku.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "The New York Times Crossword",
         "description": "The iconic daily crossword puzzle.",
-        "link": "https://www.nytimes.com/crosswords"
+        "link": "https://www.nytimes.com/crosswords",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

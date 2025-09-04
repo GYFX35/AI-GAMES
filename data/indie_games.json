@@ -2,16 +2,19 @@
     {
         "name": "Stardew Valley",
         "description": "A farming simulation game where you take over a dilapidated farm.",
-        "link": "https://www.stardewvalley.net/"
+        "link": "https://www.stardewvalley.net/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Hollow Knight",
         "description": "A 2D action-adventure game with an emphasis on exploration and combat.",
-        "link": "https://www.hollowknight.com/"
+        "link": "https://www.hollowknight.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Celeste",
         "description": "A platforming video game about a young woman named Madeline as she attempts to climb Celeste Mountain.",
-        "link": "http://www.celestegame.com/"
+        "link": "http://www.celestegame.com/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

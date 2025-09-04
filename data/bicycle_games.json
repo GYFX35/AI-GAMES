@@ -2,16 +2,19 @@
     {
         "name": "Descenders",
         "description": "A fast-paced extreme downhill biking game with procedurally generated worlds.",
-        "link": "https://www.descendersgame.com/"
+        "link": "https://www.descendersgame.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Riders Republic",
         "description": "Jump into the massive multiplayer playground! Bike, ski, snowboard, or wingsuit across an open world sports paradise.",
-        "link": "https://www.ubisoft.com/en-us/game/riders-republic"
+        "link": "https://www.ubisoft.com/en-us/game/riders-republic",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Pro Cycling Manager 2023",
         "description": "Become the director of a professional cycling team and guide them to victory.",
-        "link": "https://www.procyclingmanager.com/"
+        "link": "https://www.procyclingmanager.com/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

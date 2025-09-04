@@ -5,7 +5,8 @@
     "developer": "TiMi Studio Group",
     "publisher": "Tencent Games",
     "release_date": "2015-11-26",
-    "platforms": ["iOS", "Android"]
+    "platforms": ["iOS", "Android"],
+    "download_link": "games/placeholder_game.zip"
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "developer": "LightSpeed & Quantum Studio",
     "publisher": "Tencent Games",
     "release_date": "2018-03-19",
-    "platforms": ["iOS", "Android"]
+    "platforms": ["iOS", "Android"],
+    "download_link": "games/placeholder_game.zip"
   },
   {
     "id": 3,
@@ -21,6 +23,7 @@
     "developer": "Riot Games",
     "publisher": "Riot Games",
     "release_date": "2009-10-27",
-    "platforms": ["PC"]
+    "platforms": ["PC"],
+    "download_link": "games/placeholder_game.zip"
   }
 ]

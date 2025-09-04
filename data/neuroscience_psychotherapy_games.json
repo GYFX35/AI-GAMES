@@ -2,21 +2,25 @@
     {
         "name": "Mindful Journey",
         "category": "Psychotherapy",
-        "link": "https://example.com/mindful-journey"
+        "link": "https://example.com/mindful-journey",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Cognitive Adventure",
         "category": "Neuroscience",
-        "link": "https://example.com/cognitive-adventure"
+        "link": "https://example.com/cognitive-adventure",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Anxiety Relief",
         "category": "Psychotherapy",
-        "link": "https://example.com/anxiety-relief"
+        "link": "https://example.com/anxiety-relief",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Brain Boost",
         "category": "Neuroscience",
-        "link": "https://example.com/brain-boost"
+        "link": "https://example.com/brain-boost",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

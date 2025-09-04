@@ -2,16 +2,19 @@
     {
         "name": "The Witcher 3: Wild Hunt",
         "description": "An action role-playing game based on the book series by Andrzej Sapkowski.",
-        "link": "https://www.thewitcher.com/en/witcher3"
+        "link": "https://www.thewitcher.com/en/witcher3",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Metro 2033",
         "description": "A first-person shooter based on the novel by Dmitry Glukhovsky.",
-        "link": "https://www.4a-games.com.mt/metro-2033"
+        "link": "https://www.4a-games.com.mt/metro-2033",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Dante's Inferno",
         "description": "A third-person action-adventure game based on the first canticle of Dante Alighieri's Divine Comedy.",
-        "link": "https://www.ea.com/games/dantes-inferno"
+        "link": "https://www.ea.com/games/dantes-inferno",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

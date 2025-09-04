@@ -2,16 +2,19 @@
     {
         "name": "The Legend of Zelda: Breath of the Wild",
         "description": "An open-world adventure game that redefines the series.",
-        "link": "https://www.zelda.com/breath-of-the-wild/"
+        "link": "https://www.zelda.com/breath-of-the-wild/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Tomb Raider (2013)",
         "description": "A gritty and realistic reboot of the classic adventure series.",
-        "link": "https://www.tombraider.com/"
+        "link": "https://www.tombraider.com/",
+        "download_link": "games/placeholder_game.zip"
     },
     {
         "name": "Uncharted 4: A Thief's End",
         "description": "The final chapter in the epic story of Nathan Drake.",
-        "link": "https://www.playstation.com/en-us/games/uncharted-4-a-thiefs-end/"
+        "link": "https://www.playstation.com/en-us/games/uncharted-4-a-thiefs-end/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]
