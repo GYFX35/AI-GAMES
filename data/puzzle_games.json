@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Tetris",
+        "description": "The classic block-stacking puzzle game.",
+        "link": "https://tetris.com/"
+    },
+    {
+        "name": "Sudoku.com",
+        "description": "Play Sudoku online for free.",
+        "link": "https://sudoku.com/"
+    },
+    {
+        "name": "The New York Times Crossword",
+        "description": "The iconic daily crossword puzzle.",
+        "link": "https://www.nytimes.com/crosswords"
+    }
+]

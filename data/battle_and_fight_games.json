@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Street Fighter 6",
+        "description": "The latest installment in the iconic fighting game series.",
+        "link": "https://www.streetfighter.com/6/"
+    },
+    {
+        "name": "Mortal Kombat 1",
+        "description": "A new era of Kombat has begun. Discover a reborn Mortal Kombat Universe.",
+        "link": "https://www.mortalkombat.com/"
+    },
+    {
+        "name": "Tekken 8",
+        "description": "The next chapter in the long-running fighting game franchise.",
+        "link": "https://tk8.tekken-official.jp/en/"
+    }
+]
