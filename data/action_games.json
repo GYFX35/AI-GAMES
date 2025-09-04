@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Call of Duty: Modern Warfare III",
+        "description": "The latest installment in the popular first-person shooter series.",
+        "link": "https://www.callofduty.com/modernwarfare3"
+    },
+    {
+        "name": "Uncharted: Legacy of Thieves Collection",
+        "description": "Experience two critically acclaimed single-player adventures.",
+        "link": "https://www.playstation.com/en-us/games/uncharted-legacy-of-thieves-collection/"
+    },
+    {
+        "name": "Super Mario Odyssey",
+        "description": "Explore huge 3D kingdoms filled with secrets and surprises.",
+        "link": "https://www.nintendo.com/store/products/super-mario-odyssey-switch/"
+    }
+]

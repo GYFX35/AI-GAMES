@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Candy Crush Saga",
+        "description": "A sweet and addictive match-three puzzle game.",
+        "link": "https://www.king.com/game/candycrush"
+    },
+    {
+        "name": "Bejeweled Classic",
+        "description": "The original match-three puzzle game, still as dazzling as ever.",
+        "link": "https://www.ea.com/games/bejeweled/bejeweled-classic"
+    },
+    {
+        "name": "Angry Birds 2",
+        "description": "The sequel to the classic bird-flinging puzzle game.",
+        "link": "https://www.angrybirds.com/games/angry-birds-2/"
+    }
+]

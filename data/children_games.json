@@ -1,0 +1,17 @@
+[
+    {
+        "name": "PBS Kids Games",
+        "description": "A wide variety of games featuring your favorite PBS Kids characters.",
+        "link": "https://pbskids.org/games/"
+    },
+    {
+        "name": "Lego Games",
+        "description": "Build, play, and explore with a huge collection of Lego games.",
+        "link": "https://www.lego.com/en-us/games"
+    },
+    {
+        "name": "Toca Boca",
+        "description": "A collection of digital toys that empower kids to play.",
+        "link": "https://tocaboca.com/"
+    }
+]
