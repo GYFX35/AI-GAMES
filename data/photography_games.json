@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Pokemon Snap",
+        "description": "A photography game set in the world of Pokemon.",
+        "link": "https://www.pokemon.com/us/pokemon-video-games/new-pokemon-snap/"
+    },
+    {
+        "name": "Alba: A Wildlife Adventure",
+        "description": "A relaxing game about wildlife photography and conservation.",
+        "link": "https://www.albawildlife.com/"
+    },
+    {
+        "name": "Umurangi Generation",
+        "description": "A first-person photography game set in the retro-future.",
+        "link": "https://umurangigeneration.com/"
+    }
+]

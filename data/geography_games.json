@@ -1,0 +1,17 @@
+[
+    {
+        "name": "GeoGuessr",
+        "description": "A geography game which takes you on a journey around the world and challenges your ability to recognize your surroundings.",
+        "link": "https://www.geoguessr.com/"
+    },
+    {
+        "name": "Seterra",
+        "description": "A map quiz game with over 400 customizable quizzes.",
+        "link": "https://www.seterra.com/"
+    },
+    {
+        "name": "Where in the World Is Carmen Sandiego?",
+        "description": "The classic geography game where you track down the infamous thief.",
+        "link": "https://www.classicreload.com/where-in-the-world-is-carmen-sandiego.html"
+    }
+]
