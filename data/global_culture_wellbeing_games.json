@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Flower",
+        "description": "A game where you control the wind to guide a flower petal through a beautiful landscape.",
+        "link": "https://thatgamecompany.com/flower/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Journey",
+        "description": "An anonymous online adventure where players explore a vast desert and meet other players along the way.",
+        "link": "https://thatgamecompany.com/journey/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Gris",
+        "description": "A serene and evocative experience, free of danger, frustration or death. Players explore a meticulously designed world brought to life with delicate art, detailed animation, and an elegant original score.",
+        "link": "https://nomada.studio/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

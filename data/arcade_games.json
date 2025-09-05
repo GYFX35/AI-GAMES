@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Pac-Man",
+        "description": "The classic arcade game. Eat all the dots and avoid the ghosts.",
+        "link": "https://www.google.com/search?q=Pac-Man",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Donkey Kong",
+        "description": "The classic arcade game. Climb the ladders and rescue the princess.",
+        "link": "https://www.google.com/search?q=Donkey+Kong",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Space Invaders",
+        "description": "The classic arcade game. Shoot the aliens before they reach the bottom of the screen.",
+        "link": "https://www.google.com/search?q=Space+Invaders",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
