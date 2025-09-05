@@ -282,6 +282,22 @@ async def get_web3_games():
     with open("/app/data/web3_games.json", "r") as f:
         return json.load(f)
 
+@app.get("/api/coupons")
+async def get_coupons():
+    """
+    Get a list of all coupons.
+    """
+    with open("/app/data/coupons.json", "r") as f:
+        return json.load(f)
+
+@app.get("/api/pronostics")
+async def get_pronostics():
+    """
+    Get a list of all pronostics.
+    """
+    with open("/app/data/pronostics.json", "r") as f:
+        return json.load(f)
+
 # --- Hockey Game Endpoints ---
 
 hockey_ai = HockeyAI()

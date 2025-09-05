@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Entertainment - Games Universe</title>
-    <meta name="description" content="Listen to the latest music from the gaming world.">
-    <meta name="keywords" content="music, gaming music, game soundtracks">
+    <title>Pronostics - Games Universe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,11 +15,9 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Music Entertainment</h2>
-                <p>Listen to the latest music from the gaming world.</p>
-            </div>
+        <section class="container">
+            <h2>Pronostics</h2>
+            <div id="pronostics-container"></div>
         </section>
     </main>
 
@@ -30,12 +26,14 @@
             <p>&copy; 2024 Games Universe. All rights reserved.</p>
         </div>
     </footer>
+
     <script>
       fetch('nav_main.html')
         .then(response => response.text())
         .then(data => {
           document.getElementById('nav-placeholder').innerHTML = data;
         });
+        // I will add the script to fetch and display pronostics later.
     </script>
 </body>
 </html>

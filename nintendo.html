@@ -17,17 +17,7 @@
     <header>
         <div class="container">
             <h1 class="logo">Games Universe</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="games.html">Games</a></li>
-                    <li><a href="health_fitness_games.html">Health & Fitness</a></li>
-                    <li><a href="ai_agent.html">AI Assistant</a></li>
-                    <li><a href="developers.html">Developers</a></li>
-                    <li><a href="forums.html">Forums</a></li>
-                    <li><a href="sponsorship.html">Sponsor Us</a></li>
-                </ul>
-            </nav>
+            <div id="nav-placeholder"></div>
         </div>
     </header>
 
@@ -49,6 +39,11 @@
     </footer>
 
     <script>
+      fetch('nav_tertiary.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('nav-placeholder').innerHTML = data;
+        });
         async function fetchNintendoGames() {
             try {
                 const response = await fetch('/api/nintendo/games', {

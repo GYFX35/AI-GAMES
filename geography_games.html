@@ -13,30 +13,7 @@
     <header>
         <h1>Geography Games</h1>
     </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
-            <li><a href="manga_games.html">Manga Games</a></li>
-            <li><a href="casino_games.html">Casino Games</a></li>
-            <li><a href="forums.html">Forums</a></li>
-            <li class="nav-item"><a href="affiliates.html">Affiliates</a></li>
-            <li><a href="esport_games.html">E-sport Games</a></li>
-            <li><a href="instant_games.html">Instant Games</a></li>
-            <li><a href="partnerships.html">Partnerships</a></li>
-            <li><a href="camera_features.html">Camera Features</a></li>
-            <li><a href="paywell.html">Paywell Wallet</a></li>
-            <li><a href="cloud_gaming.html">Cloud Gaming</a></li>
-            <li><a href="sponsorship.html">Sponsor Us</a></li>
-            <li><a href="monetization.html">Monetization Info</a></li>
-            <li><a href="role_playing_games.html">Role-Playing Games</a></li>
-            <li><a href="developer_tools.html">Developer Tools</a></li>
-            <li><a href="ai_agent.html">AI Agent</a></li>
-            <li><a href="github_explorer.html">GitHub Explorer</a></li>
-            <li><a href="rugby_game.html">AR Rugby</a></li>
-            <li><a href="hockey_ar_vr_game.html">AR/VR Hockey</a></li>
-        </ul>
-    </nav>
+    <div id="nav-placeholder"></div>
     <main>
         <section class="all-games">
             <div class="container">
@@ -52,6 +29,12 @@
     </footer>
     <script src="modal.js" defer></script>
     <script>
+      fetch('nav_secondary.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('nav-placeholder').innerHTML = data;
+        });
+
         async function fetchGames() {
             try {
                 const response = await fetch('data/geography_games.json');

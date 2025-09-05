@@ -12,26 +12,7 @@
     <header>
         <div class="container">
             <h1 class="logo">Games Universe</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="games.html">Games</a></li>
-                    <li><a href="global_gambles.html">Global Gambling</a></li>
-                    <li><a href="indie_games.html">Indie Games</a></li>
-                    <li><a href="educational_games.html">Educational Games</a></li>
-                    <li><a href="vrar_games.html">VR/AR Games</a></li>
-                    <li><a href="web3_games.html">Web3 Games</a></li>
-                    <li><a href="health_fitness_games.html">Health & Fitness</a></li>
-                    <li><a href="neuroscience_psychotherapy_games.html">Neuroscience & Psychotherapy</a></li>
-                    <li><a href="nintendo.html">Nintendo</a></li>
-                    <li><a href="twitch.html">Twitch</a></li>
-                    <li><a href="ai_agent.html">AI Assistant</a></li>
-                    <li><a href="developers.html">Developers</a></li>
-                    <li><a href="forums.html">Forums</a></li>
-                    <li><a href="sponsorship.html">Sponsor Us</a></li>
-                    <li><a href="dropshipping.html">Dropshipping</a></li>
-                </ul>
-            </nav>
+            <div id="nav-placeholder"></div>
         </div>
     </header>
 
@@ -49,5 +30,12 @@
             <p>&copy; 2024 Games Universe. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+      fetch('nav_main.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('nav-placeholder').innerHTML = data;
+        });
+    </script>
 </body>
 </html>
