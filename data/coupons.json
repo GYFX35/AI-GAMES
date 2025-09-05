@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "50% off on all action games",
+    "description": "Get a 50% discount on all action games for a limited time.",
+    "code": "ACTION50"
+  },
+  {
+    "id": 2,
+    "title": "20% off on all sports games",
+    "description": "Get a 20% discount on all sports games this weekend.",
+    "code": "SPORTS20"
+  }
+]
