@@ -1,0 +1,20 @@
+[
+    {
+        "name": "The Sims 4",
+        "description": "Create and control people in a virtual world where there are no rules.",
+        "link": "https://www.ea.com/games/the-sims/the-sims-4",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "SimCity",
+        "description": "The classic city-building simulation game.",
+        "link": "https://www.ea.com/games/simcity",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Microsoft Flight Simulator",
+        "description": "The most realistic flight simulator on the market.",
+        "link": "https://www.flightsimulator.com/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
