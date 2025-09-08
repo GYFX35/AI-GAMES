@@ -2,6 +2,3 @@ fastapi
 uvicorn
 python-multipart
 web3
-epicstore-api
-cloudscraper
-requests
