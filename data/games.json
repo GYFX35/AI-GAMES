@@ -61,5 +61,14 @@
         "rating": 0,
         "player_count": 0,
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "AR/VR Padel Game",
+        "category": "VR/AR",
+        "link": "padel_ar_vr_game.html",
+        "description": "A cutting-edge AR/VR padel game with AI opponents and blockchain-based rewards.",
+        "rating": 5.0,
+        "player_count": 2,
+        "download_link": "/models/padel_racket.obj"
     }
 ]

@@ -16,5 +16,11 @@
         "description": "An augmented reality mobile game, part of the Pokémon franchise.",
         "link": "https://pokemongolive.com/",
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "AR/VR Padel Game",
+        "description": "A cutting-edge AR/VR padel game with AI opponents and blockchain-based rewards.",
+        "link": "padel_ar_vr_game.html",
+        "download_link": "/models/padel_racket.obj"
     }
 ]
