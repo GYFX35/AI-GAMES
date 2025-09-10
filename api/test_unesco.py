@@ -1,51 +1,50 @@
-import pytest
+import unittest
 from fastapi.testclient import TestClient
-from .main import app, get_api_key
+from main import app, get_api_key
 from unittest.mock import patch
 
-client = TestClient(app)
+class TestUnesco(unittest.TestCase):
+    def setUp(self):
+        self.client = TestClient(app)
+        self.api_key = "test-api-key"
+        self.headers = {"X-API-Key": self.api_key}
 
-API_KEY = "test-api-key"
-HEADERS = {"X-API-Key": API_KEY}
+    def get_mock_unesco_datasets(self):
+        return {"datasets": [{"dataset": {"dataset_id": "mock_id"}}]}
 
-# Helper function to get a mocked successful response for UNESCO datasets
-def get_mock_unesco_datasets():
-    return {"datasets": [{"dataset": {"dataset_id": "mock_id"}}]}
+    def get_mock_unesco_records(self, dataset_id):
+        return {"records": [{"id": "1", "value": "mock_value"}]}
 
-# Helper function to get a mocked successful response for UNESCO records
-def get_mock_unesco_records(dataset_id):
-    return {"records": [{"id": "1", "value": "mock_value"}]}
+    def test_get_unesco_datasets(self):
+        """
+        Test the /api/unesco/datasets endpoint with a mock.
+        """
+        with patch("unesco.get_datasets", return_value=self.get_mock_unesco_datasets()):
+            response = self.client.get("/api/unesco/datasets", headers=self.headers)
+            self.assertEqual(response.status_code, 200)
+            data = response.json()
+            self.assertIn("datasets", data)
+            self.assertGreater(len(data["datasets"]), 0)
 
-def test_get_unesco_datasets():
-    """
-    Test the /api/unesco/datasets endpoint with a mock.
-    """
-    with patch("api.unesco.get_datasets", return_value=get_mock_unesco_datasets()):
-        response = client.get("/api/unesco/datasets", headers=HEADERS)
-        assert response.status_code == 200
-        data = response.json()
-        assert "datasets" in data
-        assert len(data["datasets"]) > 0
+    def test_get_unesco_records(self):
+        """
+        Test the /api/unesco/datasets/{dataset_id}/records endpoint with a mock.
+        """
+        dataset_id = "mock_id"
+        with patch("unesco.get_records", return_value=self.get_mock_unesco_records(dataset_id)):
+            response = self.client.get(f"/api/unesco/datasets/{dataset_id}/records", headers=self.headers)
+            self.assertEqual(response.status_code, 200)
+            data = response.json()
+            self.assertIn("records", data)
 
-def test_get_unesco_records():
-    """
-    Test the /api/unesco/datasets/{dataset_id}/records endpoint with a mock.
-    """
-    dataset_id = "mock_id"
-    with patch("api.unesco.get_records", return_value=get_mock_unesco_records(dataset_id)):
-        response = client.get(f"/api/unesco/datasets/{dataset_id}/records", headers=HEADERS)
-        assert response.status_code == 200
-        data = response.json()
-        assert "records" in data
-
-def test_unesco_ml_predict():
-    """
-    Test the /api/unesco/ml/predict endpoint.
-    """
-    dataset_id = "mock_id"
-    with patch("api.unesco.get_records", return_value=get_mock_unesco_records(dataset_id)):
-        request_body = {"dataset_id": dataset_id}
-        response = client.post("/api/unesco/ml/predict", json=request_body, headers=HEADERS)
-        assert response.status_code == 200
-        data = response.json()
-        assert "mock_prediction" in data
+    def test_unesco_ml_predict(self):
+        """
+        Test the /api/unesco/ml/predict endpoint.
+        """
+        dataset_id = "mock_id"
+        with patch("unesco.get_records", return_value=self.get_mock_unesco_records(dataset_id)):
+            request_body = {"dataset_id": dataset_id}
+            response = self.client.post("/api/unesco/ml/predict", json=request_body, headers=self.headers)
+            self.assertEqual(response.status_code, 200)
+            data = response.json()
+            self.assertIn("mock_prediction", data)
