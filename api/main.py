@@ -4,7 +4,7 @@ import json
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Security
 from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 from .ai_engine import HockeyAI, PadelAI
 from .blockchain import BlockchainManager
@@ -17,8 +17,16 @@ from . import geforce_now
 from . import steam
 from . import playstation
 from . import amazon_luna
+from . import facebook_business
 
 app = FastAPI()
+
+@app.on_event("startup")
+async def startup_event():
+    """
+    Initialize the Facebook API on application startup.
+    """
+    facebook_business.init_facebook_api()
 
 # --- Models ---
 
@@ -45,6 +53,10 @@ class XCodeRequest(BaseModel):
 class UNESCOMLRequest(BaseModel):
     dataset_id: str
 
+class FacebookUser(BaseModel):
+    name: str
+    email: Optional[str] = None
+
 # --- API Key Authentication ---
 
 API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
@@ -58,7 +70,7 @@ def get_api_keys():
 
 def get_api_key(api_key_header: str = Security(API_KEY_HEADER)):
     api_keys = get_api_keys()
-    if api_key_header not in api_keys:
+    if api_key_header not in api_keys.values(): # Corrected to check values
         raise HTTPException(
             status_code=401,
             detail="Invalid or missing API Key",
@@ -300,6 +312,18 @@ async def get_pronostics():
     """
     with open("/app/data/pronostics.json", "r") as f:
         return json.load(f)
+
+# --- Facebook Integration Endpoints ---
+
+@app.post("/api/facebook/webhook")
+async def facebook_webhook(user: FacebookUser):
+    """
+    Receives user data from the frontend after a Facebook login
+    and sends a server-side event to the Conversions API.
+    """
+    print(f"Received Facebook user data: {user.dict()}")
+    facebook_business.send_server_event(user.dict())
+    return {"status": "success", "message": "Event processed"}
 
 # --- Hockey Game Endpoints ---
 

@@ -244,6 +244,23 @@
           email: response.email,
           picture: response.picture.data.url
         });
+
+        // Send user data to our backend for CAPI
+        fetch('/api/facebook/webhook', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: response.name,
+            email: response.email
+          }),
+        })
+        .then(response => response.json())
+        .then(data => console.log('Backend CAPI response:', data))
+        .catch((error) => {
+          console.error('Error sending CAPI data to backend:', error);
+        });
         document.getElementById('auth-container').innerHTML = `
           <img src="${response.picture.data.url}" alt="${response.name}" style="border-radius: 50%; width: 50px; height: 50px;">
           <span>${response.name}</span>

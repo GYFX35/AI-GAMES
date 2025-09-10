@@ -1,3 +1,9 @@
-[
-    "test-api-key"
-]
+{
+    "test_api_key": "test-api-key",
+    "facebook": {
+        "app_id": "YOUR_FACEBOOK_APP_ID",
+        "app_secret": "YOUR_FACEBOOK_APP_SECRET",
+        "access_token": "YOUR_FACEBOOK_ACCESS_TOKEN",
+        "pixel_id": "YOUR_FACEBOOK_PIXEL_ID"
+    }
+}

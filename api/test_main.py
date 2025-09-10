@@ -1,5 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
+from unittest.mock import patch
 from .main import app
 
 client = TestClient(app)
@@ -62,3 +63,22 @@ def test_xcode_generate():
     response_json = response.json()
     assert "code" in response_json
     assert "Hello, World!" in response_json["code"]
+
+
+def test_facebook_webhook():
+    """
+    Test the /api/facebook/webhook endpoint.
+    It should call the send_server_event function.
+    """
+    # Mock the send_server_event function to avoid real API calls
+    with patch('api.facebook_business.send_server_event') as mock_send_event:
+        user_data = {"name": "Test User", "email": "test@example.com"}
+
+        # The webhook endpoint does not require an API key
+        response = client.post("/api/facebook/webhook", json=user_data)
+
+        assert response.status_code == 200
+        assert response.json() == {"status": "success", "message": "Event processed"}
+
+        # Verify that our mocked function was called once with the correct data
+        mock_send_event.assert_called_once_with(user_data)
