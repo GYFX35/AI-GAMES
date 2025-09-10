@@ -6,18 +6,20 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse
 from typing import List, Optional
 from pydantic import BaseModel
-from .ai_engine import HockeyAI, PadelAI
-from .blockchain import BlockchainManager
-from .xcode import XCodeManager
-from . import unesco
-from . import unesco_ml
-from . import palm_store
-from . import tencent_games
-from . import geforce_now
-from . import steam
-from . import playstation
-from . import amazon_luna
-from . import facebook_business
+from ai_engine import HockeyAI, PadelAI
+from blockchain import BlockchainManager
+from xcode import XCodeManager
+import unesco
+import unesco_ml
+import palm_store
+import tencent_games
+import geforce_now
+import steam
+import playstation
+import amazon_luna
+import mmo_games
+import who_api
+import fb_business
 
 app = FastAPI()
 
@@ -26,7 +28,7 @@ async def startup_event():
     """
     Initialize the Facebook API on application startup.
     """
-    facebook_business.init_facebook_api()
+    fb_business.init_facebook_api()
 
 # --- Models ---
 
@@ -289,6 +291,24 @@ async def get_amazon_luna_games():
     """
     return amazon_luna.get_all_games()
 
+# --- MMO Games Endpoints ---
+
+@app.get("/api/mmo_games", dependencies=[Depends(get_api_key)])
+async def get_mmo_games():
+    """
+    Get a list of all MMO games.
+    """
+    return mmo_games.get_all_games()
+
+# --- WHO Endpoints ---
+
+@app.get("/api/who_data", dependencies=[Depends(get_api_key)])
+async def get_who_data():
+    """
+    Get a list of all indicators from the WHO GHO OData API.
+    """
+    return who_api.get_indicators()
+
 @app.get("/api/web3_games")
 async def get_web3_games():
     """
@@ -322,7 +342,7 @@ async def facebook_webhook(user: FacebookUser):
     and sends a server-side event to the Conversions API.
     """
     print(f"Received Facebook user data: {user.dict()}")
-    facebook_business.send_server_event(user.dict())
+    fb_business.send_server_event(user.dict())
     return {"status": "success", "message": "Event processed"}
 
 # --- Hockey Game Endpoints ---

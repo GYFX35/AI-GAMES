@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health & Fitness Games - Games Universe</title>
-    <meta name="description" content="Discover health and fitness games on the Games Universe platform.">
-    <meta name="keywords" content="health games, fitness games, exergaming, active games">
+    <title>MMO Games - Games Universe</title>
+    <meta name="description" content="Discover MMO games on the Games Universe platform.">
+    <meta name="keywords" content="mmo, mmorpg, online games">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <!-- Firebase SDK -->
@@ -24,19 +24,10 @@
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Health & Fitness Games</h2>
-                <input type="text" id="searchInput" placeholder="Enter game name or category..." onkeyup="searchGames()">
+                <h2>MMO Games</h2>
+                <input type="text" id="searchInput" placeholder="Enter game name or genre..." onkeyup="searchGames()">
                 <div id="searchResults" class="category-grid">
                     <!-- Search results will be displayed here -->
-                </div>
-            </div>
-        </section>
-
-        <section class="who-data">
-            <div class="container">
-                <h2>World Health Organization - Health Data</h2>
-                <div id="whoData" class="category-grid">
-                    <!-- WHO data will be displayed here -->
                 </div>
             </div>
         </section>
@@ -49,7 +40,7 @@
     </footer>
 
     <script>
-      fetch('nav_tertiary.html')
+      fetch('nav_main.html')
         .then(response => response.text())
         .then(data => {
           document.getElementById('nav-placeholder').innerHTML = data;
@@ -58,7 +49,11 @@
 
         async function fetchGames() {
             try {
-                const response = await fetch('data/health_fitness_games.json');
+                const response = await fetch('/api/mmo_games', {
+                    headers: {
+                        'X-API-Key': 'test-api-key'
+                    }
+                });
                 games = await response.json();
                 displayGames(games);
             } catch (error) {
@@ -79,11 +74,12 @@
                 const gameCard = document.createElement('div');
                 gameCard.className = 'category-card';
                 gameCard.innerHTML = `
-                    <h3>${game.name}</h3>
-                    <p>${game.category}</p>
-                    <a href="${game.link}" target="_blank">Play Now</a>
-                    <a href="${game.download_link}" target="_blank" class="download-button">Download</a>
-                    <a href="sponsorship.html?game=${game.name}" class="sponsor-button">Sponsor this game</a>
+                    <img src="${game.thumbnail}" alt="${game.title}" style="width:100%">
+                    <h3>${game.title}</h3>
+                    <p>${game.short_description}</p>
+                    <p>Genre: ${game.genre}</p>
+                    <a href="${game.game_url}" target="_blank">Play Now</a>
+                    <a href="sponsorship.html?game=${game.title}" class="sponsor-button">Sponsor this game</a>
                 `;
                 searchResults.appendChild(gameCard);
             });
@@ -94,50 +90,13 @@
             const searchTerm = searchInput.value.toLowerCase();
 
             const filteredGames = games.filter(game => {
-                return game.name.toLowerCase().includes(searchTerm) || game.category.toLowerCase().includes(searchTerm);
+                return game.title.toLowerCase().includes(searchTerm) || game.genre.toLowerCase().includes(searchTerm);
             });
 
             displayGames(filteredGames);
         }
 
-        async function fetchWhoData() {
-            try {
-                const response = await fetch('/api/who_data', {
-                    headers: {
-                        'X-API-Key': 'test-api-key'
-                    }
-                });
-                const data = await response.json();
-                displayWhoData(data.value);
-            } catch (error) {
-                console.error('Error fetching WHO data:', error);
-            }
-        }
-
-        function displayWhoData(indicators) {
-            const whoDataContainer = document.getElementById('whoData');
-            whoDataContainer.innerHTML = '';
-
-            if (!indicators || indicators.length === 0) {
-                whoDataContainer.innerHTML = '<p>No WHO data available.</p>';
-                return;
-            }
-
-            indicators.slice(0, 10).forEach(indicator => {
-                const indicatorCard = document.createElement('div');
-                indicatorCard.className = 'category-card';
-                indicatorCard.innerHTML = `
-                    <h3>${indicator.IndicatorName}</h3>
-                    <a href="https://www.who.int/data/gho/data/indicators/indicator-details/GHO/${indicator.IndicatorCode}" target="_blank">Learn More</a>
-                `;
-                whoDataContainer.appendChild(indicatorCard);
-            });
-        }
-
-        window.onload = function() {
-            fetchGames();
-            fetchWhoData();
-        };
+        window.onload = fetchGames;
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
