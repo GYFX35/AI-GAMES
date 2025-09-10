@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Duolingo",
+    "description": "Learn 30+ languages online with bite-size lessons based on science.",
+    "link": "https://www.duolingo.com/",
+    "download_link": "https://www.duolingo.com/mobile"
+  },
+  {
+    "name": "Drops",
+    "description": "Learn new vocabulary through fun, fast-paced games with simple mnemonic images in just 5 minutes a day.",
+    "link": "https://languagedrops.com/",
+    "download_link": "https://languagedrops.com/"
+  }
+]
