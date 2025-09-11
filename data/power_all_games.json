@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Energy Overload",
+        "description": "Harness the power of the elements to defeat your foes.",
+        "link": "https://www.example.com/energy-overload",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Galactic Guardians",
+        "description": "A space opera where you command a fleet of powerful starships.",
+        "link": "https://www.example.com/galactic-guardians",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "The Last Stand",
+        "description": "Defend the last city on Earth from hordes of alien invaders.",
+        "link": "https://www.example.com/the-last-stand",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
