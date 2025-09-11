@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Minecraft",
+        "description": "A game about placing blocks and going on adventures. Explore randomly generated worlds and build amazing things from the simplest of homes to the grandest of castles.",
+        "link": "https://www.minecraft.net/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Terraria",
+        "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game. The world is your canvas and the ground itself is your paint.",
+        "link": "https://terraria.org/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Overcooked! 2",
+        "description": "A chaotic cooperative cooking game where players must work together to prepare, cook and serve up a variety of tasty orders.",
+        "link": "https://www.team17.com/games/overcooked-2/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Cooking Mama: Cookstar",
+        "description": "A cooking simulation game where you follow Mama's instructions to create a variety of dishes.",
+        "link": "https://www.cookstarmama.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Good Pizza, Great Pizza",
+        "description": "A pizza-making simulation game where you must fulfill customer orders while managing your pizzeria.",
+        "link": "https://www.goodpizzagreatpizza.com/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

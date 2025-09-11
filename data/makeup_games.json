@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Makeup Artist: Makeup Games",
+        "description": "A game where you can create endless makeup looks and experiment with different styles.",
+        "link": "https://play.google.com/store/apps/details?id=com.gma.makeup.artist.salon.games&hl=en_US&gl=US",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Covet Fashion",
+        "description": "The game for the shopping obsessed! Join millions of other fashionistas, discover clothing and brands you love, and get recognized for your style!",
+        "link": "https://www.covetfashion.com/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

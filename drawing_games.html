@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Games - Bring Your Ideas to Life - Games Universe</title>
+    <meta name="description" content="Bring your ideas to life with these fun drawing games.">
+    <meta name="keywords" content="drawing games, art games, creative games, Drawful 2, Gartic Phone">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body>
+    <header>
+        <h1>Drawing Games</h1>
+    </header>
+    <div id="nav-placeholder"></div>
+    <main>
+        <section class="all-games">
+            <div class="container">
+                <h2>Drawing Games</h2>
+                <div id="gameResults" class="category-grid">
+                    <!-- Game results will be displayed here -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Game Portal</p>
+    </footer>
+    <script src="modal.js" defer></script>
+    <script>
+      fetch('nav_secondary.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('nav-placeholder').innerHTML = data;
+        });
+
+        async function fetchGames() {
+            try {
+                const response = await fetch('data/drawing_games.json');
+                const games = await response.json();
+                displayGames(games);
+            } catch (error) {
+                console.error('Error fetching games:', error);
+            }
+        }
+
+        function displayGames(gamesToDisplay) {
+            const gameResults = document.getElementById('gameResults');
+            gameResults.innerHTML = '';
+
+            if (gamesToDisplay.length === 0) {
+                gameResults.innerHTML = '<p>No games found.</p>';
+                return;
+            }
+
+            gamesToDisplay.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'category-card';
+                gameCard.innerHTML = `
+                    <h3>${game.name}</h3>
+                    <p>${game.description}</p>
+                    <a href="${game.link}" target="_blank">Play Now</a>
+                    <a href="${game.download_link}" target="_blank" class="download-button">Download</a>
+                `;
+                gameResults.appendChild(gameCard);
+            });
+        }
+
+        window.onload = fetchGames;
+    </script>
+</body>
+</html>
