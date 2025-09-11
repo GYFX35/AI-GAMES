@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Painting Games",
+        "description": "Unleash your inner artist with these creative painting games.",
+        "link": "painting_games.html"
+    },
+    {
+        "name": "Architecture Games",
+        "description": "Design and build stunning structures in these architecture games.",
+        "link": "architecture_games.html"
+    },
+    {
+        "name": "Drawing Games",
+        "description": "Bring your ideas to life with these fun drawing games.",
+        "link": "drawing_games.html"
+    },
+    {
+        "name": "Makeup Games",
+        "description": "Express your creativity with these fabulous makeup games.",
+        "link": "makeup_games.html"
+    },
+    {
+        "name": "Building Games",
+        "description": "Construct amazing worlds and structures in these building games.",
+        "link": "building_games.html"
+    }
+]

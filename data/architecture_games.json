@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Cities: Skylines",
+        "description": "A modern take on the classic city simulation. It introduces new game play elements to realize the thrill and hardships of creating and maintaining a real city.",
+        "link": "https://www.citiesskylines.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "SimCity",
+        "description": "The classic city-building simulation game that has been around for decades.",
+        "link": "https://www.ea.com/games/simcity",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Passpartout: The Starving Artist",
+        "description": "A painting simulation game where you play as a struggling artist, trying to sell your paintings to a variety of customers.",
+        "link": "https://www.passpartoutgame.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Colors Live",
+        "description": "A powerful and fun painting game for Nintendo Switch that comes with a pressure-sensitive SonarPen.",
+        "link": "https://www.colorslive.com/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
