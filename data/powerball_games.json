@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Powerball Classic",
+        "description": "The original Powerball lottery game. Pick your numbers and win big!",
+        "link": "https://www.powerball.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Powerball Double Play",
+        "description": "A second chance to win with your Powerball numbers.",
+        "link": "https://www.powerball.com/games/double-play",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Powerball Power Cruise",
+        "description": "Win a luxury cruise vacation with Powerball.",
+        "link": "https://www.powerball.com/promotions/power-cruise",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
