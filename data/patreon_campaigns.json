@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "type": "campaign",
+        "attributes": {
+            "creation_name": "Game Dev Studio",
+            "patron_count": 250,
+            "summary": "Support our journey in creating amazing indie games."
+        }
+    },
+    {
+        "id": "2",
+        "type": "campaign",
+        "attributes": {
+            "creation_name": "Pixel Art World",
+            "patron_count": 150,
+            "summary": "Join us in creating a vibrant world of pixel art."
+        }
+    }
+]

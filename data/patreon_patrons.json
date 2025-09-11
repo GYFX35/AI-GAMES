@@ -1,0 +1,38 @@
+[
+    {
+        "id": "101",
+        "type": "pledge",
+        "attributes": {
+            "amount_cents": 500
+        },
+        "relationships": {
+            "patron": {
+                "data": {
+                    "id": "201",
+                    "type": "user",
+                    "attributes": {
+                        "full_name": "John Doe"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": "102",
+        "type": "pledge",
+        "attributes": {
+            "amount_cents": 1000
+        },
+        "relationships": {
+            "patron": {
+                "data": {
+                    "id": "202",
+                    "type": "user",
+                    "attributes": {
+                        "full_name": "Jane Smith"
+                    }
+                }
+            }
+        }
+    }
+]
