@@ -24,6 +24,16 @@
     <script src="firebase-init.js"></script>
 </head>
 <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : 'YOUR_FACEBOOK_APP_ID',
+          xfbml      : true,
+          version    : 'v23.0'
+        });
+      };
+    </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <header>
         <h1>Monetizing Game Portal</h1>
     </header>
@@ -74,6 +84,11 @@
                 <li>For in-app purchases, a third-party payment processor securely handles the transaction and deposits funds to the owner.</li>
             </ul>
             <p>Google Pay, in these contexts, is a payment method that users can select at the point of sale (either in the app store or within the app via the payment processor). The funds are then routed through these intermediaries before reaching the app owner.</p>
+        </section>
+        <section id="advertisements">
+            <h2>Advertisements</h2>
+            <p>We use Facebook Audience Network to show ads and monetize our platform. By viewing these ads, you are supporting our development.</p>
+            <div class="fb-ad" data-placementid="YOUR_PLACEMENT_ID" data-format="300x250" data-test="true"></div>
         </section>
          <section id="current-support">
             <h3>Supporting Game Portal Now</h3>
