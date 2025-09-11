@@ -20,6 +20,7 @@ import amazon_luna
 import mmo_games
 import who_api
 import fb_business
+import wescore
 
 app = FastAPI()
 
@@ -444,3 +445,19 @@ async def delete_model(model_name: str):
         raise HTTPException(status_code=404, detail="Model not found.")
     os.remove(file_path)
     return {"message": f"Model '{model_name}' deleted successfully."}
+
+# --- WeScore Endpoints ---
+
+@app.get("/api/wescore/scores", dependencies=[Depends(get_api_key)])
+async def get_wescore_scores():
+    """
+    Get live scores from the WeScore API.
+    """
+    return wescore.get_live_scores()
+
+@app.get("/api/wescore/fixtures", dependencies=[Depends(get_api_key)])
+async def get_wescore_fixtures():
+    """
+    Get all fixtures from the WeScore API.
+    """
+    return wescore.get_all_fixtures()
