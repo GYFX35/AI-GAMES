@@ -4,3 +4,6 @@ python-multipart
 web3
 requests
 facebook-business
+patreon
+beautifulsoup4
+httpx

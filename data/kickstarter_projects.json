@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Project Alpha",
+        "blurb": "A new game about exploring a mysterious island.",
+        "link": "https://www.kickstarter.com/projects/user/project-alpha"
+    },
+    {
+        "title": "Cyberpunk Racer",
+        "blurb": "Race through a futuristic city in this high-speed game.",
+        "link": "https://www.kickstarter.com/projects/user/cyberpunk-racer"
+    },
+    {
+        "title": "Fantasy Kingdom Builder",
+        "blurb": "Create and manage your own fantasy kingdom.",
+        "link": "https://www.kickstarter.com/projects/user/fantasy-kingdom-builder"
+    }
+]

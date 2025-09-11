@@ -21,6 +21,8 @@ import mmo_games
 import who_api
 import fb_business
 import wescore
+import kickstarter
+import patreon
 
 app = FastAPI()
 
@@ -461,3 +463,28 @@ async def get_wescore_fixtures():
     Get all fixtures from the WeScore API.
     """
     return wescore.get_all_fixtures()
+
+# --- Kickstarter Endpoints ---
+
+@app.get("/api/kickstarter/projects", dependencies=[Depends(get_api_key)])
+async def get_kickstarter_projects(q: str = ""):
+    """
+    Get a list of all projects from Kickstarter.
+    """
+    return kickstarter.get_projects(q)
+
+# --- Patreon Endpoints ---
+
+@app.get("/api/patreon/campaigns", dependencies=[Depends(get_api_key)])
+async def get_patreon_campaigns():
+    """
+    Get a list of all campaigns from Patreon.
+    """
+    return patreon.get_campaigns()
+
+@app.get("/api/patreon/campaigns/{campaign_id}/patrons", dependencies=[Depends(get_api_key)])
+async def get_patreon_patrons(campaign_id: str):
+    """
+    Get a list of all patrons for a campaign from Patreon.
+    """
+    return patreon.get_patrons(campaign_id)
