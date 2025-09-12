@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Olympic Games Tokyo 2020 - The Official Video Game",
+        "description": "Compete in a variety of sports, including track and field, swimming, and gymnastics.",
+        "link": "https://www.olympicvideogames.com/tokyo2020/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Steep - Road to the Olympics",
+        "description": "Experience the thrill of winter sports like skiing, snowboarding, and bobsledding.",
+        "link": "https://www.ubisoft.com/en-us/game/steep/road-to-the-olympics",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Mario & Sonic at the Olympic Games Tokyo 2020",
+        "description": "Join your favorite characters from the Mario and Sonic universes as they compete in a variety of Olympic events.",
+        "link": "https://www.olympicvideogames.com/marioandsonic/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
