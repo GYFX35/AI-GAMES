@@ -23,6 +23,7 @@ import fb_business
 import wescore
 import kickstarter
 import patreon
+import tiktok
 
 app = FastAPI()
 
@@ -488,3 +489,38 @@ async def get_patreon_patrons(campaign_id: str):
     Get a list of all patrons for a campaign from Patreon.
     """
     return patreon.get_patrons(campaign_id)
+
+# --- TikTok Endpoints ---
+
+class TikTokTokenRequest(BaseModel):
+    code: str
+
+@app.post("/api/tiktok/token", dependencies=[Depends(get_api_key)])
+async def get_tiktok_token(request: TikTokTokenRequest):
+    """
+    Exchange an authorization code for a TikTok access token.
+    """
+    try:
+        return tiktok.get_access_token(request.code)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/tiktok/user", dependencies=[Depends(get_api_key)])
+async def get_tiktok_user(access_token: str):
+    """
+    Get user information from the TikTok API.
+    """
+    try:
+        return tiktok.get_user_info(access_token)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/tiktok/videos", dependencies=[Depends(get_api_key)])
+async def get_tiktok_videos(access_token: str, max_count: int = 20):
+    """
+    Get a list of videos from the TikTok API.
+    """
+    try:
+        return tiktok.get_video_list(access_token, max_count)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
