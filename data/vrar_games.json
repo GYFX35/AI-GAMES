@@ -22,5 +22,23 @@
         "description": "A cutting-edge AR/VR padel game with AI opponents and blockchain-based rewards.",
         "link": "padel_ar_vr_game.html",
         "download_link": "/models/padel_racket.obj"
+    },
+    {
+        "name": "Vader Immortal: A Star Wars VR Series",
+        "description": "A canonical, three-part virtual reality adventure that allows you to step inside a galaxy far, far away.",
+        "link": "https://www.oculus.com/vader-immortal/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Superhot VR",
+        "description": "A unique first-person shooter where time moves only when you move.",
+        "link": "https://superhotgame.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Job Simulator",
+        "description": "A humorous VR simulation game where robots have replaced all human jobs.",
+        "link": "https://jobsimulatorgame.com/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]
