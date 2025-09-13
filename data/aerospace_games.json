@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Kerbal Space Program",
+        "description": "A game where you create and manage your own space program. Build spacecraft, fly them, and try to help the Kerbals to fulfill their ultimate mission of conquering space.",
+        "link": "https://www.kerbalspaceprogram.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Microsoft Flight Simulator",
+        "description": "The most realistic flight simulator. From light planes to wide-body jets, fly highly detailed and accurate aircraft in the next generation of Microsoft Flight Simulator.",
+        "link": "https://www.flightsimulator.com/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Universe Sandbox",
+        "description": "A physics-based space simulator that allows you to create, destroy, and interact on an unimaginable scale.",
+        "link": "http://universesandbox.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Stellarium",
+        "description": "A free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.",
+        "link": "https://stellarium.org/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
