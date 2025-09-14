@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Counter-Strike: Global Offensive",
+        "genre": "First-person shooter",
+        "developer": "Valve"
+    },
+    {
+        "name": "League of Legends",
+        "genre": "MOBA",
+        "developer": "Riot Games"
+    },
+    {
+        "name": "Dota 2",
+        "genre": "MOBA",
+        "developer": "Valve"
+    },
+    {
+        "name": "Valorant",
+        "genre": "First-person shooter",
+        "developer": "Riot Games"
+    }
+]

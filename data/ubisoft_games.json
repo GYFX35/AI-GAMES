@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Assassin's Creed Valhalla",
+        "genre": "Action RPG",
+        "release_year": 2020
+    },
+    {
+        "name": "Far Cry 6",
+        "genre": "First-person shooter",
+        "release_year": 2021
+    },
+    {
+        "name": "Rainbow Six Siege",
+        "genre": "Tactical shooter",
+        "release_year": 2015
+    },
+    {
+        "name": "Watch Dogs: Legion",
+        "genre": "Action-adventure",
+        "release_year": 2020
+    }
+]

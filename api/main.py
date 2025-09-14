@@ -17,6 +17,8 @@ import geforce_now
 import steam
 import playstation
 import amazon_luna
+import ubisoft
+import rival
 import mmo_games
 import who_api
 import fb_business
@@ -294,6 +296,24 @@ async def get_amazon_luna_games():
     Get a list of all games from the Amazon Luna store.
     """
     return amazon_luna.get_all_games()
+
+# --- Ubisoft Endpoints ---
+
+@app.get("/api/ubisoft/games", dependencies=[Depends(get_api_key)])
+async def get_ubisoft_games():
+    """
+    Get a list of all games from Ubisoft.
+    """
+    return ubisoft.get_all_games()
+
+# --- Rival Endpoints ---
+
+@app.get("/api/rival/games", dependencies=[Depends(get_api_key)])
+async def get_rival_games():
+    """
+    Get a list of all games from Rival.
+    """
+    return rival.get_all_games()
 
 # --- MMO Games Endpoints ---
 
