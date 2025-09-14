@@ -1,0 +1,20 @@
+[
+    {
+        "name": "MotoGP 23",
+        "description": "The official MotoGP game for the 2023 season. Experience the thrill of the championship.",
+        "link": "https://motogp.com/en/game",
+        "download_link": "https://store.steampowered.com/app/2165730/MotoGP23/"
+    },
+    {
+        "name": "MotoGP 22",
+        "description": "Relive the 2022 season with all the official riders and tracks.",
+        "link": "https://motogp.com/en/game",
+        "download_link": "https://store.steampowered.com/app/1710580/MotoGP22/"
+    },
+    {
+        "name": "MotoGP 21",
+        "description": "The most realistic and immersive MotoGP videogame experience is back.",
+        "link": "https://motogp.com/en/game",
+        "download_link": "https://store.steampowered.com/app/1477960/MotoGP21/"
+    }
+]
