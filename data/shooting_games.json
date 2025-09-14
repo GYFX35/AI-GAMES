@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Valorant",
+        "description": "A 5v5 character-based tactical shooter.",
+        "link": "https://playvalorant.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Counter-Strike 2",
+        "description": "The latest chapter in the legendary first-person shooter series.",
+        "link": "https://www.counter-strike.net/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Apex Legends",
+        "description": "A free-to-play battle royale-hero shooter game.",
+        "link": "https://www.ea.com/games/apex-legends",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
