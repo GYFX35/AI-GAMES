@@ -19,6 +19,9 @@ class Product(BaseModel):
     price: int # in cents
     quantity: int
 
+class Sponsorship(BaseModel):
+    amount: int # in cents
+
 @router.post("/create-checkout-session")
 async def create_checkout_session(product: Product):
     try:
@@ -33,6 +36,29 @@ async def create_checkout_session(product: Product):
                     'unit_amount': product.price,
                 },
                 'quantity': product.quantity,
+            }],
+            mode='payment',
+            success_url='http://localhost/success.html',
+            cancel_url='http://localhost/cancel.html',
+        )
+        return {"id": session.id}
+    except Exception as e:
+        return {"error": str(e)}
+
+@router.post("/create-sponsorship-checkout-session")
+async def create_sponsorship_checkout_session(sponsorship: Sponsorship):
+    try:
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': 'Sponsorship',
+                    },
+                    'unit_amount': sponsorship.amount,
+                },
+                'quantity': 1,
             }],
             mode='payment',
             success_url='http://localhost/success.html',

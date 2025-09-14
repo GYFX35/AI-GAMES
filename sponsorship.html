@@ -8,6 +8,7 @@
     <meta name="keywords" content="sponsor, game development, game research, support, contribution, community, gamedev">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <header>
@@ -35,6 +36,15 @@
 
             <div style="text-align: center; margin: 25px 0;">
                 <button id="sponsorBtn" class="modal-trigger-btn">Sponsor with QR Code</button>
+            </div>
+
+            <div style="border: 1px solid #ddd; padding: 15px; margin-top: 15px; background-color: #f9f9f9;" id="stripe-sponsorship">
+                <h4>Sponsor with Stripe</h4>
+                <p>You can also sponsor us directly using Stripe. Please enter an amount in USD below.</p>
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+                    <input type="number" id="sponsorship-amount" placeholder="Enter amount in USD" min="1" style="padding: 10px; width: 200px; margin-right: 10px;">
+                    <button id="stripe-sponsor-btn" style="padding: 10px 20px;">Sponsor</button>
+                </div>
             </div>
 
             <div style="border: 1px solid #ddd; padding: 15px; margin-top: 15px; background-color: #f9f9f9;">
@@ -101,6 +111,49 @@
         .then(response => response.text())
         .then(data => {
           document.getElementById('nav-placeholder').innerHTML = data;
+        });
+
+        const stripe = Stripe('pk_test_51RVf53PRUK83xN8e0v4mVdEyU8oXRxPaVMBENyE3qslpQFeab7Rqhy0jpa6RPrSAhIeaCvSeABCabaV3OUfqgynz0080lau5Rg');
+        const sponsorButton = document.getElementById('stripe-sponsor-btn');
+
+        sponsorButton.addEventListener('click', async () => {
+            const amountInput = document.getElementById('sponsorship-amount');
+            const amount = parseInt(amountInput.value, 10);
+
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount.');
+                return;
+            }
+
+            const amountInCents = amount * 100;
+
+            try {
+                const response = await fetch('/api/payment/create-sponsorship-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ amount: amountInCents }),
+                });
+
+                const session = await response.json();
+
+                if (session.error) {
+                    alert(`Error: ${session.error}`);
+                    return;
+                }
+
+                const result = await stripe.redirectToCheckout({
+                    sessionId: session.id,
+                });
+
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
         });
     </script>
 </body>
