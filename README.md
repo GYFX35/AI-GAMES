@@ -55,6 +55,16 @@ The API provides the following endpoints for managing 3D models:
 
 The API comes with automatic interactive documentation (Swagger UI). Once the server is running, you can access it at `http://127.0.0.1:8000/docs`.
 
+### Environment Variables
+
+To run the application, you will need to create a `.env` file in the `api` directory with the following environment variables:
+
+```
+STRIPE_SECRET_KEY=your_stripe_secret_key
+```
+
+You can get your Stripe secret key from the [Stripe dashboard](https://dashboard.stripe.com/apikeys).
+
 ## Deployment
 
 This application is containerized using Docker and orchestrated with Docker Compose.

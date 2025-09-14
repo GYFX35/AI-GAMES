@@ -7,3 +7,5 @@ facebook-business
 patreon
 beautifulsoup4
 httpx
+stripe
+python-dotenv

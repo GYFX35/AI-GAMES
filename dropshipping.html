@@ -12,6 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
     <script src="firebase-init.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <header>
@@ -73,9 +74,17 @@
                     <h3>${product.name}</h3>
                     <p>${product.category}</p>
                     <p>Price: $${product.price}</p>
-                    <a href="${product.link}" target="_blank">Buy Now</a>
+                    <button class="purchase-btn" data-name="${product.name}" data-price="${product.price * 100}">Purchase</button>
                 `;
                 searchResults.appendChild(productCard);
+            });
+
+            document.querySelectorAll('.purchase-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const name = event.target.dataset.name;
+                    const price = parseInt(event.target.dataset.price);
+                    purchaseProduct(name, price);
+                });
             });
         }
 
@@ -88,6 +97,41 @@
             });
 
             displayProducts(filteredProducts);
+        }
+
+        const stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
+        async function purchaseProduct(name, price) {
+            try {
+                const response = await fetch('/api/payment/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        price: price,
+                        quantity: 1,
+                    }),
+                });
+
+                const session = await response.json();
+
+                if (session.error) {
+                    alert(session.error);
+                    return;
+                }
+
+                const result = await stripe.redirectToCheckout({
+                    sessionId: session.id,
+                });
+
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            } catch (error) {
+                console.error('Error purchasing product:', error);
+            }
         }
 
         window.onload = fetchProducts;

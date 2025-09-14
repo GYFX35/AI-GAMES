@@ -26,8 +26,14 @@ import wescore
 import kickstarter
 import patreon
 import tiktok
+from api import payment
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
+
+app.include_router(payment.router, prefix="/api/payment", tags=["payment"])
 
 @app.on_event("startup")
 async def startup_event():
