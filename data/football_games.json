@@ -1,0 +1,20 @@
+[
+    {
+        "name": "FIFA 23",
+        "description": "The world's most popular football simulation game.",
+        "link": "https://www.ea.com/games/fifa/fifa-23",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Madden NFL 24",
+        "description": "Experience the latest version of FieldSENSE™ in Madden NFL 24. More realistic character movement and smarter AI gives you control to play out your gameplay strategy with the confidence to dominate any opponent.",
+        "link": "https://www.ea.com/games/madden-nfl/madden-nfl-24",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "eFootball 2024",
+        "description": "eFootball™ 2024 is the latest installment of the popular football simulation game by Konami.",
+        "link": "https://www.konami.com/efootball/en/",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
