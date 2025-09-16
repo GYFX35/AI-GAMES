@@ -1,0 +1,110 @@
+[
+    {
+        "name": "Powerball",
+        "description": "American lottery game offered by 45 states, the District of Columbia, Puerto Rico and the U.S. Virgin Islands.",
+        "link": "https://www.powerball.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Mega Millions",
+        "description": "American multi-jurisdictional lottery game; it is offered in 45 states, the District of Columbia, and the U.S. Virgin Islands.",
+        "link": "https://www.megamillions.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Lotto America",
+        "description": "Lotto America is a multi-state lottery game offered by 13 states.",
+        "link": "https://www.powerball.com/lotto-america",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "2by2",
+        "description": "2by2 is a lottery game played in Kansas, Nebraska, and North Dakota.",
+        "link": "https://www.powerball.com/2by2",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Double Play",
+        "description": "A second chance to win with your Powerball numbers.",
+        "link": "https://www.powerball.com/double-play",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Emirates Draw",
+        "description": "The largest weekly draw in the UAE.",
+        "link": "https://www.emiratesdraw.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Big Ticket",
+        "description": "The longest-running and biggest raffle draw for cash prizes and luxury cars in Abu Dhabi.",
+        "link": "https://www.bigticket.ae/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "China Welfare Lottery",
+        "description": "A nationwide lottery in China.",
+        "link": "http://www.cwl.gov.cn/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "LOTTO 6aus49",
+        "description": "The classic German lottery game.",
+        "link": "https://www.lotto.de/lotto-6aus49",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Eurojackpot",
+        "description": "A transnational European lottery.",
+        "link": "https://www.lotto.de/eurojackpot",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "GlücksSpirale",
+        "description": "A German lottery that offers the chance to win a monthly pension.",
+        "link": "https://www.lotto.de/gluecksspirale",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "KENO",
+        "description": "A daily lottery game played in Germany.",
+        "link": "https://www.lotto.de/keno",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Loto 7",
+        "description": "A popular lottery game in Japan.",
+        "link": "https://www.takarakuji-official.jp/kuji/loto/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Loto 6",
+        "description": "A popular lottery game in Japan.",
+        "link": "https://www.takarakuji-official.jp/kuji/loto/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Mini Loto",
+        "description": "A popular lottery game in Japan.",
+        "link": "https://www.takarakuji-official.jp/kuji/loto/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Russkoe Lotto",
+        "description": "The most popular lottery in Russia.",
+        "link": "https://www.stoloto.ru/ruslotto",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Gosloto 6x45",
+        "description": "A popular Russian lottery game.",
+        "link": "https://www.stoloto.ru/6x45",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Gosloto 5x36",
+        "description": "A popular Russian lottery game.",
+        "link": "https://www.stoloto.ru/5x36",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
