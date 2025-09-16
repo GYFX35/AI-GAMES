@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Euromillions Classic",
+        "description": "The original Euromillions lottery game. Pick your numbers and win big!",
+        "link": "https://www.euro-millions.com/",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Euromillions Superdraw",
+        "description": "A special event with a guaranteed massive jackpot.",
+        "link": "https://www.euro-millions.com/superdraw",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Euromillions UK Millionaire Maker",
+        "description": "A UK-only raffle alongside the main Euromillions game.",
+        "link": "https://www.euro-millions.com/millionaire-maker",
+        "download_link": "games/placeholder_game.zip"
+    }
+]
