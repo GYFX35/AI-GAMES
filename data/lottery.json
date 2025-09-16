@@ -106,5 +106,65 @@
         "description": "A popular Russian lottery game.",
         "link": "https://www.stoloto.ru/5x36",
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Loto",
+        "description": "The main lottery game in France.",
+        "link": "https://www.fdj.fr/jeux-de-tirage/loto",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "EuroDreams",
+        "description": "A popular lottery game in France.",
+        "link": "https://www.fdj.fr/jeux-de-tirage/eurodreams",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Keno",
+        "description": "A popular lottery game in France.",
+        "link": "https://www.fdj.fr/jeux-de-tirage/keno",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "UK Lotto",
+        "description": "The main lottery game in the UK.",
+        "link": "https://www.national-lottery.co.uk/games/lotto",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Thunderball",
+        "description": "A popular lottery game in the UK.",
+        "link": "https://www.national-lottery.co.uk/games/thunderball",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Set For Life",
+        "description": "A popular lottery game in the UK.",
+        "link": "https://www.national-lottery.co.uk/games/set-for-life",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "TOTO",
+        "description": "A popular lottery game in Singapore.",
+        "link": "https://www.singaporepools.com.sg/en/product/Pages/toto_results.aspx",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "4D",
+        "description": "A popular lottery game in Singapore.",
+        "link": "https://www.singaporepools.com.sg/en/product/Pages/4d_results.aspx",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Singapore Sweep",
+        "description": "A popular lottery game in Singapore.",
+        "link": "https://www.singaporepools.com.sg/en/product/Pages/sweep_results.aspx",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Lotto India",
+        "description": "The first online lottery for the whole of India.",
+        "link": "https://www.lotto-india.com/",
+        "download_link": "games/placeholder_game.zip"
     }
 ]
