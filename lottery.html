@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Powerball Games - Win Big! - Games Universe</title>
-    <meta name="description" content="Play Powerball and other lottery games. Check winning numbers and jackpots.">
-    <meta name="keywords" content="powerball, lottery, jackpot, winning numbers">
+    <title>Lottery Games - Win Big! - Games Universe</title>
+    <meta name="description" content="Play lottery games from around the world. Check winning numbers and jackpots.">
+    <meta name="keywords" content="lottery, jackpot, winning numbers, Powerball, Mega Millions, EuroMillions">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <header>
-        <h1>Powerball Games</h1>
+        <h1>Lottery Games</h1>
     </header>
     <div id="nav-placeholder"></div>
     <main>
         <section class="all-games">
             <div class="container">
-                <h2>Powerball Games</h2>
+                <h2>Lottery Games</h2>
                 <div id="gameResults" class="category-grid">
                     <!-- Game results will be displayed here -->
                 </div>
@@ -37,7 +37,7 @@
 
         async function fetchGames() {
             try {
-                const response = await fetch('data/powerball_games.json');
+                const response = await fetch('data/lottery.json');
                 const games = await response.json();
                 displayGames(games);
             } catch (error) {
