@@ -10,3 +10,4 @@ httpx
 stripe
 python-dotenv
 google-cloud-storage
+PyGithub

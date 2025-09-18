@@ -74,14 +74,26 @@ Alternatively, you can create a service account, download the JSON credentials f
 
 ## Deployment
 
+This project is automatically deployed using GitHub Actions.
+
+### Frontend
+
+The frontend is deployed to GitHub Pages. The deployment is triggered automatically on every push to the `main` branch. The workflow is defined in `.github/workflows/static.yml`.
+
+### Backend
+
+The backend API is containerized using Docker and deployed to GitHub Container Registry (GHCR). The deployment is triggered automatically on every push to the `main` branch that includes changes in the `api/` directory. The workflow is defined in `.github/workflows/api.yml`.
+
+### Local Development
+
 This application is containerized using Docker and orchestrated with Docker Compose.
 
-### Prerequisites
+#### Prerequisites
 
 *   [Docker](https://docs.docker.com/get-docker/)
 *   [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Running the Application
+#### Running the Application
 
 1.  **Clone the repository:**
     ```bash
