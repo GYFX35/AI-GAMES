@@ -1,9 +1,8 @@
 import os
-import shutil
 import json
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Security
 from fastapi.security import APIKeyHeader
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
 from ai_engine import HockeyAI, PadelAI
@@ -27,6 +26,7 @@ import kickstarter
 import patreon
 import tiktok
 from api import payment
+from api import gcs
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -420,28 +420,18 @@ async def get_padel_nft_details(token_id: int):
         raise HTTPException(status_code=404, detail="NFT not found.")
     return details
 
-# The 'uploads' directory is mapped to /app/uploads in the container
-UPLOADS_DIR = "/app/uploads"
-
 @app.post("/models", status_code=201)
 async def upload_model(file: UploadFile = File(...)):
     """
     Upload a 3D model file.
     """
-    if not os.path.exists(UPLOADS_DIR):
-        os.makedirs(UPLOADS_DIR)
-
-    file_path = os.path.join(UPLOADS_DIR, file.filename)
-
-    if os.path.exists(file_path):
+    if gcs.file_exists(file.filename):
         raise HTTPException(status_code=409, detail="File with this name already exists.")
 
     try:
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+        gcs.upload_file(file)
     finally:
         file.file.close()
-
 
     return {"filename": file.filename, "content_type": file.content_type}
 
@@ -450,29 +440,28 @@ async def list_models():
     """
     Get a list of all available 3D models.
     """
-    if not os.path.exists(UPLOADS_DIR):
-        return []
-    return os.listdir(UPLOADS_DIR)
+    return gcs.list_files()
 
 @app.get("/models/{model_name}")
 async def download_model(model_name: str):
     """
     Download a 3D model file.
     """
-    file_path = os.path.join(UPLOADS_DIR, model_name)
-    if not os.path.exists(file_path):
+    if not gcs.file_exists(model_name):
         raise HTTPException(status_code=404, detail="Model not found.")
-    return FileResponse(file_path)
+
+    content = gcs.download_file(model_name)
+    return Response(content, media_type="application/octet-stream")
 
 @app.delete("/models/{model_name}")
 async def delete_model(model_name: str):
     """
     Delete a 3D model file.
     """
-    file_path = os.path.join(UPLOADS_DIR, model_name)
-    if not os.path.exists(file_path):
+    if not gcs.file_exists(model_name):
         raise HTTPException(status_code=404, detail="Model not found.")
-    os.remove(file_path)
+
+    gcs.delete_file(model_name)
     return {"message": f"Model '{model_name}' deleted successfully."}
 
 # --- WeScore Endpoints ---
