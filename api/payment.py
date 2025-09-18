@@ -26,7 +26,6 @@ class Sponsorship(BaseModel):
 async def create_checkout_session(product: Product):
     try:
         session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
             line_items=[{
                 'price_data': {
                     'currency': 'usd',
@@ -38,6 +37,9 @@ async def create_checkout_session(product: Product):
                 'quantity': product.quantity,
             }],
             mode='payment',
+            automatic_payment_methods={
+                'enabled': True,
+            },
             success_url='http://localhost/success.html',
             cancel_url='http://localhost/cancel.html',
         )
@@ -49,10 +51,9 @@ async def create_checkout_session(product: Product):
 async def create_sponsorship_checkout_session(sponsorship: Sponsorship):
     try:
         session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
             line_items=[{
                 'price_data': {
-                    'currency': 'usd',
+                    'currency': 'ngn',
                     'product_data': {
                         'name': 'Sponsorship',
                     },
@@ -61,6 +62,9 @@ async def create_sponsorship_checkout_session(sponsorship: Sponsorship):
                 'quantity': 1,
             }],
             mode='payment',
+            automatic_payment_methods={
+                'enabled': True,
+            },
             success_url='http://localhost/success.html',
             cancel_url='http://localhost/cancel.html',
         )
