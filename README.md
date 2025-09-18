@@ -61,9 +61,16 @@ To run the application, you will need to create a `.env` file in the `api` direc
 
 ```
 STRIPE_SECRET_KEY=your_stripe_secret_key
+GCS_BUCKET_NAME=your-gcs-bucket-name
 ```
 
 You can get your Stripe secret key from the [Stripe dashboard](https://dashboard.stripe.com/apikeys).
+
+You will also need to set up [Google Cloud Authentication](https://cloud.google.com/docs/authentication/client-libraries). For local development, you can use the Google Cloud CLI to authenticate:
+```bash
+gcloud auth application-default login
+```
+Alternatively, you can create a service account, download the JSON credentials file, and set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to the path of the file.
 
 ## Deployment
 

@@ -12,16 +12,16 @@ def get_wescore_credentials():
         keys = json.load(f)
         return keys.get("wescore", {})
 
-credentials = get_wescore_credentials()
-API_KEY = credentials.get("api_key")
-API_SECRET = credentials.get("api_secret")
-
 BASE_URL = "https://live-score-api.com/api-client"
 
 def get_live_scores():
     """
     Fetches live scores from the live-score-api.com.
     """
+    credentials = get_wescore_credentials()
+    API_KEY = credentials.get("api_key")
+    API_SECRET = credentials.get("api_secret")
+
     if not API_KEY or not API_SECRET or API_KEY == "YOUR_WESCORE_API_KEY":
         return {"error": "API key and secret not set for WeScore."}
 
@@ -38,6 +38,10 @@ def get_all_fixtures():
     """
     Fetches all fixtures from the live-score-api.com.
     """
+    credentials = get_wescore_credentials()
+    API_KEY = credentials.get("api_key")
+    API_SECRET = credentials.get("api_secret")
+
     if not API_KEY or not API_SECRET or API_KEY == "YOUR_WESCORE_API_KEY":
         return {"error": "API key and secret not set for WeScore."}
 
