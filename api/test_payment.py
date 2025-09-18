@@ -28,7 +28,24 @@ class TestPayment(unittest.TestCase):
         data = response.json()
         self.assertIn("id", data)
         self.assertEqual(data["id"], "cs_test_123")
-        mock_stripe_create.assert_called_once()
+        mock_stripe_create.assert_called_once_with(
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': 'Test Product',
+                    },
+                    'unit_amount': 1000,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            automatic_payment_methods={
+                'enabled': True,
+            },
+            success_url='http://localhost/success.html',
+            cancel_url='http://localhost/cancel.html',
+        )
 
     @patch('stripe.checkout.Session.create')
     def test_create_sponsorship_checkout_session(self, mock_stripe_create):
@@ -47,7 +64,24 @@ class TestPayment(unittest.TestCase):
         data = response.json()
         self.assertIn("id", data)
         self.assertEqual(data["id"], "cs_test_456")
-        mock_stripe_create.assert_called_once()
+        mock_stripe_create.assert_called_once_with(
+            line_items=[{
+                'price_data': {
+                    'currency': 'ngn',
+                    'product_data': {
+                        'name': 'Sponsorship',
+                    },
+                    'unit_amount': 5000,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            automatic_payment_methods={
+                'enabled': True,
+            },
+            success_url='http://localhost/success.html',
+            cancel_url='http://localhost/cancel.html',
+        )
 
 if __name__ == '__main__':
     unittest.main()
