@@ -61,9 +61,15 @@ To run the application, you will need to create a `.env` file in the `api` direc
 
 ```
 STRIPE_SECRET_KEY=your_stripe_secret_key
+GCS_BUCKET_NAME=your-gcs-bucket-name
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/service-account-file.json
 ```
 
 You can get your Stripe secret key from the [Stripe dashboard](https://dashboard.stripe.com/apikeys).
+
+For Google Cloud Storage, you will need to:
+1.  Create a GCS bucket and get its name for `GCS_BUCKET_NAME`.
+2.  Create a service account with "Storage Object Admin" role, create and download a JSON key file, and provide its path for `GOOGLE_APPLICATION_CREDENTIALS`.
 
 ## Deployment
 

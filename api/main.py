@@ -1,9 +1,8 @@
 import os
-import shutil
 import json
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Security
 from fastapi.security import APIKeyHeader
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
 from ai_engine import HockeyAI, PadelAI
@@ -22,12 +21,13 @@ import rival
 import mmo_games
 import who_api
 import fb_business
-import wescore
 import kickstarter
 import patreon
 import tiktok
 from api import payment
+from api import gcs
 from dotenv import load_dotenv
+from google.cloud.exceptions import NotFound
 
 load_dotenv()
 
@@ -420,60 +420,57 @@ async def get_padel_nft_details(token_id: int):
         raise HTTPException(status_code=404, detail="NFT not found.")
     return details
 
-# The 'uploads' directory is mapped to /app/uploads in the container
-UPLOADS_DIR = "/app/uploads"
-
 @app.post("/models", status_code=201)
 async def upload_model(file: UploadFile = File(...)):
     """
-    Upload a 3D model file.
+    Upload a 3D model file to Google Cloud Storage.
     """
-    if not os.path.exists(UPLOADS_DIR):
-        os.makedirs(UPLOADS_DIR)
-
-    file_path = os.path.join(UPLOADS_DIR, file.filename)
-
-    if os.path.exists(file_path):
+    # Check if file already exists
+    blobs = gcs.list_blobs()
+    if file.filename in blobs:
         raise HTTPException(status_code=409, detail="File with this name already exists.")
 
     try:
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-    finally:
-        file.file.close()
-
-
-    return {"filename": file.filename, "content_type": file.content_type}
+        public_url = gcs.upload_blob(file, file.filename)
+        return {"filename": file.filename, "public_url": public_url}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/models", response_model=List[str])
 async def list_models():
     """
-    Get a list of all available 3D models.
+    Get a list of all available 3D models from Google Cloud Storage.
     """
-    if not os.path.exists(UPLOADS_DIR):
-        return []
-    return os.listdir(UPLOADS_DIR)
+    try:
+        return gcs.list_blobs()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/models/{model_name}")
 async def download_model(model_name: str):
     """
-    Download a 3D model file.
+    Download a 3D model file from Google Cloud Storage.
     """
-    file_path = os.path.join(UPLOADS_DIR, model_name)
-    if not os.path.exists(file_path):
+    try:
+        content = gcs.download_blob(model_name)
+        return Response(content=content, media_type="application/octet-stream")
+    except NotFound:
         raise HTTPException(status_code=404, detail="Model not found.")
-    return FileResponse(file_path)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.delete("/models/{model_name}")
 async def delete_model(model_name: str):
     """
-    Delete a 3D model file.
+    Delete a 3D model file from Google Cloud Storage.
     """
-    file_path = os.path.join(UPLOADS_DIR, model_name)
-    if not os.path.exists(file_path):
+    try:
+        gcs.delete_blob(model_name)
+        return {"message": f"Model '{model_name}' deleted successfully."}
+    except NotFound:
         raise HTTPException(status_code=404, detail="Model not found.")
-    os.remove(file_path)
-    return {"message": f"Model '{model_name}' deleted successfully."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # --- WeScore Endpoints ---
 
@@ -482,6 +479,7 @@ async def get_wescore_scores():
     """
     Get live scores from the WeScore API.
     """
+    import wescore
     return wescore.get_live_scores()
 
 @app.get("/api/wescore/fixtures", dependencies=[Depends(get_api_key)])
@@ -489,6 +487,7 @@ async def get_wescore_fixtures():
     """
     Get all fixtures from the WeScore API.
     """
+    import wescore
     return wescore.get_all_fixtures()
 
 # --- Kickstarter Endpoints ---
