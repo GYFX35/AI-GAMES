@@ -55,14 +55,16 @@
                     twitchGamesResponse,
                     neuroscienceGamesResponse,
                     palmGamesResponse,
-                    tencentGamesResponse
+                    tencentGamesResponse,
+                    minecraftGamesResponse
                 ] = await Promise.all([
                     fetch('data/games.json'),
                     fetch('/api/nintendo/games', { headers: { 'X-API-Key': 'test-api-key' } }),
                     fetch('/api/twitch/games', { headers: { 'X-API-Key': 'test-api-key' } }),
                     fetch('data/neuroscience_psychotherapy_games.json'),
                     fetch('/api/palm/games', { headers: { 'X-API-Key': 'test-api-key' } }),
-                    fetch('/api/tencent/games', { headers: { 'X-API-Key': 'test-api-key' } })
+                    fetch('/api/tencent/games', { headers: { 'X-API-Key': 'test-api-key' } }),
+                    fetch('/api/minecraft/games', { headers: { 'X-API-Key': 'test-api-key' } })
                 ]);
 
                 const localGames = await localGamesResponse.json();
@@ -71,6 +73,7 @@
                 const neuroscienceGames = await neuroscienceGamesResponse.json();
                 const palmGamesData = await palmGamesResponse.json();
                 const tencentGamesData = await tencentGamesResponse.json();
+                const minecraftGames = await minecraftGamesResponse.json();
 
                 const palmGames = palmGamesData.map(game => ({
                     name: game.name,
@@ -84,7 +87,7 @@
                     link: game.download_link
                 }));
 
-                games = [...localGames, ...nintendoGames, ...twitchGames, ...neuroscienceGames, ...palmGames, ...tencentGames];
+                games = [...localGames, ...nintendoGames, ...twitchGames, ...neuroscienceGames, ...palmGames, ...tencentGames, ...minecraftGames];
                 displayGames(games);
             } catch (error) {
                 console.error('Error fetching games:', error);

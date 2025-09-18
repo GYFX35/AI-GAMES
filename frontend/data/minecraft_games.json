@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Minecraft",
+        "category": "Sandbox, Survival",
+        "link": "https://www.minecraft.net/",
+        "description": "A game about placing blocks and going on adventures.",
+        "rating": 4.5,
+        "player_count": 100000000
+    },
+    {
+        "name": "Minecraft Dungeons",
+        "category": "Action RPG, Dungeon Crawler",
+        "link": "https://www.minecraft.net/en-us/about-dungeons",
+        "description": "An all-new action-adventure game, inspired by classic dungeon crawlers.",
+        "rating": 4.0,
+        "player_count": 10000000
+    },
+    {
+        "name": "Minecraft Legends",
+        "category": "Action Strategy",
+        "link": "https://www.minecraft.net/en-us/about-legends",
+        "description": "A new action strategy game.",
+        "rating": 3.5,
+        "player_count": 1000000
+    }
+]

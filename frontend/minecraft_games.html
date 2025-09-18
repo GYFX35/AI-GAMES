@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Games - Build, Explore, and Create - Games Universe</title>
+    <meta name="description" content="Explore the world of Minecraft and its various editions. Build, explore, and create in a universe of endless possibilities.">
+    <meta name="keywords" content="minecraft, minecraft games, sandbox, building games, survival games, minecraft dungeons, minecraft legends">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body>
+    <header>
+        <h1>Minecraft Games</h1>
+    </header>
+    <div id="nav-placeholder"></div>
+    <main>
+        <section class="all-games">
+            <div class="container">
+                <h2>Minecraft Games</h2>
+                <div id="gameResults" class="category-grid">
+                    <!-- Game results will be displayed here -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Games Universe. All rights reserved.</p>
+    </footer>
+    <script src="modal.js" defer></script>
+    <script>
+      fetch('nav_secondary.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('nav-placeholder').innerHTML = data;
+        });
+
+        async function fetchGames() {
+            try {
+                const response = await fetch('/api/minecraft/games', { headers: { 'X-API-Key': 'test-api-key' } });
+                const games = await response.json();
+                displayGames(games);
+            } catch (error) {
+                console.error('Error fetching games:', error);
+            }
+        }
+
+        function displayGames(gamesToDisplay) {
+            const gameResults = document.getElementById('gameResults');
+            gameResults.innerHTML = '';
+
+            if (gamesToDisplay.length === 0) {
+                gameResults.innerHTML = '<p>No games found.</p>';
+                return;
+            }
+
+            gamesToDisplay.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'category-card';
+                gameCard.innerHTML = `
+                    <h3>${game.name}</h3>
+                    <p>${game.description}</p>
+                    <a href="${game.link}" target="_blank">Play Now</a>
+                `;
+                gameResults.appendChild(gameCard);
+            });
+        }
+
+        window.onload = fetchGames;
+    </script>
+</body>
+</html>

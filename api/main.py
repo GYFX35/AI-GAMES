@@ -19,6 +19,7 @@ import amazon_luna
 import ubisoft
 import rival
 import mmo_games
+import minecraft
 import who_api
 import fb_business
 import wescore
@@ -329,6 +330,15 @@ async def get_mmo_games():
     Get a list of all MMO games.
     """
     return mmo_games.get_all_games()
+
+# --- Minecraft Endpoints ---
+
+@app.get("/api/minecraft/games", dependencies=[Depends(get_api_key)])
+async def get_minecraft_games():
+    """
+    Get a list of all games from Minecraft.
+    """
+    return minecraft.get_all_games()
 
 # --- WHO Endpoints ---
 
