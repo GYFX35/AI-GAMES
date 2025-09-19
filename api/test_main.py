@@ -1,7 +1,7 @@
 import unittest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
-from main import app
+from api.main import app
 
 class TestMain(unittest.TestCase):
     def setUp(self):
@@ -81,3 +81,10 @@ class TestMain(unittest.TestCase):
 
             # Verify that our mocked function was called once with the correct data
             mock_send_event.assert_called_once_with(user_data)
+
+    def test_delete_game_not_found(self):
+        """
+        Test deleting a game that does not exist.
+        """
+        response = self.client.delete("/api/games/non_existent_game", headers=self.headers)
+        self.assertEqual(response.status_code, 404)
