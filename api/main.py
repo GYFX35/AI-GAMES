@@ -162,6 +162,7 @@ async def delete_game(game_name: str):
 
     games.remove(game_to_delete)
     save_games(games)
+    return Response(status_code=204)
 
 def mock_llm_call(prompt: str) -> str:
     """
