@@ -18,7 +18,7 @@ class TestMotoGP(unittest.TestCase):
             self.assertEqual(len(games), 2)
             self.assertEqual(games[0]['name'], 'MotoGP 23')
             # Check that the file was opened with the correct path
-            mock_file.assert_called_once_with("/app/data/motogp_games.json", "r")
+            mock_file.assert_called_once_with("/app/frontend/data/motogp_games.json", "r")
 
     def test_get_all_games_file_not_found(self):
         # Simulate a FileNotFoundError

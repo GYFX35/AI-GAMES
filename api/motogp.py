@@ -7,5 +7,5 @@ def get_all_games():
     For now, this returns mock data. In the future, this could be updated
     to fetch data from the Sportradar API.
     """
-    with open("/app/data/motogp_games.json", "r") as f:
+    with open("/app/frontend/data/motogp_games.json", "r") as f:
         return json.load(f)
