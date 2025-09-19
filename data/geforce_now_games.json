@@ -1,0 +1,74 @@
+[
+    {
+        "title": "Fortnite®",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.5,
+        "tags": ["Action", "Shooter"]
+    },
+    {
+        "title": "Genshin Impact",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.8,
+        "tags": ["RPG", "Adventure"]
+    },
+    {
+        "title": "Marvel Rivals",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.2,
+        "tags": ["Action", "Shooter"]
+    },
+    {
+        "title": "Borderlands® 4",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.6,
+        "tags": ["Action", "RPG"]
+    },
+    {
+        "title": "Wuthering Waves",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.3,
+        "tags": ["RPG", "Adventure"]
+    },
+    {
+        "title": "Call of Duty®",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.7,
+        "tags": ["Action", "Shooter"]
+    },
+    {
+        "title": "Path of Exile 2",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.9,
+        "tags": ["RPG", "Action"]
+    },
+    {
+        "title": "Overwatch® 2",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.4,
+        "tags": ["Action", "Shooter"]
+    },
+    {
+        "title": "Rocket League®",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.6,
+        "tags": ["Sports", "Racing"]
+    },
+    {
+        "title": "Honkai: Star Rail",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.8,
+        "tags": ["RPG", "Strategy"]
+    },
+    {
+        "title": "Tom Clancy's Rainbow Six® Siege X",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.5,
+        "tags": ["Action", "Shooter"]
+    },
+    {
+        "title": "Baldur's Gate 3",
+        "link": "https://www.nvidia.com/en-us/geforce-now/games/",
+        "rating": 4.9,
+        "tags": ["RPG", "Strategy"]
+    }
+]
