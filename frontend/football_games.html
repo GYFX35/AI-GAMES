@@ -23,6 +23,14 @@
                 </div>
             </div>
         </section>
+        <section class="all-games">
+            <div class="container">
+                <h2>World Cup Competitions</h2>
+                <div id="worldCupCompetitions" class="category-grid">
+                    <!-- World Cup competitions will be displayed here -->
+                </div>
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2023 Game Portal</p>
@@ -67,7 +75,44 @@
             });
         }
 
-        window.onload = fetchGames;
+        async function fetchWorldCupCompetitions() {
+            try {
+                const response = await fetch('/api/fifa/world_cup', {
+                    headers: {
+                        'X-API-Key': 'test-api-key'
+                    }
+                });
+                const data = await response.json();
+                displayCompetitions(data.competitions);
+            } catch (error) {
+                console.error('Error fetching World Cup competitions:', error);
+            }
+        }
+
+        function displayCompetitions(competitions) {
+            const worldCupCompetitions = document.getElementById('worldCupCompetitions');
+            worldCupCompetitions.innerHTML = '';
+
+            if (competitions.length === 0) {
+                worldCupCompetitions.innerHTML = '<p>No competitions found.</p>';
+                return;
+            }
+
+            competitions.forEach(competition => {
+                const competitionCard = document.createElement('div');
+                competitionCard.className = 'category-card';
+                competitionCard.innerHTML = `
+                    <h3>${competition.name}</h3>
+                    <p>Area: ${competition.area.name}</p>
+                `;
+                worldCupCompetitions.appendChild(competitionCard);
+            });
+        }
+
+        window.onload = () => {
+            fetchGames();
+            fetchWorldCupCompetitions();
+        };
     </script>
 </body>
 </html>

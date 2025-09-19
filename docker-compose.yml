@@ -5,7 +5,7 @@ services:
       - "8000:8000"
     volumes:
       - ./uploads:/app/uploads
-      - ./data:/app/data
+      - ./frontend/data:/app/data
       - ./api/api_keys.json:/app/api_keys.json
 
   frontend:
