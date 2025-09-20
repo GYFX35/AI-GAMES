@@ -3,6 +3,8 @@ from fastapi.testclient import TestClient
 from main import app, get_api_key
 from unittest.mock import patch
 
+import json
+import os
 class TestUnesco(unittest.TestCase):
     def setUp(self):
         self.client = TestClient(app)

@@ -11,21 +11,6 @@ from api import tiktok
 
 class TestTikTok(unittest.TestCase):
 
-    def setUp(self):
-        # Create a dummy api_keys.json file for testing
-        self.api_keys = {
-            "tiktok": {
-                "client_key": "test_client_key",
-                "client_secret": "test_client_secret"
-            }
-        }
-        with open("api/api_keys.json", "w") as f:
-            json.dump(self.api_keys, f)
-
-    def tearDown(self):
-        # Clean up the dummy api_keys.json file
-        if os.path.exists("api/api_keys.json"):
-            os.remove("api/api_keys.json")
 
     @patch("api.tiktok.requests.post")
     def test_get_access_token(self, mock_post):
