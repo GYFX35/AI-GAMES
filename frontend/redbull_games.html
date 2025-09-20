@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Bull Games - Games Universe</title>
+    <meta name="description" content="Explore games from Red Bull on the Games Universe platform.">
+    <meta name="keywords" content="red bull games, red bull, games universe">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Games Universe</h1>
+            <div id="nav-placeholder"></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="all-games">
+            <div class="container">
+                <h2>Red Bull Games</h2>
+                <div id="gameResults" class="category-grid">
+                    <!-- Game results will be displayed here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Games Universe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+      fetch('nav_tertiary.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('nav-placeholder').innerHTML = data;
+        });
+
+        async function fetchRedBullGames() {
+            try {
+                const response = await fetch('/api/redbull/games', { headers: { 'X-API-Key': 'test-api-key' } });
+                const games = await response.json();
+                displayGames(games);
+            } catch (error) {
+                console.error('Error fetching Red Bull games:', error);
+            }
+        }
+
+        function displayGames(gamesToDisplay) {
+            const gameResults = document.getElementById('gameResults');
+            gameResults.innerHTML = '';
+
+            if (gamesToDisplay.length === 0) {
+                gameResults.innerHTML = '<p>No games found.</p>';
+                return;
+            }
+
+            gamesToDisplay.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'category-card';
+                gameCard.innerHTML = `
+                    <h3>${game.name}</h3>
+                    <p>${game.developer}</p>
+                    <a href="${game.download_link}" target="_blank">Play Now</a>
+                `;
+                gameResults.appendChild(gameCard);
+            });
+        }
+
+        window.onload = fetchRedBullGames;
+    </script>
+</body>
+</html>
