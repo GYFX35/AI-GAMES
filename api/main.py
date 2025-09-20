@@ -22,6 +22,7 @@ import mmo_games
 import minecraft
 import netflix_games
 import redbull
+import junglee_games
 import who_api
 import fb_business
 import wescore
@@ -338,6 +339,16 @@ async def get_netflix_games():
     Get a list of all games from Netflix.
     """
     return netflix_games.get_netflix_games()
+
+
+# --- Junglee Games Endpoints ---
+
+@app.get("/api/junglee/games", dependencies=[Depends(get_api_key)])
+async def get_junglee_games():
+    """
+    Get a list of all games from Junglee Games.
+    """
+    return junglee_games.get_junglee_games()
 
 # --- Rival Endpoints ---
 

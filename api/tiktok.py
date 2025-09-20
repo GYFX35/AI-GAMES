@@ -10,9 +10,12 @@ def get_tiktok_api_keys():
     """
     dir_path = os.path.dirname(os.path.realpath(__file__))
     keys_path = os.path.join(dir_path, "api_keys.json")
-    with open(keys_path, "r") as f:
-        keys = json.load(f)
-        return keys.get("tiktok", {})
+    try:
+        with open(keys_path, "r") as f:
+            keys = json.load(f)
+            return keys.get("tiktok", {})
+    except FileNotFoundError:
+        return {}
 
 def get_access_token(code: str):
     """

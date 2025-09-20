@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Junglee Rummy",
+        "description": "The classic 13-card rummy game. Play with millions of players and win real cash.",
+        "link": "https://www.jungleerummy.com/"
+    },
+    {
+        "title": "Pool Rummy",
+        "description": "A popular variant of rummy where players are eliminated when their score reaches a certain limit.",
+        "link": "https://www.jungleerummy.com/rummy-variants/pool-rummy/"
+    },
+    {
+        "title": "Points Rummy",
+        "description": "A fast-paced rummy game where the winner gets all the points from the losing players.",
+        "link": "https://www.jungleerummy.com/rummy-variants/points-rummy/"
+    },
+    {
+        "title": "Deals Rummy",
+        "description": "A rummy game played for a fixed number of deals. The player with the most chips at the end wins.",
+        "link": "https://www.jungleerummy.com/rummy-variants/deals-rummy/"
+    }
+]
