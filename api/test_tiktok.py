@@ -13,7 +13,11 @@ class TestTikTok(unittest.TestCase):
 
 
     @patch("api.tiktok.requests.post")
-    def test_get_access_token(self, mock_post):
+    @patch("api.tiktok.get_tiktok_api_keys")
+    def test_get_access_token(self, mock_get_keys, mock_post):
+        # Mock the API keys
+        mock_get_keys.return_value = {"client_key": "test_client_key", "client_secret": "test_client_secret"}
+
         # Mock the response from the TikTok API
         mock_response = MagicMock()
         mock_response.status_code = 200
