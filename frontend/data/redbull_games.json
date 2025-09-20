@@ -1,0 +1,26 @@
+[
+  {
+    "id": "RB001",
+    "name": "Red Bull Tetris",
+    "platform": "Mobile",
+    "developer": "Red Bull",
+    "publisher": "Red Bull",
+    "download_link": "games/placeholder_game.zip"
+  },
+  {
+    "id": "RB002",
+    "name": "Bike Unchained 2",
+    "platform": "Mobile",
+    "developer": "Red Bull",
+    "publisher": "Red Bull",
+    "download_link": "games/placeholder_game.zip"
+  },
+  {
+    "id": "RB003",
+    "name": "Red Bull Air Race 2",
+    "platform": "Mobile",
+    "developer": "Red Bull",
+    "publisher": "Red Bull",
+    "download_link": "games/placeholder_game.zip"
+  }
+]
