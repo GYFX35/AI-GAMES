@@ -20,6 +20,7 @@ import ubisoft
 import rival
 import mmo_games
 import minecraft
+import netflix_games
 import redbull
 import who_api
 import fb_business
@@ -328,6 +329,15 @@ async def get_redbull_games():
     Get a list of all games from Red Bull.
     """
     return redbull.get_all_games()
+
+# --- Netflix Games Endpoints ---
+
+@app.get("/api/netflix/games", dependencies=[Depends(get_api_key)])
+async def get_netflix_games():
+    """
+    Get a list of all games from Netflix.
+    """
+    return netflix_games.get_netflix_games()
 
 # --- Rival Endpoints ---
 
