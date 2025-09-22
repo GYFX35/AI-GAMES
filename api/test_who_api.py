@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import patch
 import requests
-import who_api
+from api import who_api
 
 class TestWhoApi(unittest.TestCase):
 
-    @patch('who_api.requests.get')
+    @patch('api.who_api.requests.get')
     def test_get_indicators(self, mock_get):
         # Mock the API response
         mock_response = unittest.mock.Mock()
@@ -25,7 +25,7 @@ class TestWhoApi(unittest.TestCase):
         self.assertEqual(len(indicators['value']), 2)
         self.assertEqual(indicators['value'][0]['IndicatorName'], 'Test Indicator 1')
 
-    @patch('who_api.requests.get')
+    @patch('api.who_api.requests.get')
     def test_get_indicators_api_error(self, mock_get):
         # Mock an API error
         mock_get.side_effect = requests.exceptions.RequestException("API is down")

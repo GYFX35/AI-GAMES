@@ -70,7 +70,7 @@ class TestMain(unittest.TestCase):
         It should call the send_server_event function.
         """
         # Mock the send_server_event function to avoid real API calls
-        with patch('fb_business.send_server_event') as mock_send_event:
+        with patch('api.fb_business.send_server_event') as mock_send_event:
             user_data = {"name": "Test User", "email": "test@example.com"}
 
             # The webhook endpoint does not require an API key

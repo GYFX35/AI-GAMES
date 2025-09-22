@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import patch
 import requests
-import mmo_games
+from api import mmo_games
 
 class TestMMOGames(unittest.TestCase):
 
-    @patch('mmo_games.requests.get')
+    @patch('api.mmo_games.requests.get')
     def test_get_all_games(self, mock_get):
         # Mock the API response
         mock_response = unittest.mock.Mock()
@@ -23,7 +23,7 @@ class TestMMOGames(unittest.TestCase):
         self.assertEqual(len(games), 2)
         self.assertEqual(games[0]['title'], 'Test Game 1')
 
-    @patch('mmo_games.requests.get')
+    @patch('api.mmo_games.requests.get')
     def test_get_all_games_api_error(self, mock_get):
         # Mock an API error
         mock_get.side_effect = requests.exceptions.RequestException("API is down")

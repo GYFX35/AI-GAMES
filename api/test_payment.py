@@ -1,7 +1,7 @@
 import unittest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
-from main import app
+from api.main import app
 
 class TestPayment(unittest.TestCase):
     def setUp(self):

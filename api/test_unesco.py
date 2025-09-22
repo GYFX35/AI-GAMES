@@ -1,6 +1,6 @@
 import unittest
 from fastapi.testclient import TestClient
-from main import app, get_api_key
+from api.main import app, get_api_key
 from unittest.mock import patch
 
 import json
@@ -21,7 +21,7 @@ class TestUnesco(unittest.TestCase):
         """
         Test the /api/unesco/datasets endpoint with a mock.
         """
-        with patch("unesco.get_datasets", return_value=self.get_mock_unesco_datasets()):
+        with patch("api.unesco.get_datasets", return_value=self.get_mock_unesco_datasets()):
             response = self.client.get("/api/unesco/datasets", headers=self.headers)
             self.assertEqual(response.status_code, 200)
             data = response.json()
@@ -33,7 +33,7 @@ class TestUnesco(unittest.TestCase):
         Test the /api/unesco/datasets/{dataset_id}/records endpoint with a mock.
         """
         dataset_id = "mock_id"
-        with patch("unesco.get_records", return_value=self.get_mock_unesco_records(dataset_id)):
+        with patch("api.unesco.get_records", return_value=self.get_mock_unesco_records(dataset_id)):
             response = self.client.get(f"/api/unesco/datasets/{dataset_id}/records", headers=self.headers)
             self.assertEqual(response.status_code, 200)
             data = response.json()
@@ -44,7 +44,7 @@ class TestUnesco(unittest.TestCase):
         Test the /api/unesco/ml/predict endpoint.
         """
         dataset_id = "mock_id"
-        with patch("unesco.get_records", return_value=self.get_mock_unesco_records(dataset_id)):
+        with patch("api.unesco.get_records", return_value=self.get_mock_unesco_records(dataset_id)):
             request_body = {"dataset_id": dataset_id}
             response = self.client.post("/api/unesco/ml/predict", json=request_body, headers=self.headers)
             self.assertEqual(response.status_code, 200)

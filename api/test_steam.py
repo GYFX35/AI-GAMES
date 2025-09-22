@@ -1,6 +1,6 @@
 import unittest
 from fastapi.testclient import TestClient
-from main import app
+from api.main import app
 from unittest.mock import patch
 
 class TestSteam(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestSteam(unittest.TestCase):
         }
 
     def test_get_steam_games_success(self):
-        with patch("steam.requests.get") as mock_get:
+        with patch("api.steam.requests.get") as mock_get:
             mock_get.return_value.status_code = 200
             mock_get.return_value.json.return_value = self.get_mock_steam_games()
 
