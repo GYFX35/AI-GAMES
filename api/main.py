@@ -5,31 +5,33 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from ai_engine import HockeyAI, PadelAI
-from blockchain import BlockchainManager
-from xcode import XCodeManager
-import unesco
-import unesco_ml
-import palm_store
-import tencent_games
-import geforce_now
-import steam
-import playstation
-import amazon_luna
-import ubisoft
-import rival
-import mmo_games
-import minecraft
-import netflix_games
-import redbull
-import junglee_games
-import who_api
-import fb_business
-import wescore
-import kickstarter
-import patreon
-import tiktok
-import fifa
+from api.ai_engine import HockeyAI, PadelAI
+from api.blockchain import BlockchainManager
+from api.xcode import XCodeManager
+from api import unesco
+from api import unesco_ml
+from api import palm_store
+from api import tencent_games
+from api import geforce_now
+from api import steam
+from api import playstation
+from api import amazon_luna
+from api import ubisoft
+from api import rival
+from api import mmo_games
+from api import minecraft
+from api import netflix_games
+from api import redbull
+from api import junglee_games
+from api import who_api
+from api import fb_business
+from api import wescore
+from api import kickstarter
+from api import patreon
+from api import tiktok
+from api import fifa
+from api import makeup
+from api import unicorn
 from api import payment
 from api import gcs
 from dotenv import load_dotenv
@@ -598,3 +600,24 @@ async def get_fifa_world_cup_data():
     if data is None:
         raise HTTPException(status_code=500, detail="Could not fetch data from FIFA API.")
     return data
+
+# --- Makeup Endpoints ---
+
+@app.get("/api/makeup/products", dependencies=[Depends(get_api_key)])
+async def get_makeup_products(brand: str = None, product_type: str = None):
+    """
+    Get a list of makeup products, optionally filtered by brand or product type.
+    """
+    return makeup.get_products(brand=brand, product_type=product_type)
+
+# --- Unicorn Endpoints ---
+
+class UnicornRequest(BaseModel):
+    text: str
+
+@app.post("/api/unicorn/translate", dependencies=[Depends(get_api_key)])
+async def translate_for_unicorn(request: UnicornRequest):
+    """
+    Translate text into a unicorn-friendly dialect.
+    """
+    return unicorn.translate_text(request.text)

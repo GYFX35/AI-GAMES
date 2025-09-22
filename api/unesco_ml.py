@@ -1,5 +1,5 @@
 import random
-import unesco
+from api import unesco
 
 def predict(dataset_id: str):
     """

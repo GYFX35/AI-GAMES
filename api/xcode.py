@@ -1,5 +1,5 @@
 import random
-from xcode_templates import XCODE_TEMPLATES
+from api.xcode_templates import XCODE_TEMPLATES
 
 class XCodeManager:
     def __init__(self):

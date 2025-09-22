@@ -1,6 +1,6 @@
 import unittest
 from fastapi.testclient import TestClient
-from main import app
+from api.main import app
 
 class TestGeforceNow(unittest.TestCase):
     def setUp(self):
