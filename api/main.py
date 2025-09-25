@@ -34,6 +34,7 @@ from api import makeup
 from api import unicorn
 from api import payment
 from api import gcs
+from api import monetag
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -41,6 +42,7 @@ load_dotenv()
 app = FastAPI()
 
 app.include_router(payment.router, prefix="/api/payment", tags=["payment"])
+app.include_router(monetag.router, prefix="/api/monetag", tags=["monetag"])
 
 @app.on_event("startup")
 async def startup_event():
