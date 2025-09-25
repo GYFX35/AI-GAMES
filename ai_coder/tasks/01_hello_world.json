@@ -1,0 +1,5 @@
+{
+  "title": "Hello, World!",
+  "description": "Your first task is to write a Python script that prints 'Hello, World!' to the console.",
+  "expected_output": "Hello, World!\n"
+}
