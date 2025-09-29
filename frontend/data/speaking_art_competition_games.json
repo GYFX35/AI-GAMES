@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Articulate",
+        "description": "A fun game of quick descriptions and guessing.",
+        "link": "#/articulate"
+    },
+    {
+        "name": "Pictionary Air",
+        "description": "Draw in the air and see it on screen in this hilarious twist on the classic drawing game.",
+        "link": "#/pictionary-air"
+    }
+]
