@@ -23,5 +23,10 @@
         "name": "Building Games",
         "description": "Construct amazing worlds and structures in these building games.",
         "link": "building_games.html"
+    },
+    {
+        "name": "Speaking Art Competition Games",
+        "description": "Challenge your creativity and communication skills.",
+        "link": "speaking_art_competition_games.html"
     }
 ]
