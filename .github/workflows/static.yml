@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Package PWA
+        run: zip -r pwa-release.zip ./frontend
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
@@ -50,4 +52,5 @@ jobs:
             --repo-name ${{ github.repository }} \
             --tag-name "v${{ github.run_number }}" \
             --release-name "Release v${{ github.run_number }}" \
-            --body "Frontend deployed to GitHub Pages"
+            --body "Frontend deployed to GitHub Pages" \
+            --asset-path ./pwa-release.zip
