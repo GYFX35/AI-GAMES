@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the application
-CMD ["/app/api/run.sh"]
+CMD ["/app/run.sh"]

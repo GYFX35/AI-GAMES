@@ -1,0 +1,75 @@
+/* Basic styles */
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#game-container {
+    width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Layout */
+#dashboard {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#metrics, #user-segments {
+    width: 48%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Actions */
+#actions {
+    margin-bottom: 20px;
+}
+
+#actions button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#actions button:hover {
+    background-color: #45a049;
+}
+
+#actions button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Console */
+#console {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#output {
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid #eee;
+    padding: 10px;
+}
