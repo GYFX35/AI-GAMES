@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales & Marketing Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sales_marketing_game.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>Sales & Marketing Simulation</h1>
+        <div id="dashboard">
+            <h2>Dashboard</h2>
+            <div id="metrics">
+                <p>Revenue: <span id="revenue">$0</span></p>
+                <p>Total Users: <span id="users">0</span></p>
+                <p>Retention: <span id="retention">0%</span></p>
+            </div>
+            <div id="user-segments">
+                <h3>User Segments</h3>
+                <p>New Players: <span id="segment-new-players">0</span></p>
+                <p>Grinders: <span id="segment-grinders">0</span></p>
+                <p>Minnows: <span id="segment-minnows">0</span></p>
+                <p>Dolphins: <span id="segment-dolphins">0</span></p>
+                <p>Whales: <span id="segment-whales">0</span></p>
+                <p>Lapsed Players: <span id="segment-lapsed-players">0</span></p>
+            </div>
+        </div>
+        <div id="actions">
+            <h2>Actions</h2>
+            <button id="run-campaign-btn">Run Marketing Campaign</button>
+            <button id="offer-discount-btn">Offer Discounts</button>
+            <button id="subscription-drive-btn">Subscription Drive</button>
+        </div>
+        <div id="console">
+            <h2>Console</h2>
+            <div id="output"></div>
+        </div>
+    </div>
+    <script src="data/sales_marketing_game.js"></script>
+</body>
+</html>
