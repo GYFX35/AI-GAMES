@@ -5,7 +5,7 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from api.ai_engine import HockeyAI, PadelAI
+from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI
 from api.blockchain import BlockchainManager
 from api.xcode import XCodeManager
 from api import unesco
@@ -69,6 +69,9 @@ class HockeyGameState(BaseModel):
 
 class PadelGameState(BaseModel):
     game_state: str # "player_serves", "ai_serves", "ball_in_play"
+
+class InvestigationGameState(BaseModel):
+    game_state: str # "scene_entered", "clue_found", "suspect_spotted", "threat_detected"
 
 class XCodeRequest(BaseModel):
     prompt: str
@@ -465,6 +468,28 @@ async def get_padel_ai_action(game_state: PadelGameState):
 async def get_padel_nft_details(token_id: int):
     """
     Get the details of a player's NFT for the padel game.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
+
+# --- Investigation Game Endpoints ---
+
+investigative_ai = InvestigativeAI()
+
+@app.post("/api/investigation/ai/action", dependencies=[Depends(get_api_key)])
+async def get_investigation_ai_action(game_state: InvestigationGameState):
+    """
+    Get the next action from the investigative AI.
+    """
+    action = investigative_ai.decide_action(game_state.game_state)
+    return {"action": action}
+
+@app.get("/api/investigation/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_investigation_nft_details(token_id: int):
+    """
+    Get the details of a player's NFT for the investigation game.
     """
     details = blockchain_manager.get_nft_details(token_id)
     if not details:
