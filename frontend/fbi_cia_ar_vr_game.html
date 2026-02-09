@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBI & CIA Scene Investigation - AR/VR Experience - Games Universe</title>
+    <meta name="description" content="Step into the shoes of a special agent in this immersive AR/VR investigation game. Use advanced tools to solve complex cases.">
+    <meta name="keywords" content="AR game, VR game, FBI game, CIA game, investigation game, crime scene investigation, augmented reality, virtual reality, AI in games, game development">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body>
+    <header>
+        <h1>FBI & CIA Scene Investigation</h1>
+    </header>
+    <div id="nav-placeholder"></div>
+    <main>
+        <section id="game-overview">
+            <h2>Game Overview</h2>
+            <p>Experience the thrill of being an elite investigator. In the FBI & CIA Scene Investigation game, you'll use cutting-edge AR and VR technology to analyze crime scenes, collect evidence, and track down suspects in a highly realistic environment.</p>
+        </section>
+
+        <section id="core-features">
+            <h3>Core Features</h3>
+            <ul>
+                <li><strong>Immersive Investigation:</strong> Explore detailed 3D crime scenes in VR or bring them into your living room with AR.</li>
+                <li><strong>Advanced Forensic Tools:</strong> Use virtual tools for fingerprinting, DNA analysis, and digital forensics.</li>
+                <li><strong>AI-Driven Suspects:</strong> Interact with intelligent NPCs that respond to your investigative techniques.</li>
+                <li><strong>Global Operations:</strong> Take on missions around the world, from urban centers to remote locations.</li>
+                <li><strong>Collaboration:</strong> Work with other agents in real-time to solve the most difficult cases.</li>
+            </ul>
+        </section>
+
+        <section id="tech-stack">
+            <h3>Technology Stack</h3>
+            <p>Our investigation simulation is built on a powerful web-based platform:</p>
+            <ul>
+                <li><strong>WebXR:</strong> Delivering seamless AR and VR experiences directly in the browser.</li>
+                <li><strong>Investigative AI:</strong> Sophisticated algorithms that power realistic scene analysis and NPC behavior.</li>
+                <li><strong>Blockchain Security:</strong> Ensuring the integrity of evidence and agent credentials as digital assets.</li>
+                <li><strong>High-Fidelity Assets:</strong> Detailed 3D models and environments for maximum immersion.</li>
+            </ul>
+        </section>
+
+        <section id="ai-demo">
+            <h3>Investigation AI Demo</h3>
+            <p>Test the investigative AI by simulating different scene states.</p>
+            <button onclick="getAiAction('scene_entered')">Enter Scene</button>
+            <button onclick="getAiAction('clue_found')">Find Clue</button>
+            <button onclick="getAiAction('suspect_spotted')">Spot Suspect</button>
+            <button onclick="getAiAction('threat_detected')">Threat Detected</button>
+            <p><strong>AI Action:</strong> <span id="ai-action"></span></p>
+        </section>
+
+        <section id="nft-viewer">
+            <h3>Agent Credentials (NFT)</h3>
+            <p>Enter your agent token ID to view your credentials and specialized gear.</p>
+            <input type="number" id="nft-token-id" placeholder="Enter Token ID (e.g., 1 or 2)">
+            <button onclick="getNftDetails()">View Credentials</button>
+            <div id="nft-details"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Games Universe</p>
+    </footer>
+    <script src="modal.js" defer></script>
+    <script>
+        fetch('nav_secondary.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+            });
+
+        const API_KEY = "test-api-key";
+
+        async function getAiAction(gameState) {
+            const response = await fetch('/api/investigation/ai/action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({ game_state: gameState })
+            });
+            const data = await response.json();
+            document.getElementById('ai-action').textContent = data.action;
+        }
+
+        async function getNftDetails() {
+            const tokenId = document.getElementById('nft-token-id').value;
+            if (!tokenId) {
+                alert('Please enter a token ID.');
+                return;
+            }
+            const response = await fetch(`/api/investigation/nft/${tokenId}`, {
+                headers: {
+                    'X-API-Key': API_KEY
+                }
+            });
+            const nftDetailsDiv = document.getElementById('nft-details');
+            if (response.ok) {
+                const data = await response.json();
+                nftDetailsDiv.innerHTML = `
+                    <p><strong>Owner:</strong> ${data.owner}</p>
+                    <p><strong>Metadata URI:</strong> <a href="${data.uri}" target="_blank">${data.uri}</a></p>
+                `;
+            } else {
+                nftDetailsDiv.innerHTML = `<p>Error: Agent credentials not found.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -24,6 +24,12 @@
         "download_link": "/models/padel_racket.obj"
     },
     {
+        "name": "FBI & CIA Scene Investigation",
+        "description": "Immersive AR/VR investigation game with advanced AI and blockchain-secured credentials.",
+        "link": "fbi_cia_ar_vr_game.html",
+        "download_link": "games/placeholder_game.zip"
+    },
+    {
         "name": "Vader Immortal: A Star Wars VR Series",
         "description": "A canonical, three-part virtual reality adventure that allows you to step inside a galaxy far, far away.",
         "link": "https://www.oculus.com/vader-immortal/",

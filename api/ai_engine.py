@@ -70,6 +70,47 @@ class PadelAI:
             actions = ["move_to_position", "watch_ball"]
             return random.choice(actions)
 
+class InvestigativeAI:
+    def __init__(self):
+        self.state = "idle"  # Possible states: idle, investigating, analyzing, secure_scene
+
+    def decide_action(self, game_state: str):
+        """
+        Decides the next action based on the investigation state.
+        """
+        if game_state == "clue_found":
+            self.state = "analyzing"
+        elif game_state == "suspect_spotted":
+            self.state = "chasing"
+        elif game_state == "scene_entered":
+            self.state = "investigating"
+        elif game_state == "threat_detected":
+            self.state = "secure_scene"
+        else:
+            self.state = "idle"
+
+        return self.get_action_in_state()
+
+    def get_action_in_state(self):
+        """
+        Returns a specific action based on the current investigation state.
+        """
+        if self.state == "investigating":
+            actions = ["search_for_fingerprints", "take_photos", "collect_dna_sample"]
+            return random.choice(actions)
+        elif self.state == "analyzing":
+            actions = ["run_ballistics", "cross_reference_database", "decrypt_files"]
+            return random.choice(actions)
+        elif self.state == "chasing":
+            actions = ["pursue_suspect", "call_for_backup", "deploy_drone"]
+            return random.choice(actions)
+        elif self.state == "secure_scene":
+            actions = ["establish_perimeter", "interview_witnesses", "check_surveillance"]
+            return random.choice(actions)
+        else: # idle
+            actions = ["patrol_area", "review_case_files"]
+            return random.choice(actions)
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()
