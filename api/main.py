@@ -5,7 +5,7 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI
+from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI
 from api.blockchain import BlockchainManager
 from api.xcode import XCodeManager
 from api import unesco
@@ -72,6 +72,13 @@ class PadelGameState(BaseModel):
 
 class InvestigationGameState(BaseModel):
     game_state: str # "scene_entered", "clue_found", "suspect_spotted", "threat_detected"
+
+class ShovelMasterGameState(BaseModel):
+    game_state: str # "shovel_ready", "shovel_full", "truck_full", "idle"
+
+class RewardRequest(BaseModel):
+    owner_address: str
+    metadata_uri: str
 
 class XCodeRequest(BaseModel):
     prompt: str
@@ -477,6 +484,36 @@ async def get_padel_nft_details(token_id: int):
 # --- Investigation Game Endpoints ---
 
 investigative_ai = InvestigativeAI()
+
+# --- Shovel Master Game Endpoints ---
+
+shovel_master_ai = ShovelMasterAI()
+
+@app.post("/api/shovel_master/ai/action", dependencies=[Depends(get_api_key)])
+async def get_shovel_master_ai_action(game_state: ShovelMasterGameState):
+    """
+    Get the next action from the Shovel Master AI.
+    """
+    action = shovel_master_ai.decide_action(game_state.game_state)
+    return {"action": action}
+
+@app.post("/api/shovel_master/reward", dependencies=[Depends(get_api_key)])
+async def shovel_master_reward(request: RewardRequest):
+    """
+    Reward the player with an NFT for filling the truck.
+    """
+    reward = blockchain_manager.mint_reward(request.owner_address, request.metadata_uri)
+    return reward
+
+@app.get("/api/shovel_master/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_shovel_master_nft_details(token_id: int):
+    """
+    Get the details of a reward NFT for the shovel master game.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
 
 @app.post("/api/investigation/ai/action", dependencies=[Depends(get_api_key)])
 async def get_investigation_ai_action(game_state: InvestigationGameState):

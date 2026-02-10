@@ -57,6 +57,34 @@ class BlockchainManager:
         else:
             return None
 
+    def mint_reward(self, owner_address: str, metadata_uri: str):
+        """
+        Mints a reward NFT for a player.
+        In a real application, this would send a transaction to the smart contract.
+        """
+        # Real implementation would look something like this:
+        # tx_hash = self.contract.functions.mint(owner_address, metadata_uri).transact()
+        # return tx_hash
+
+        # Mocked implementation
+        token_id = max(self.mocked_nfts.keys()) + 1 if self.mocked_nfts else 1
+
+        # Enhanced metadata for Shovel Master
+        if "shovel_master" in metadata_uri:
+             metadata = {
+                 "name": "Shovel Master Achievement",
+                 "description": "Awarded for successfully filling a dump truck with a shovel.",
+                 "image": "https://games-universe.com/assets/shovel_nft.png",
+                 "attributes": [
+                     {"trait_type": "Skill", "value": "Master Shoveler"},
+                     {"trait_type": "Trucks Filled", "value": 1}
+                 ]
+             }
+             metadata_uri = f"data:application/json;base64,{metadata}" # Simplified for PoC
+
+        self.mocked_nfts[token_id] = {"owner": owner_address, "uri": metadata_uri}
+        return {"status": "success", "token_id": token_id, "owner": owner_address}
+
 # Example usage:
 if __name__ == "__main__":
     blockchain_manager = BlockchainManager()
