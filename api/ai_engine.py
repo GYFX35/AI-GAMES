@@ -111,6 +111,32 @@ class InvestigativeAI:
             actions = ["patrol_area", "review_case_files"]
             return random.choice(actions)
 
+class ShovelMasterAI:
+    """
+    Stateless AI engine for Shovel Master game.
+    """
+    def decide_action(self, game_state: str):
+        """
+        Decides the next action based on the shoveling state.
+        Now stateless - state is passed in and returned in the action description.
+        """
+        if game_state in ["shovel_ready", "shoveling"]:
+            actions = ["dig_dirt", "lift_shovel", "balance_load"]
+            recommendation = random.choice(actions)
+            return f"Action: {recommendation} (State: Shoveling)"
+        elif game_state in ["shovel_full", "dumping"]:
+            actions = ["move_to_truck", "tilt_shovel", "empty_shovel"]
+            recommendation = random.choice(actions)
+            return f"Action: {recommendation} (State: Dumping)"
+        elif game_state == "truck_full":
+            actions = ["celebrate", "signal_next_truck", "rest"]
+            recommendation = random.choice(actions)
+            return f"Action: {recommendation} (State: Truck Full)"
+        else:
+            actions = ["wait_for_truck", "sharpen_shovel", "check_surroundings"]
+            recommendation = random.choice(actions)
+            return f"Action: {recommendation} (State: Idle)"
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()

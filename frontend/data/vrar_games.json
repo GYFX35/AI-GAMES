@@ -46,5 +46,11 @@
         "description": "A humorous VR simulation game where robots have replaced all human jobs.",
         "link": "https://jobsimulatorgame.com/",
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Shovel Master",
+        "description": "Immersive AR/VR game where you fill dump trucks using precision and speed. Features AI assistance and blockchain rewards.",
+        "link": "shovel_master_game.html",
+        "download_link": "games/placeholder_game.zip"
     }
 ]
