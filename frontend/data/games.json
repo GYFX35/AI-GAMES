@@ -70,5 +70,14 @@
         "rating": 5.0,
         "player_count": 2,
         "download_link": "/models/padel_racket.obj"
+    },
+    {
+        "name": "Animal Running Competition",
+        "category": "VR/AR",
+        "link": "animal_running_game.html",
+        "description": "Choose your pet (Lion or Tiger) and compete in a forest running challenge with obstacles, powered by AI and blockchain.",
+        "rating": 4.8,
+        "player_count": 105,
+        "download_link": "/models/lion.obj"
     }
 ]

@@ -5,7 +5,7 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI
+from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI
 from api.blockchain import BlockchainManager
 from api.xcode import XCodeManager
 from api import unesco
@@ -75,6 +75,10 @@ class InvestigationGameState(BaseModel):
 
 class ShovelMasterGameState(BaseModel):
     game_state: str # "shovel_ready", "shovel_full", "truck_full", "idle"
+
+class AnimalRunningGameState(BaseModel):
+    game_state: str # "ready", "running", "obstacle_ahead", "finish_line_near"
+    animal_type: str # "lion", "tiger", etc.
 
 class RewardRequest(BaseModel):
     owner_address: str
@@ -488,6 +492,36 @@ investigative_ai = InvestigativeAI()
 # --- Shovel Master Game Endpoints ---
 
 shovel_master_ai = ShovelMasterAI()
+
+# --- Animal Running Game Endpoints ---
+
+animal_running_ai = AnimalRunningAI()
+
+@app.post("/api/animal_running/ai/action", dependencies=[Depends(get_api_key)])
+async def get_animal_running_ai_action(game_state: AnimalRunningGameState):
+    """
+    Get the next action from the Animal Running AI.
+    """
+    action = animal_running_ai.decide_action(game_state.game_state, game_state.animal_type)
+    return {"action": action}
+
+@app.post("/api/animal_running/reward", dependencies=[Depends(get_api_key)])
+async def animal_running_reward(request: RewardRequest):
+    """
+    Reward the player with an NFT for winning the competition.
+    """
+    reward = blockchain_manager.mint_reward(request.owner_address, request.metadata_uri)
+    return reward
+
+@app.get("/api/animal_running/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_animal_running_nft_details(token_id: int):
+    """
+    Get the details of a reward NFT for the animal running game.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
 
 @app.post("/api/shovel_master/ai/action", dependencies=[Depends(get_api_key)])
 async def get_shovel_master_ai_action(game_state: ShovelMasterGameState):

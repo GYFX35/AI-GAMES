@@ -1,0 +1,27 @@
+INFO:     Started server process [7147]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.12/lib/python3.12/site-packages/starlette/routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.12/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.12/lib/python3.12/site-packages/fastapi/routing.py", line 203, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.12/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.12/lib/python3.12/site-packages/fastapi/routing.py", line 203, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.12/lib/python3.12/site-packages/fastapi/routing.py", line 228, in __aenter__
+    await self._router._startup()
+  File "/home/jules/.pyenv/versions/3.12.12/lib/python3.12/site-packages/fastapi/routing.py", line 4562, in _startup
+    await handler()
+  File "/app/api/payment.py", line 15, in startup_event
+    raise Exception("STRIPE_SECRET_KEY environment variable not set")
+Exception: STRIPE_SECRET_KEY environment variable not set
+
+ERROR:    Application startup failed. Exiting.

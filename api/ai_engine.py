@@ -137,6 +137,36 @@ class ShovelMasterAI:
             recommendation = random.choice(actions)
             return f"Action: {recommendation} (State: Idle)"
 
+class AnimalRunningAI:
+    """
+    Stateless AI engine for Animal Running Competition game.
+    """
+    def decide_action(self, game_state: str, animal_type: str):
+        """
+        Decides the next action based on the running state and animal type.
+        """
+        if game_state == "running":
+            actions = ["sprint", "conserve_energy", "check_competitors"]
+            recommendation = random.choice(actions)
+            return f"Action: {recommendation} ({animal_type} is running)"
+        elif game_state == "obstacle_ahead":
+            if animal_type == "lion":
+                actions = ["jump_over", "roar_to_clear", "sidestep"]
+            elif animal_type == "tiger":
+                actions = ["pounce_over", "stealth_around", "climb_over"]
+            else:
+                actions = ["jump", "dodge", "brake"]
+            recommendation = random.choice(actions)
+            return f"Action: {recommendation} ({animal_type} encountered an obstacle)"
+        elif game_state == "finish_line_near":
+            actions = ["final_burst", "block_competitor", "maintain_speed"]
+            recommendation = random.choice(actions)
+            return f"Action: {recommendation} ({animal_type} is near the finish line)"
+        else:
+            actions = ["stretch", "focus", "wait_for_signal"]
+            recommendation = random.choice(actions)
+            return f"Action: {recommendation} ({animal_type} is ready)"
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()

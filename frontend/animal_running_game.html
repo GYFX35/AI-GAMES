@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Running Competition - Games Universe</title>
+    <meta name="description" content="Experience Animal Running Competition, an AR/VR game where pets compete in the forest using AI and blockchain technology.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Animal Running Competition</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="vrar_games.html">AR/VR Games</a></li>
+            <li><a href="animal_running_game.html">Animal Running</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="game-overview">
+            <h2>Game Overview</h2>
+            <p>Welcome to the Forest Challenge! Choose your pet and compete against others in a high-speed race through the jungle. Navigate obstacles using AI-powered strategies and win unique blockchain rewards.</p>
+        </section>
+
+        <section id="pet-selection" style="text-align: center; margin-bottom: 20px;">
+            <h3>Choose Your Pet</h3>
+            <button onclick="selectPet('lion')">Select Lion</button>
+            <button onclick="selectPet('tiger')">Select Tiger</button>
+            <p>Currently Selected: <strong id="selected-pet">Lion</strong></p>
+        </section>
+
+        <section id="game-scene" style="height: 500px; position: relative;">
+            <h3>Forest Race Track (AR/VR)</h3>
+            <a-scene embedded style="height: 100%; width: 100%;">
+                <a-assets>
+                    <img id="forest-texture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+                </a-assets>
+
+                <a-sky color="#228B22"></a-sky>
+                <a-plane position="0 0 -20" rotation="-90 0 0" width="10" height="100" src="#forest-texture" repeat="1 10"></a-plane>
+
+                <!-- Competitor 1: Lion -->
+                <a-entity id="lion-pet" position="-1 0.5 -5">
+                    <a-box position="0 0.5 0" width="0.8" height="1" depth="1.5" color="orange"></a-box>
+                    <a-sphere position="0 1.2 0.8" radius="0.4" color="orange"></a-sphere> <!-- Head -->
+                    <a-cylinder position="0 1.2 0.8" radius="0.5" height="0.2" rotation="90 0 0" color="brown"></a-cylinder> <!-- Mane -->
+                    <a-text value="Lion" position="0 2 0" align="center" color="black"></a-text>
+                </a-entity>
+
+                <!-- Competitor 2: Tiger -->
+                <a-entity id="tiger-pet" position="1 0.5 -5">
+                    <a-box position="0 0.5 0" width="0.8" height="1" depth="1.5" color="orange"></a-box>
+                    <!-- Stripes simplified with boxes -->
+                    <a-box position="0 0.6 0.1" width="0.85" height="0.1" depth="0.1" color="black"></a-box>
+                    <a-box position="0 0.6 -0.1" width="0.85" height="0.1" depth="0.1" color="black"></a-box>
+                    <a-sphere position="0 1.2 0.8" radius="0.4" color="orange"></a-sphere> <!-- Head -->
+                    <a-text value="Tiger" position="0 2 0" align="center" color="black"></a-text>
+                </a-entity>
+
+                <!-- Obstacle -->
+                <a-entity id="obstacle" position="0 0.5 -15">
+                    <a-box width="4" height="1" depth="0.5" color="brown"></a-box>
+                    <a-text value="LOG" position="0 1.5 0" align="center" color="red"></a-text>
+                </a-entity>
+
+                <a-entity camera look-controls position="0 2 0">
+                    <a-cursor fuse="false" color="red"></a-cursor>
+                </a-entity>
+            </a-scene>
+            <p style="text-align: center; font-style: italic;">Use your mouse to look around. The race is about to start!</p>
+        </section>
+
+        <section id="ai-demo">
+            <h3>AI Racing Assistant</h3>
+            <p>Get AI-powered advice for your race based on the current situation.</p>
+            <button onclick="getAiAction('running')">Racing</button>
+            <button onclick="getAiAction('obstacle_ahead')">Obstacle Ahead!</button>
+            <button onclick="getAiAction('finish_line_near')">Near Finish Line</button>
+            <p><strong>AI Strategy Recommendation:</strong> <span id="ai-action">Wait for signal...</span></p>
+        </section>
+
+        <section id="blockchain-reward">
+            <h3>Winner's Podium</h3>
+            <p>If you win the challenge, enter your wallet address to claim your Champion NFT.</p>
+            <input type="text" id="wallet-address" placeholder="Enter Wallet Address (0x...)">
+            <button onclick="claimReward()">Claim Champion NFT</button>
+            <div id="reward-status"></div>
+        </section>
+
+        <section id="nft-viewer">
+            <h3>Trophy Room</h3>
+            <p>Enter your Champion token ID to view your trophy.</p>
+            <input type="number" id="nft-token-id" placeholder="Enter Token ID">
+            <button onclick="getNftDetails()">View Trophy</button>
+            <div id="nft-details"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Games Universe</p>
+    </footer>
+    <script src="modal.js" defer></script>
+    <script>
+        const API_KEY = "test-api-key";
+        let selectedPet = 'lion';
+
+        function selectPet(pet) {
+            selectedPet = pet;
+            document.getElementById('selected-pet').textContent = pet.charAt(0).toUpperCase() + pet.slice(1);
+
+            // Highlight selected pet in A-Frame (simple scale change)
+            const lion = document.getElementById('lion-pet');
+            const tiger = document.getElementById('tiger-pet');
+
+            if (pet === 'lion') {
+                lion.setAttribute('scale', '1.2 1.2 1.2');
+                tiger.setAttribute('scale', '1 1 1');
+            } else {
+                tiger.setAttribute('scale', '1.2 1.2 1.2');
+                lion.setAttribute('scale', '1 1 1');
+            }
+        }
+
+        async function getAiAction(state) {
+            const response = await fetch('/api/animal_running/ai/action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({
+                    game_state: state,
+                    animal_type: selectedPet
+                })
+            });
+            const data = await response.json();
+            document.getElementById('ai-action').textContent = data.action;
+
+            // Visual feedback in the scene
+            if (state === 'obstacle_ahead') {
+                 const petEntity = document.getElementById(selectedPet + '-pet');
+                 // Simulate a jump
+                 petEntity.setAttribute('animation', 'property: position; to: ' + petEntity.getAttribute('position').x + ' 2 ' + petEntity.getAttribute('position').z + '; dur: 500; dir: alternate; loop: 1');
+            }
+        }
+
+        async function claimReward() {
+            const address = document.getElementById('wallet-address').value;
+            if (!address) {
+                alert('Please enter a wallet address.');
+                return;
+            }
+            const response = await fetch('/api/animal_running/reward', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({
+                    owner_address: address,
+                    metadata_uri: "https://games-universe.com/rewards/animal_champion_" + selectedPet + ".json"
+                })
+            });
+            const data = await response.json();
+            const statusDiv = document.getElementById('reward-status');
+            if (response.ok) {
+                statusDiv.innerHTML = `<p style="color: green;">Congratulations! Champion Token ID: ${data.token_id} minted to ${data.owner}</p>`;
+            } else {
+                statusDiv.innerHTML = `<p style="color: red;">Error claiming reward.</p>`;
+            }
+        }
+
+        async function getNftDetails() {
+            const tokenId = document.getElementById('nft-token-id').value;
+            if (!tokenId) {
+                alert('Please enter a token ID.');
+                return;
+            }
+            const response = await fetch(`/api/animal_running/nft/${tokenId}`, {
+                headers: {
+                    'X-API-Key': API_KEY
+                }
+            });
+            const nftDetailsDiv = document.getElementById('nft-details');
+            if (response.ok) {
+                const data = await response.json();
+                nftDetailsDiv.innerHTML = `
+                    <div style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
+                        <p><strong>Champion:</strong> ${data.owner}</p>
+                        <p><strong>Trophy Metadata:</strong> <a href="${data.uri}" target="_blank">${data.uri}</a></p>
+                    </div>
+                `;
+            } else {
+                nftDetailsDiv.innerHTML = `<p style="color: red;">Error: Trophy not found.</p>`;
+            }
+        }
+
+        // Initial setup
+        selectPet('lion');
+    </script>
+</body>
+</html>
