@@ -167,6 +167,35 @@ class AnimalRunningAI:
             recommendation = random.choice(actions)
             return f"Action: {recommendation} ({animal_type} is ready)"
 
+class TreePlantingAI:
+    """
+    AI engine for Tree Planting AR game.
+    """
+    def decide_action(self, game_state: str, area: str):
+        """
+        Decides the next action based on the planting state and area.
+        """
+        if game_state == "choosing_tree":
+            if area == "forest":
+                actions = ["Plant Oak for longevity", "Plant Pine for fast growth", "Ensure enough spacing"]
+            elif area == "desert":
+                actions = ["Plant Cactus to conserve water", "Plant Palm near oases", "Use drought-resistant seeds"]
+            elif area == "city":
+                actions = ["Plant Oak for shade", "Use planters for limited space", "Choose trees that filter pollution"]
+            else:
+                actions = ["Select a tree", "Check soil quality", "Look for sunlight"]
+
+            recommendation = random.choice(actions)
+            return f"AI Tip: {recommendation} (Area: {area})"
+
+        elif game_state == "planting":
+            actions = ["Dig a deep hole", "Water the sapling", "Add compost"]
+            recommendation = random.choice(actions)
+            return f"AI Guidance: {recommendation}"
+
+        else:
+            return "AI: Ready to help you reforest!"
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()
