@@ -52,5 +52,11 @@
         "description": "Immersive AR/VR game where you fill dump trucks using precision and speed. Features AI assistance and blockchain rewards.",
         "link": "shovel_master_game.html",
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Tree Planting AR",
+        "description": "A reforestation AR game where you plant trees in different environments. Integrated with AI guidance and blockchain rewards.",
+        "link": "tree_planting_game.html",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

@@ -79,5 +79,14 @@
         "rating": 4.8,
         "player_count": 105,
         "download_link": "/models/lion.obj"
+    },
+    {
+        "name": "Tree Planting AR",
+        "category": "VR/AR",
+        "link": "tree_planting_game.html",
+        "description": "A reforestation AR game where you plant trees in different environments. Integrated with AI guidance and blockchain rewards.",
+        "rating": 4.9,
+        "player_count": 320,
+        "download_link": "games/placeholder_game.zip"
     }
 ]

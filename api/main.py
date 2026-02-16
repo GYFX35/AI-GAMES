@@ -5,7 +5,7 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI
+from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI
 from api.blockchain import BlockchainManager
 from api.xcode import XCodeManager
 from api import unesco
@@ -79,6 +79,10 @@ class ShovelMasterGameState(BaseModel):
 class AnimalRunningGameState(BaseModel):
     game_state: str # "ready", "running", "obstacle_ahead", "finish_line_near"
     animal_type: str # "lion", "tiger", etc.
+
+class TreePlantingGameState(BaseModel):
+    game_state: str # "choosing_tree", "planting", "idle"
+    area: str # "forest", "desert", "city"
 
 class RewardRequest(BaseModel):
     owner_address: str
@@ -497,6 +501,10 @@ shovel_master_ai = ShovelMasterAI()
 
 animal_running_ai = AnimalRunningAI()
 
+# --- Tree Planting Game Endpoints ---
+
+tree_planting_ai = TreePlantingAI()
+
 @app.post("/api/animal_running/ai/action", dependencies=[Depends(get_api_key)])
 async def get_animal_running_ai_action(game_state: AnimalRunningGameState):
     """
@@ -517,6 +525,32 @@ async def animal_running_reward(request: RewardRequest):
 async def get_animal_running_nft_details(token_id: int):
     """
     Get the details of a reward NFT for the animal running game.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
+
+@app.post("/api/tree_planting/ai/action", dependencies=[Depends(get_api_key)])
+async def get_tree_planting_ai_action(game_state: TreePlantingGameState):
+    """
+    Get the next action from the Tree Planting AI.
+    """
+    action = tree_planting_ai.decide_action(game_state.game_state, game_state.area)
+    return {"action": action}
+
+@app.post("/api/tree_planting/reward", dependencies=[Depends(get_api_key)])
+async def tree_planting_reward(request: RewardRequest):
+    """
+    Reward the player with an NFT for planting trees.
+    """
+    reward = blockchain_manager.mint_reward(request.owner_address, request.metadata_uri)
+    return reward
+
+@app.get("/api/tree_planting/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_tree_planting_nft_details(token_id: int):
+    """
+    Get the details of a reward NFT for the tree planting game.
     """
     details = blockchain_manager.get_nft_details(token_id)
     if not details:
