@@ -88,5 +88,14 @@
         "rating": 4.9,
         "player_count": 320,
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Papaya Peeling AR",
+        "category": "VR/AR",
+        "link": "papaya_peeling_game.html",
+        "description": "A fun AR game where you peel papaya and serve it. Features AI feedback and blockchain-based 'Papaya Master' rewards.",
+        "rating": 4.7,
+        "player_count": 50,
+        "download_link": "games/placeholder_game.zip"
     }
 ]

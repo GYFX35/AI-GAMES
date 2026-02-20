@@ -58,5 +58,11 @@
         "description": "A reforestation AR game where you plant trees in different environments. Integrated with AI guidance and blockchain rewards.",
         "link": "tree_planting_game.html",
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Papaya Peeling AR",
+        "description": "A fun AR game where you peel papaya and serve it. Features AI feedback and blockchain-based 'Papaya Master' rewards.",
+        "link": "papaya_peeling_game.html",
+        "download_link": "games/placeholder_game.zip"
     }
 ]

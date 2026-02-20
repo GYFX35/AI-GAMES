@@ -5,7 +5,7 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI
+from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI, PapayaPeelingAI
 from api.blockchain import BlockchainManager
 from api.xcode import XCodeManager
 from api import unesco
@@ -83,6 +83,10 @@ class AnimalRunningGameState(BaseModel):
 class TreePlantingGameState(BaseModel):
     game_state: str # "choosing_tree", "planting", "idle"
     area: str # "forest", "desert", "city"
+
+class PapayaPeelingGameState(BaseModel):
+    game_state: str # "peeling", "serving", "idle"
+    peeling_quality: float
 
 class RewardRequest(BaseModel):
     owner_address: str
@@ -505,6 +509,8 @@ animal_running_ai = AnimalRunningAI()
 
 tree_planting_ai = TreePlantingAI()
 
+papaya_peeling_ai = PapayaPeelingAI()
+
 @app.post("/api/animal_running/ai/action", dependencies=[Depends(get_api_key)])
 async def get_animal_running_ai_action(game_state: AnimalRunningGameState):
     """
@@ -551,6 +557,32 @@ async def tree_planting_reward(request: RewardRequest):
 async def get_tree_planting_nft_details(token_id: int):
     """
     Get the details of a reward NFT for the tree planting game.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
+
+@app.post("/api/papaya_peeling/ai/action", dependencies=[Depends(get_api_key)])
+async def get_papaya_peeling_ai_action(game_state: PapayaPeelingGameState):
+    """
+    Get the next action from the Papaya Peeling AI.
+    """
+    action = papaya_peeling_ai.decide_action(game_state.game_state, game_state.peeling_quality)
+    return {"action": action}
+
+@app.post("/api/papaya_peeling/reward", dependencies=[Depends(get_api_key)])
+async def papaya_peeling_reward(request: RewardRequest):
+    """
+    Reward the player with an NFT for peeling papaya.
+    """
+    reward = blockchain_manager.mint_reward(request.owner_address, request.metadata_uri)
+    return reward
+
+@app.get("/api/papaya_peeling/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_papaya_peeling_nft_details(token_id: int):
+    """
+    Get the details of a reward NFT for the papaya peeling game.
     """
     details = blockchain_manager.get_nft_details(token_id)
     if not details:

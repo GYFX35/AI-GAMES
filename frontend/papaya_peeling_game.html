@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papaya Peeling AR Game - Games Universe</title>
+    <meta name="description" content="Experience Papaya Peeling AR, a game where you peel well papaya and serve it. Integrated with AI and blockchain rewards.">
+    <meta name="keywords" content="AR game, Papaya Peeling, blockchain, AI, game development">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Papaya Peeling AR Game</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="vrar_games.html">AR/VR Games</a></li>
+            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+            <li><a href="papaya_peeling_game.html">Papaya Peeling</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="game-overview">
+            <h2>Game Overview</h2>
+            <p>Welcome to Papaya Peeling AR! Your task is to peel the papaya perfectly and serve it on the table. Use the AI tips to improve your technique and win blockchain rewards!</p>
+        </section>
+
+        <section id="game-scene" style="height: 500px; position: relative;">
+            <h3>Game Scene (AR/VR)</h3>
+            <a-scene embedded style="height: 100%; width: 100%;">
+                <a-sky id="sky" color="#ECECEC"></a-sky>
+
+                <!-- Table -->
+                <a-box position="0 0.5 -3" width="4" height="0.1" depth="2" color="#8B4513"></a-box>
+                <a-box position="-1.8 0.25 -2.1" width="0.1" height="0.5" depth="0.1" color="#5D2906"></a-box>
+                <a-box position="1.8 0.25 -2.1" width="0.1" height="0.5" depth="0.1" color="#5D2906"></a-box>
+                <a-box position="-1.8 0.25 -3.9" width="0.1" height="0.5" depth="0.1" color="#5D2906"></a-box>
+                <a-box position="1.8 0.25 -3.9" width="0.1" height="0.5" depth="0.1" color="#5D2906"></a-box>
+
+                <!-- Papaya -->
+                <a-entity id="papaya-container" position="0 0.7 -3">
+                    <a-sphere id="papaya" radius="0.3" scale="0.6 1 0.6" color="#FFA500" class="raycastable"></a-sphere>
+                </a-entity>
+
+                <a-entity camera look-controls position="0 1.6 0">
+                    <a-cursor fuse="false" color="red"></a-cursor>
+                </a-entity>
+            </a-scene>
+            <div id="game-ui" style="position: absolute; bottom: 10px; left: 10px; color: white; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+                <p>Peeling Progress: <span id="peel-progress">0</span>%</p>
+                <button id="serve-button" onclick="servePapaya()" style="display: none;">Serve on Table</button>
+            </div>
+            <p style="text-align: center; font-style: italic;">Click on the papaya to peel it. Enter VR mode or use your mouse to look around.</p>
+        </section>
+
+        <section id="ai-assistant">
+            <h3>AI Peeling Assistant</h3>
+            <p>Get tips from our AI on your peeling technique.</p>
+            <p><strong>AI Recommendation:</strong> <span id="ai-action">AI is watching...</span></p>
+        </section>
+
+        <section id="blockchain-reward">
+            <h3>Claim Your Peeling Reward</h3>
+            <p>Successfully serve a perfectly peeled papaya to claim a "Papaya Master" NFT.</p>
+            <input type="text" id="wallet-address" placeholder="Enter Wallet Address (0x...)">
+            <button id="claim-button" onclick="claimReward()" disabled>Claim NFT</button>
+            <div id="reward-status"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Games Universe</p>
+    </footer>
+    <script src="modal.js" defer></script>
+    <script>
+        const API_KEY = "test-api-key";
+        let peelProgress = 0;
+        let isServed = false;
+        let lastPeelTime = Date.now();
+        let peelingQuality = 1.0;
+
+        document.getElementById('papaya').addEventListener('click', function () {
+            if (peelProgress < 100 && !isServed) {
+                const now = Date.now();
+                const delta = now - lastPeelTime;
+                lastPeelTime = now;
+
+                // Simple quality metric: too fast or too slow reduces quality
+                if (delta < 200) peelingQuality -= 0.05;
+                if (delta > 2000) peelingQuality -= 0.02;
+                peelingQuality = Math.max(0.1, peelingQuality);
+
+                peelProgress += 5;
+                if (peelProgress > 100) peelProgress = 100;
+
+                document.getElementById('peel-progress').textContent = peelProgress;
+
+                // Change papaya color as it gets peeled
+                const papaya = document.getElementById('papaya');
+                if (peelProgress >= 100) {
+                    papaya.setAttribute('color', '#FFD700');
+                    document.getElementById('serve-button').style.display = 'block';
+                } else if (peelProgress > 50) {
+                    papaya.setAttribute('color', '#FFB833');
+                }
+
+                getAiRecommendation();
+            }
+        });
+
+        async function getAiRecommendation() {
+            const state = peelProgress >= 100 ? 'serving' : 'peeling';
+            const response = await fetch('/api/papaya_peeling/ai/action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({ game_state: state, peeling_quality: peelingQuality })
+            });
+            const data = await response.json();
+            document.getElementById('ai-action').textContent = data.action;
+        }
+
+        function servePapaya() {
+            if (peelProgress >= 100 && !isServed) {
+                const papayaContainer = document.getElementById('papaya-container');
+                papayaContainer.setAttribute('animation', 'property: position; to: 1 0.6 -3; dur: 1000; easing: easeInOutQuad');
+                isServed = true;
+                document.getElementById('serve-button').style.display = 'none';
+                document.getElementById('claim-button').disabled = false;
+                getAiRecommendation();
+                alert("Papaya served successfully! You can now claim your reward.");
+            }
+        }
+
+        async function claimReward() {
+            const address = document.getElementById('wallet-address').value;
+            if (!address) {
+                alert('Please enter a wallet address.');
+                return;
+            }
+            const response = await fetch('/api/papaya_peeling/reward', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({
+                    owner_address: address,
+                    metadata_uri: "https://games-universe.com/rewards/papaya_master.json"
+                })
+            });
+            const data = await response.json();
+            const statusDiv = document.getElementById('reward-status');
+            if (response.ok) {
+                statusDiv.innerHTML = `<p style="color: green;">Success! Token ID: ${data.token_id} minted to ${data.owner}</p>`;
+                document.getElementById('claim-button').disabled = true;
+            } else {
+                statusDiv.innerHTML = `<p style="color: red;">Error claiming reward.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
