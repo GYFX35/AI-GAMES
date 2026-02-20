@@ -196,6 +196,26 @@ class TreePlantingAI:
         else:
             return "AI: Ready to help you reforest!"
 
+class PapayaPeelingAI:
+    """
+    AI engine for Papaya Peeling AR game.
+    """
+    def decide_action(self, game_state: str, peeling_quality: float):
+        """
+        Decides the next action based on the peeling state and quality.
+        """
+        if game_state == "peeling":
+            if peeling_quality > 0.8:
+                return "AI Tip: Perfect technique! Keep going."
+            elif peeling_quality > 0.5:
+                return "AI Tip: Good progress, but watch your depth."
+            else:
+                return "AI Tip: Be careful not to waste too much fruit!"
+        elif game_state == "serving":
+            return "AI Tip: Place it gently on the table for the perfect presentation."
+        else:
+            return "AI: Ready to help you peel the perfect papaya!"
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()
