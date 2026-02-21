@@ -97,5 +97,14 @@
         "rating": 4.7,
         "player_count": 50,
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Money Jumping & Climbing AR",
+        "category": "VR/AR",
+        "link": "money_climbing_game.html",
+        "description": "Jump for money and climb mountains in this AR adventure integrated with AI and blockchain.",
+        "rating": 5.0,
+        "player_count": 10,
+        "download_link": "games/placeholder_game.zip"
     }
 ]

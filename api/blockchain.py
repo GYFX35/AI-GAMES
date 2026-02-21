@@ -1,4 +1,5 @@
 import json
+import base64
 from web3 import Web3
 
 # In a real application, you would get this from your compiled smart contract
@@ -80,7 +81,24 @@ class BlockchainManager:
                      {"trait_type": "Trucks Filled", "value": 1}
                  ]
              }
-             metadata_uri = f"data:application/json;base64,{metadata}" # Simplified for PoC
+             metadata_json = json.dumps(metadata)
+             metadata_base64 = base64.b64encode(metadata_json.encode()).decode()
+             metadata_uri = f"data:application/json;base64,{metadata_base64}"
+
+        # Enhanced metadata for Money Climbing
+        if "money_climbing" in metadata_uri:
+             metadata = {
+                 "name": "Money Climbing Master",
+                 "description": "Awarded for reaching extreme heights and collecting treasure.",
+                 "image": "https://games-universe.com/assets/climbing_nft.png",
+                 "attributes": [
+                     {"trait_type": "Skill", "value": "Elite Climber"},
+                     {"trait_type": "Achievement", "value": "Summit Reached"}
+                 ]
+             }
+             metadata_json = json.dumps(metadata)
+             metadata_base64 = base64.b64encode(metadata_json.encode()).decode()
+             metadata_uri = f"data:application/json;base64,{metadata_base64}"
 
         self.mocked_nfts[token_id] = {"owner": owner_address, "uri": metadata_uri}
         return {"status": "success", "token_id": token_id, "owner": owner_address}

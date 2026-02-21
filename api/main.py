@@ -1,11 +1,12 @@
 import os
 import json
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Security
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI, PapayaPeelingAI
+from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI, PapayaPeelingAI, MoneyClimbingAI
 from api.blockchain import BlockchainManager
 from api.xcode import XCodeManager
 from api import unesco
@@ -40,6 +41,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(payment.router, prefix="/api/payment", tags=["payment"])
 app.include_router(monetag.router, prefix="/api/monetag", tags=["monetag"])
@@ -87,6 +96,11 @@ class TreePlantingGameState(BaseModel):
 class PapayaPeelingGameState(BaseModel):
     game_state: str # "peeling", "serving", "idle"
     peeling_quality: float
+
+class MoneyClimbingGameState(BaseModel):
+    game_state: str # "climbing", "jumping", "idle"
+    height: float
+    money_collected: int
 
 class RewardRequest(BaseModel):
     owner_address: str
@@ -511,6 +525,8 @@ tree_planting_ai = TreePlantingAI()
 
 papaya_peeling_ai = PapayaPeelingAI()
 
+money_climbing_ai = MoneyClimbingAI()
+
 @app.post("/api/animal_running/ai/action", dependencies=[Depends(get_api_key)])
 async def get_animal_running_ai_action(game_state: AnimalRunningGameState):
     """
@@ -583,6 +599,32 @@ async def papaya_peeling_reward(request: RewardRequest):
 async def get_papaya_peeling_nft_details(token_id: int):
     """
     Get the details of a reward NFT for the papaya peeling game.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
+
+@app.post("/api/money_climbing/ai/action", dependencies=[Depends(get_api_key)])
+async def get_money_climbing_ai_action(game_state: MoneyClimbingGameState):
+    """
+    Get the next action from the Money Climbing AI.
+    """
+    action = money_climbing_ai.decide_action(game_state.game_state, game_state.height, game_state.money_collected)
+    return {"action": action}
+
+@app.post("/api/money_climbing/reward", dependencies=[Depends(get_api_key)])
+async def money_climbing_reward(request: RewardRequest):
+    """
+    Reward the player with an NFT for climbing and jumping achievements.
+    """
+    reward = blockchain_manager.mint_reward(request.owner_address, request.metadata_uri)
+    return reward
+
+@app.get("/api/money_climbing/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_money_climbing_nft_details(token_id: int):
+    """
+    Get the details of a reward NFT for the money climbing game.
     """
     details = blockchain_manager.get_nft_details(token_id)
     if not details:
