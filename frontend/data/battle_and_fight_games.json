@@ -16,5 +16,11 @@
         "description": "The next chapter in the long-running fighting game franchise.",
         "link": "https://tk8.tekken-official.jp/en/",
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Animal Fighting AR",
+        "description": "Legendary animals clash in this immersive AR arena. Features AI-powered combat strategies and blockchain-based 'Combat Champion' NFT rewards.",
+        "link": "animal_fighting_game.html",
+        "download_link": "games/placeholder_game.zip"
     }
 ]
