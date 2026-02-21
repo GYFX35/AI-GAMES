@@ -216,6 +216,42 @@ class PapayaPeelingAI:
         else:
             return "AI: Ready to help you peel the perfect papaya!"
 
+class AnimalFightingAI:
+    """
+    AI engine for Animal Fighting AR game.
+    """
+    def decide_action(self, game_state: str, player_animal: str, opponent_animal: str):
+        """
+        Decides the next combat action based on the fight state and animals involved.
+        """
+        if game_state == "fighting":
+            if player_animal == "lion":
+                actions = ["Pounce", "Roar", "Claw Strike"]
+            elif player_animal == "tiger":
+                actions = ["Ambush", "Powerful Swipe", "Bite"]
+            elif player_animal == "gorilla":
+                actions = ["Chest Beat", "Ground Slam", "Mighty Punch"]
+            elif player_animal == "elephant":
+                actions = ["Trunk Slap", "Charge", "Bellow"]
+            elif player_animal == "snake":
+                actions = ["Venomous Strike", "Coil", "Hiss"]
+            else:
+                actions = ["Attack", "Defend", "Dodge"]
+
+            recommendation = random.choice(actions)
+            return f"AI Combat Tip: Use {recommendation} against the {opponent_animal}!"
+
+        elif game_state == "defending":
+            actions = ["Dodge", "Block", "Counter-attack"]
+            recommendation = random.choice(actions)
+            return f"AI Tactical Tip: {recommendation} is your best bet now!"
+
+        elif game_state == "victory":
+            return f"AI: Impressive! The {player_animal} has defeated the {opponent_animal}."
+
+        else:
+            return f"AI: Get ready! Your {player_animal} is about to face the {opponent_animal}."
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()

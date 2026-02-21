@@ -5,7 +5,7 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI, PapayaPeelingAI
+from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI, PapayaPeelingAI, AnimalFightingAI
 from api.blockchain import BlockchainManager
 from api.xcode import XCodeManager
 from api import unesco
@@ -87,6 +87,11 @@ class TreePlantingGameState(BaseModel):
 class PapayaPeelingGameState(BaseModel):
     game_state: str # "peeling", "serving", "idle"
     peeling_quality: float
+
+class AnimalFightingGameState(BaseModel):
+    game_state: str # "ready", "fighting", "defending", "victory"
+    player_animal: str
+    opponent_animal: str
 
 class RewardRequest(BaseModel):
     owner_address: str
@@ -511,6 +516,8 @@ tree_planting_ai = TreePlantingAI()
 
 papaya_peeling_ai = PapayaPeelingAI()
 
+animal_fighting_ai = AnimalFightingAI()
+
 @app.post("/api/animal_running/ai/action", dependencies=[Depends(get_api_key)])
 async def get_animal_running_ai_action(game_state: AnimalRunningGameState):
     """
@@ -583,6 +590,34 @@ async def papaya_peeling_reward(request: RewardRequest):
 async def get_papaya_peeling_nft_details(token_id: int):
     """
     Get the details of a reward NFT for the papaya peeling game.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
+
+# --- Animal Fighting Game Endpoints ---
+
+@app.post("/api/animal_fighting/ai/action", dependencies=[Depends(get_api_key)])
+async def get_animal_fighting_ai_action(game_state: AnimalFightingGameState):
+    """
+    Get the next action from the Animal Fighting AI.
+    """
+    action = animal_fighting_ai.decide_action(game_state.game_state, game_state.player_animal, game_state.opponent_animal)
+    return {"action": action}
+
+@app.post("/api/animal_fighting/reward", dependencies=[Depends(get_api_key)])
+async def animal_fighting_reward(request: RewardRequest):
+    """
+    Reward the player with an NFT for winning the animal fight.
+    """
+    reward = blockchain_manager.mint_reward(request.owner_address, request.metadata_uri)
+    return reward
+
+@app.get("/api/animal_fighting/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_animal_fighting_nft_details(token_id: int):
+    """
+    Get the details of a reward NFT for the animal fighting game.
     """
     details = blockchain_manager.get_nft_details(token_id)
     if not details:
