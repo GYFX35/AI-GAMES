@@ -216,6 +216,37 @@ class PapayaPeelingAI:
         else:
             return "AI: Ready to help you peel the perfect papaya!"
 
+class MoneyClimbingAI:
+    """
+    AI engine for Money Jumping and Climbing AR game.
+    """
+    def decide_action(self, game_state: str, height: float, money_collected: int):
+        """
+        Decides the next action based on the climbing state, current height, and money collected.
+        """
+        if game_state == "climbing":
+            if height > 50:
+                actions = ["Watch your step, it's getting high!", "Look for a stable branch", "The air is thin, take a breather"]
+            elif height > 20:
+                actions = ["Nice climb! Keep going.", "Check for money on the side branches", "You're halfway there!"]
+            else:
+                actions = ["Start your ascent!", "Look for the easiest path up", "Don't forget to collect money"]
+
+            recommendation = random.choice(actions)
+            return f"AI Climbing Tip: {recommendation} (Height: {height}m)"
+
+        elif game_state == "jumping":
+            if money_collected > 100:
+                actions = ["You're a money magnet!", "Try a double jump for higher coins", "Keep that momentum!"]
+            else:
+                actions = ["Jump higher to reach more money!", "Timing is everything", "Aim for the golden coins"]
+
+            recommendation = random.choice(actions)
+            return f"AI Jumping Tip: {recommendation} (Money: ${money_collected})"
+
+        else:
+            return "AI: Ready to help you climb and jump to wealth!"
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()

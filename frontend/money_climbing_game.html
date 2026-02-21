@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Jumping & Climbing AR - Games Universe</title>
+    <meta name="description" content="Jump for money and climb mountains in this AR adventure integrated with AI and blockchain.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Money Jumping & Climbing AR</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="vrar_games.html">AR/VR Games</a></li>
+            <li><a href="money_climbing_game.html">Money Climbing</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="game-overview">
+            <h2>Game Overview</h2>
+            <p>Welcome to the ultimate AR climbing challenge! Scale trees and mountains to reach new heights, and jump to collect floating money. Earn exclusive NFTs for your achievements.</p>
+        </section>
+
+        <section id="game-stats" style="text-align: center; margin-bottom: 20px; background: #f4f4f4; padding: 10px; border-radius: 8px;">
+            <p><strong>Current Height:</strong> <span id="height-val">0</span>m | <strong>Money Collected:</strong> $<span id="money-val">0</span></p>
+        </section>
+
+        <section id="game-scene" style="height: 500px; position: relative;">
+            <a-scene embedded style="height: 100%; width: 100%;">
+                <a-sky color="#87CEEB"></a-sky>
+                <a-plane position="0 0 -4" rotation="-90 0 0" width="100" height="100" color="#7BC8A4"></a-plane>
+
+                <!-- Mountain -->
+                <a-cone position="-5 10 -15" radius-bottom="10" height="20" color="#808080" class="climbable" onclick="climb(2)"></a-cone>
+                <a-cone position="5 15 -25" radius-bottom="15" height="30" color="#A9A9A9" class="climbable" onclick="climb(5)"></a-cone>
+
+                <!-- Trees -->
+                <a-entity position="-2 0 -5" class="climbable" onclick="climb(1)">
+                    <a-cylinder radius="0.2" height="4" color="brown" position="0 2 0"></a-cylinder>
+                    <a-sphere radius="1.5" color="green" position="0 4 0"></a-sphere>
+                </a-entity>
+
+                <a-entity position="3 0 -8" class="climbable" onclick="climb(1)">
+                    <a-cylinder radius="0.2" height="5" color="brown" position="0 2.5 0"></a-cylinder>
+                    <a-sphere radius="2" color="green" position="0 5 0"></a-sphere>
+                </a-entity>
+
+                <!-- Floating Money (Coins) -->
+                <a-cylinder class="collectible" position="0 2 -3" radius="0.3" height="0.05" color="gold" rotation="90 0 0" onclick="collectMoney(10)"></a-cylinder>
+                <a-cylinder class="collectible" position="-2 5 -5" radius="0.3" height="0.05" color="gold" rotation="90 0 0" onclick="collectMoney(20)"></a-cylinder>
+                <a-cylinder class="collectible" position="2 6 -8" radius="0.3" height="0.05" color="gold" rotation="90 0 0" onclick="collectMoney(20)"></a-cylinder>
+                <a-cylinder class="collectible" position="-5 15 -15" radius="0.5" height="0.1" color="gold" rotation="90 0 0" onclick="collectMoney(50)"></a-cylinder>
+
+                <a-entity camera look-controls position="0 1.6 0">
+                    <a-cursor fuse="false" color="red"></a-cursor>
+                </a-entity>
+            </a-scene>
+            <p style="text-align: center; font-style: italic;">Click on mountains or trees to climb. Click on gold coins to jump and collect them.</p>
+        </section>
+
+        <section id="ai-assistant">
+            <h3>AI Climbing Assistant</h3>
+            <button onclick="getAiRecommendation()">Get Climbing Tip</button>
+            <p><strong>AI Tip:</strong> <span id="ai-action"></span></p>
+        </section>
+
+        <section id="blockchain-reward">
+            <h3>Claim Your Achievement NFT</h3>
+            <p>Reach 50m height OR collect $100 to claim your "Money Climbing Master" NFT.</p>
+            <input type="text" id="wallet-address" placeholder="Enter Wallet Address (0x...)">
+            <button id="claim-button" onclick="claimReward()" disabled>Claim NFT</button>
+            <div id="reward-status"></div>
+        </section>
+
+        <section id="nft-viewer">
+            <h3>NFT Viewer</h3>
+            <input type="number" id="nft-token-id" placeholder="Enter Token ID">
+            <button onclick="getNftDetails()">View NFT</button>
+            <div id="nft-details"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Games Universe</p>
+    </footer>
+    <script>
+        const API_KEY = "test-api-key";
+        const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
+        let currentHeight = 0;
+        let moneyCollected = 0;
+
+        function climb(amount) {
+            currentHeight += amount;
+            document.getElementById('height-val').textContent = currentHeight;
+            checkRewards();
+            getAiRecommendation('climbing');
+        }
+
+        function collectMoney(amount) {
+            moneyCollected += amount;
+            document.getElementById('money-val').textContent = moneyCollected;
+
+            // Visual feedback: remove the coin
+            if (typeof event !== 'undefined' && event.target) {
+                event.target.setAttribute('visible', 'false');
+            }
+
+            checkRewards();
+            getAiRecommendation('jumping');
+        }
+
+        function checkRewards() {
+            if (currentHeight >= 50 || moneyCollected >= 100) {
+                document.getElementById('claim-button').disabled = false;
+            }
+        }
+
+        async function getAiRecommendation(state = 'idle') {
+            const response = await fetch(`${API_BASE_URL}/api/money_climbing/ai/action`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({
+                    game_state: state,
+                    height: currentHeight,
+                    money_collected: moneyCollected
+                })
+            });
+            const data = await response.json();
+            document.getElementById('ai-action').textContent = data.action;
+        }
+
+        async function claimReward() {
+            const address = document.getElementById('wallet-address').value;
+            if (!address) {
+                alert('Please enter a wallet address.');
+                return;
+            }
+            const response = await fetch(`${API_BASE_URL}/api/money_climbing/reward`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': API_KEY
+                },
+                body: JSON.stringify({
+                    owner_address: address,
+                    metadata_uri: "https://games-universe.com/rewards/money_climbing.json"
+                })
+            });
+            const data = await response.json();
+            const statusDiv = document.getElementById('reward-status');
+            if (response.ok) {
+                statusDiv.innerHTML = `<p style="color: green;">Success! Token ID: ${data.token_id} minted to ${data.owner}</p>`;
+                document.getElementById('claim-button').disabled = true;
+            } else {
+                statusDiv.innerHTML = `<p style="color: red;">Error claiming reward.</p>`;
+            }
+        }
+
+        async function getNftDetails() {
+            const tokenId = document.getElementById('nft-token-id').value;
+            if (!tokenId) {
+                alert('Please enter a token ID.');
+                return;
+            }
+            const response = await fetch(`${API_BASE_URL}/api/money_climbing/nft/${tokenId}`, {
+                headers: {
+                    'X-API-Key': API_KEY
+                }
+            });
+            const nftDetailsDiv = document.getElementById('nft-details');
+            if (response.ok) {
+                const data = await response.json();
+                nftDetailsDiv.innerHTML = `
+                    <p><strong>Owner:</strong> ${data.owner}</p>
+                    <p><strong>Metadata URI:</strong> <a href="${data.uri}" target="_blank">${data.uri}</a></p>
+                `;
+            } else {
+                nftDetailsDiv.innerHTML = `<p style="color: red;">Error: NFT not found.</p>`;
+            }
+        }
+
+        window.onload = () => getAiRecommendation();
+    </script>
+</body>
+</html>
