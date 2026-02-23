@@ -64,5 +64,11 @@
         "description": "A fun AR game where you peel papaya and serve it. Features AI feedback and blockchain-based 'Papaya Master' rewards.",
         "link": "papaya_peeling_game.html",
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Animal Fighting AR",
+        "description": "Clash with legendary predators in an AR arena. Features Lion vs Tiger combat with AI tactical advice and blockchain rewards.",
+        "link": "animal_fighting_game.html",
+        "download_link": "games/placeholder_game.zip"
     }
 ]
