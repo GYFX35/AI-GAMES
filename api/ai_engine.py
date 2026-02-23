@@ -247,6 +247,37 @@ class MoneyClimbingAI:
         else:
             return "AI: Ready to help you climb and jump to wealth!"
 
+class AnimalFightingAI:
+    """
+    Stateless AI engine for Animal Fighting AR game.
+    """
+    def decide_action(self, game_state: str, animal_type: str, opponent_type: str):
+        """
+        Decides the next action based on the fighting state and animal types.
+        """
+        if game_state == "ready":
+            return f"AI: The {animal_type} is sizing up the {opponent_type}. Ready to strike!"
+
+        if game_state == "attacking":
+            if animal_type == "lion":
+                actions = ["Powerful Paw Swipe", "Crushing Bite", "Intimidating Roar"]
+            elif animal_type == "tiger":
+                actions = ["Ambush Strike", "Precision Clawing", "Quick Leap"]
+            else:
+                actions = ["Basic Attack", "Charge", "Bite"]
+            recommendation = random.choice(actions)
+            return f"AI Tip: Use {recommendation}!"
+
+        if game_state == "defending":
+            actions = ["Dodge", "Counter-attack", "Block with Paws"]
+            recommendation = random.choice(actions)
+            return f"AI Tip: {recommendation} now!"
+
+        if game_state == "near_victory":
+            return f"AI: The {opponent_type} is weakening! Deliver the final blow!"
+
+        return f"AI: Stay focused and watch the {opponent_type}'s movements."
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()

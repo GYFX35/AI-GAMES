@@ -106,5 +106,14 @@
         "rating": 5.0,
         "player_count": 10,
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Animal Fighting AR",
+        "category": "VR/AR",
+        "link": "animal_fighting_game.html",
+        "description": "Clash with legendary predators in an AR arena. Features Lion vs Tiger combat with AI tactical advice and blockchain rewards.",
+        "rating": 4.9,
+        "player_count": 85,
+        "download_link": "games/placeholder_game.zip"
     }
 ]
