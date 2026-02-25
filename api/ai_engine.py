@@ -278,6 +278,33 @@ class AnimalFightingAI:
 
         return f"AI: Stay focused and watch the {opponent_type}'s movements."
 
+class CarpenterAI:
+    """
+    AI engine for AR Carpenter game.
+    """
+    def decide_action(self, game_state: str, material: str):
+        """
+        Decides the next action based on the carpentry state and material.
+        """
+        if game_state == "measuring":
+            actions = ["Use the tape measure twice", "Mark the cutting line clearly", "Check the blueprints"]
+            recommendation = random.choice(actions)
+            return f"AI Carpenter Tip: {recommendation} (Material: {material})"
+        elif game_state == "cutting":
+            actions = ["Keep your hand steady", "Follow the line", "Wear safety goggles"]
+            recommendation = random.choice(actions)
+            return f"AI Carpenter Tip: {recommendation} (Material: {material})"
+        elif game_state == "sanding":
+            actions = ["Sand with the grain", "Use a finer grit for finishing", "Check for smooth edges"]
+            recommendation = random.choice(actions)
+            return f"AI Carpenter Tip: {recommendation} (Material: {material})"
+        elif game_state == "assembling":
+            actions = ["Apply glue evenly", "Use clamps to hold pieces", "Pre-drill holes for screws"]
+            recommendation = random.choice(actions)
+            return f"AI Carpenter Tip: {recommendation} (Material: {material})"
+        else:
+            return "AI Carpenter: Ready to build something great!"
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()
