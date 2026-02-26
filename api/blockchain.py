@@ -115,6 +115,21 @@ class BlockchainManager:
              metadata_base64 = base64.b64encode(metadata_json.encode()).decode()
              metadata_uri = f"data:application/json;base64,{metadata_base64}"
 
+        # Enhanced metadata for Carpenter
+        if "carpenter" in metadata_uri:
+             metadata = {
+                 "name": "Master Carpenter Achievement",
+                 "description": "Awarded for exceptional skill in the AR Carpenter game.",
+                 "image": "https://games-universe.com/assets/carpenter_nft.png",
+                 "attributes": [
+                     {"trait_type": "Skill", "value": "Master Carpenter"},
+                     {"trait_type": "Projects Completed", "value": 1}
+                 ]
+             }
+             metadata_json = json.dumps(metadata)
+             metadata_base64 = base64.b64encode(metadata_json.encode()).decode()
+             metadata_uri = f"data:application/json;base64,{metadata_base64}"
+
         self.mocked_nfts[token_id] = {"owner": owner_address, "uri": metadata_uri}
         return {"status": "success", "token_id": token_id, "owner": owner_address}
 

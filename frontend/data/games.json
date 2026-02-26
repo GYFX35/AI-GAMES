@@ -115,5 +115,14 @@
         "rating": 4.9,
         "player_count": 85,
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "AR Carpenter",
+        "category": "VR/AR",
+        "link": "carpenter_game.html",
+        "description": "Master the art of carpentry in AR. Measure, cut, sand, and assemble with AI assistance and blockchain rewards.",
+        "rating": 4.9,
+        "player_count": 12,
+        "download_link": "games/placeholder_game.zip"
     }
 ]

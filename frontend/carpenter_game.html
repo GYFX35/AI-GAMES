@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Carpenter Game - Games Universe</title>
+    <meta name="description" content="Master the art of carpentry in AR. Measure, cut, sand, and assemble your creations with AI assistance and blockchain rewards.">
+    <meta name="keywords" content="AR game, VR game, Carpenter, carpentry, blockchain, AI, game development, woodworking">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>AR Carpenter Game</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="vrar_games.html">AR/VR Games</a></li>
+            <li><a href="ai_mmo_games.html">AI MMO Games</a></li>
+            <li><a href="paywell.html">Paywell Wallet</a></li>
+            <li><a href="carpenter_game.html">AR Carpenter</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="game-overview">
+            <h2>Game Overview</h2>
+            <p>Welcome to AR Carpenter! Master the art of woodworking. Choose your material, measure your pieces, cut them to size, sand them smooth, and assemble your masterpiece. Your projects are recorded on the blockchain, and our AI Master Carpenter provides tips at every step.</p>
+        </section>
+
+        <section id="game-controls" style="text-align: center; margin-bottom: 20px;">
+            <label for="material-select">Choose Material:</label>
+            <select id="material-select" onchange="updateAiTip()">
+                <option value="oak">Oak</option>
+                <option value="pine">Pine</option>
+                <option value="plywood">Plywood</option>
+            </select>
+
+            <label for="tool-select">Choose Tool/Action:</label>
+            <select id="tool-select" onchange="updateAiTip()">
+                <option value="measuring">Tape Measure</option>
+                <option value="cutting">Saw</option>
+                <option value="sanding">Sandpaper</option>
+                <option value="assembling">Hammer & Glue</option>
+            </select>
+            <button onclick="performAction()">Perform Action</button>
+        </section>
+
+        <section id="game-scene" style="height: 500px; position: relative;">
+            <h3>Work-in-Progress (AR/VR)</h3>
+            <a-scene embedded style="height: 100%; width: 100%;">
+                <a-sky id="sky" color="#ECECEC"></a-sky>
+                <a-plane id="workbench" position="0 0 -4" rotation="-90 0 0" width="4" height="2" color="#8B4513"></a-plane>
+
+                <!-- Container for wood pieces -->
+                <a-entity id="wood-container" position="0 0.05 -4"></a-entity>
+
+                <a-entity camera look-controls position="0 1.6 0">
+                    <a-cursor fuse="false" color="red"></a-cursor>
+                </a-entity>
+            </a-scene>
+            <p style="text-align: center; font-style: italic;">Interact with your workbench. Enter VR mode or use your mouse to look around.</p>
+        </section>
+
+        <section id="ai-assistant">
+            <h3>AI Master Carpenter</h3>
+            <p>Get professional tips from our AI.</p>
+            <button onclick="getAiRecommendation()">Get Tip</button>
+            <p><strong>AI Tip:</strong> <span id="ai-action"></span></p>
+        </section>
+
+        <section id="blockchain-reward">
+            <h3>Claim Your Master Carpenter NFT</h3>
+            <p>Complete 5 actions to finish your project and claim your "Master Carpenter" NFT.</p>
+            <p>Actions completed: <span id="action-count">0</span></p>
+            <input type="text" id="wallet-address" placeholder="Enter Wallet Address (0x...)">
+            <button id="claim-button" onclick="claimReward()" disabled>Claim NFT</button>
+            <div id="reward-status"></div>
+        </section>
+
+        <section id="nft-viewer">
+            <h3>NFT Viewer</h3>
+            <p>Enter your reward token ID to view your achievement.</p>
+            <input type="number" id="nft-token-id" placeholder="Enter Token ID">
+            <button onclick="getNftDetails()">View NFT</button>
+            <div id="nft-details"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Games Universe</p>
+    </footer>
+    <script src="modal.js" defer></script>
+    <script>
+        const API_KEY = "test-api-key";
+        let actionsCompleted = 0;
+
+        function updateAiTip() {
+            getAiRecommendation();
+        }
+
+        function performAction() {
+            const tool = document.getElementById('tool-select').value;
+            const container = document.getElementById('wood-container');
+
+            const piece = document.createElement('a-box');
+            piece.setAttribute('width', '0.5');
+            piece.setAttribute('height', '0.1');
+            piece.setAttribute('depth', '0.2');
+
+            // Random position on workbench
+            const x = (Math.random() - 0.5) * 3;
+            const z = (Math.random() - 0.5) * 1.5;
+            piece.setAttribute('position', `${x} 0 ${z}`);
+
+            if (tool === 'measuring') piece.setAttribute('color', '#FFFF00');
+            else if (tool === 'cutting') piece.setAttribute('color', '#FF4500');
+            else if (tool === 'sanding') piece.setAttribute('color', '#F4A460');
+            else if (tool === 'assembling') piece.setAttribute('color', '#DEB887');
+
+            container.appendChild(piece);
+
+            actionsCompleted++;
+            document.getElementById('action-count').textContent = actionsCompleted;
+            if (actionsCompleted >= 5) {
+                document.getElementById('claim-button').disabled = false;
+            }
+            getAiRecommendation();
+        }
+
+        async function getAiRecommendation() {
+            const material = document.getElementById('material-select').value;
+            const gameState = document.getElementById('tool-select').value;
+
+            try {
+                const response = await fetch('/api/carpenter/ai/action', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': API_KEY
+                    },
+                    body: JSON.stringify({ game_state: gameState, material: material })
+                });
+                const data = await response.json();
+                document.getElementById('ai-action').textContent = data.action;
+            } catch (error) {
+                console.error('Error fetching AI recommendation:', error);
+            }
+        }
+
+        async function claimReward() {
+            const address = document.getElementById('wallet-address').value;
+            if (!address) {
+                alert('Please enter a wallet address.');
+                return;
+            }
+            try {
+                const response = await fetch('/api/carpenter/reward', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': API_KEY
+                    },
+                    body: JSON.stringify({
+                        owner_address: address,
+                        metadata_uri: "https://games-universe.com/rewards/carpenter.json"
+                    })
+                });
+                const data = await response.json();
+                const statusDiv = document.getElementById('reward-status');
+                if (response.ok) {
+                    statusDiv.innerHTML = `<p style="color: green;">Success! Token ID: ${data.token_id} minted to ${data.owner}</p>`;
+                    actionsCompleted = 0;
+                    document.getElementById('action-count').textContent = actionsCompleted;
+                    document.getElementById('claim-button').disabled = true;
+                } else {
+                    statusDiv.innerHTML = `<p style="color: red;">Error claiming reward.</p>`;
+                }
+            } catch (error) {
+                console.error('Error claiming reward:', error);
+            }
+        }
+
+        async function getNftDetails() {
+            const tokenId = document.getElementById('nft-token-id').value;
+            if (!tokenId) {
+                alert('Please enter a token ID.');
+                return;
+            }
+            try {
+                const response = await fetch(`/api/carpenter/nft/${tokenId}`, {
+                    headers: {
+                        'X-API-Key': API_KEY
+                    }
+                });
+                const nftDetailsDiv = document.getElementById('nft-details');
+                if (response.ok) {
+                    const data = await response.json();
+                    nftDetailsDiv.innerHTML = `
+                        <p><strong>Owner:</strong> ${data.owner}</p>
+                        <p><strong>Metadata URI:</strong> <a href="${data.uri}" target="_blank">${data.uri}</a></p>
+                    `;
+                } else {
+                    nftDetailsDiv.innerHTML = `<p style="color: red;">Error: NFT not found.</p>`;
+                }
+            } catch (error) {
+                console.error('Error fetching NFT details:', error);
+            }
+        }
+
+        window.onload = getAiRecommendation;
+    </script>
+</body>
+</html>
