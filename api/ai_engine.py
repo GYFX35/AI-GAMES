@@ -305,6 +305,42 @@ class CarpenterAI:
         else:
             return "AI Carpenter: Ready to build something great!"
 
+class SwimmingAI:
+    """
+    AI engine for AR Swimming game.
+    """
+    def decide_action(self, game_state: str, stroke_type: str):
+        """
+        Decides the next action based on the swimming state and stroke type.
+        """
+        if game_state == "diving":
+            actions = ["Maintain a streamlined position", "Point your toes", "Exhale slowly"]
+            recommendation = random.choice(actions)
+            return f"AI Diving Tip: {recommendation} (Stroke: {stroke_type})"
+        elif game_state == "swimming":
+            if stroke_type == "freestyle":
+                actions = ["Rotate your body", "Breathe on both sides", "Keep your head down"]
+            elif stroke_type == "backstroke":
+                actions = ["Look up at the sky", "Reach far behind your head", "Kick from your hips"]
+            elif stroke_type == "breaststroke":
+                actions = ["Glide after each stroke", "Keep your knees together on the kick", "Breathe as you pull"]
+            elif stroke_type == "butterfly":
+                actions = ["Coordinate your kick with your pull", "Press your chest down", "Relax your neck"]
+            else:
+                actions = ["Maintain a steady rhythm", "Focus on your breathing", "Maximize your pull"]
+            recommendation = random.choice(actions)
+            return f"AI Swimming Tip: {recommendation} (Stroke: {stroke_type})"
+        elif game_state == "turning":
+            actions = ["Tuck your chin", "Push off the wall with both feet", "Streamline immediately"]
+            recommendation = random.choice(actions)
+            return f"AI Turning Tip: {recommendation}"
+        elif game_state == "finishing":
+            actions = ["Touch the wall with both hands", "Don't look up before you touch", "Lunge for the finish"]
+            recommendation = random.choice(actions)
+            return f"AI Finishing Tip: {recommendation}"
+        else:
+            return "AI Coach: Ready to help you swim faster!"
+
 # Example usage:
 if __name__ == "__main__":
     hockey_ai = HockeyAI()

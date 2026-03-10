@@ -76,5 +76,11 @@
         "description": "Master the art of carpentry in AR. Measure, cut, sand, and assemble with AI assistance and blockchain rewards.",
         "link": "carpenter_game.html",
         "download_link": "games/placeholder_game.zip"
+    },
+    {
+        "name": "Swimming AR",
+        "description": "Dive into a virtual pool and master different strokes. Features AI coaching and blockchain-based achievement rewards.",
+        "link": "swimming_game.html",
+        "download_link": "games/placeholder_game.zip"
     }
 ]
