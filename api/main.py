@@ -6,7 +6,7 @@ from fastapi.security import APIKeyHeader
 from fastapi.responses import FileResponse, Response
 from typing import List, Optional
 from pydantic import BaseModel
-from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI, PapayaPeelingAI, MoneyClimbingAI, AnimalFightingAI, CarpenterAI
+from api.ai_engine import HockeyAI, PadelAI, InvestigativeAI, ShovelMasterAI, AnimalRunningAI, TreePlantingAI, PapayaPeelingAI, MoneyClimbingAI, AnimalFightingAI, CarpenterAI, SwimmingAI
 from api.blockchain import BlockchainManager
 from api.xcode import XCodeManager
 from api import unesco
@@ -110,6 +110,10 @@ class AnimalFightingGameState(BaseModel):
 class CarpenterGameState(BaseModel):
     game_state: str # "measuring", "cutting", "sanding", "assembling", "idle"
     material: str # "oak", "pine", "plywood"
+
+class SwimmingGameState(BaseModel):
+    game_state: str # "diving", "swimming", "turning", "finishing", "idle"
+    stroke_type: str # "freestyle", "backstroke", "breaststroke", "butterfly"
 
 class RewardRequest(BaseModel):
     owner_address: str
@@ -540,6 +544,8 @@ animal_fighting_ai = AnimalFightingAI()
 
 carpenter_ai = CarpenterAI()
 
+swimming_ai = SwimmingAI()
+
 @app.post("/api/animal_running/ai/action", dependencies=[Depends(get_api_key)])
 async def get_animal_running_ai_action(game_state: AnimalRunningGameState):
     """
@@ -716,6 +722,32 @@ async def shovel_master_reward(request: RewardRequest):
 async def get_shovel_master_nft_details(token_id: int):
     """
     Get the details of a reward NFT for the shovel master game.
+    """
+    details = blockchain_manager.get_nft_details(token_id)
+    if not details:
+        raise HTTPException(status_code=404, detail="NFT not found.")
+    return details
+
+@app.post("/api/swimming/ai/action", dependencies=[Depends(get_api_key)])
+async def get_swimming_ai_action(game_state: SwimmingGameState):
+    """
+    Get the next action from the Swimming AI.
+    """
+    action = swimming_ai.decide_action(game_state.game_state, game_state.stroke_type)
+    return {"action": action}
+
+@app.post("/api/swimming/reward", dependencies=[Depends(get_api_key)])
+async def swimming_reward(request: RewardRequest):
+    """
+    Reward the player with an NFT for swimming achievements.
+    """
+    reward = blockchain_manager.mint_reward(request.owner_address, request.metadata_uri)
+    return reward
+
+@app.get("/api/swimming/nft/{token_id}", dependencies=[Depends(get_api_key)])
+async def get_swimming_nft_details(token_id: int):
+    """
+    Get the details of a reward NFT for the swimming game.
     """
     details = blockchain_manager.get_nft_details(token_id)
     if not details:
