@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Golden Shovel",
+        "category": "Tools",
+        "price": 500,
+        "description": "A shiny golden shovel for Shovel Master. Increases digging speed by 20%.",
+        "image": "https://example.com/images/golden_shovel.png"
+    },
+    {
+        "id": 2,
+        "name": "Tiger Skin",
+        "category": "Cosmetics",
+        "price": 1200,
+        "description": "A fierce tiger skin for your animal avatar in Animal Running.",
+        "image": "https://example.com/images/tiger_skin.png"
+    },
+    {
+        "id": 3,
+        "name": "Ancient Blueprint",
+        "category": "Blueprints",
+        "price": 800,
+        "description": "Unlocks a secret furniture set in AR Carpenter.",
+        "image": "https://example.com/images/blueprint.png"
+    }
+]

@@ -36,6 +36,7 @@ from api import unicorn
 from api import payment
 from api import gcs
 from api import monetag
+from api import marketplace
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -52,6 +53,7 @@ app.add_middleware(
 
 app.include_router(payment.router, prefix="/api/payment", tags=["payment"])
 app.include_router(monetag.router, prefix="/api/monetag", tags=["monetag"])
+app.include_router(marketplace.router, prefix="/api/marketplace", tags=["marketplace"])
 
 @app.on_event("startup")
 async def startup_event():
@@ -129,28 +131,6 @@ class FacebookUser(BaseModel):
     name: str
     email: Optional[str] = None
 
-# --- API Key Authentication ---
-
-API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
-
-def get_api_keys():
-    # Build the path relative to the current file
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    keys_path = os.path.join(dir_path, "api_keys.json")
-    try:
-        with open(keys_path, "r") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {"test-key": "test-api-key"}
-
-def get_api_key(api_key_header: str = Security(API_KEY_HEADER)):
-    api_keys = get_api_keys()
-    if api_key_header not in api_keys.values(): # Corrected to check values
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid or missing API Key",
-        )
-    return api_key_header
 
 # --- Endpoints ---
 
