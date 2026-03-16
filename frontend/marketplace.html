@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Games Universe</title>
+    <meta name="description" content="Discover and acquire exclusive in-game items, skins, and tools in the Games Universe Marketplace.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Games Universe Marketplace</h1>
+            <div id="nav-placeholder"></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Exclusive In-Game Assets</h2>
+                <p>Level up your gameplay with unique items and skins.</p>
+            </div>
+        </section>
+
+        <section class="dynamic-offers">
+            <div class="container">
+                <h2>Personalized Offers For You</h2>
+                <div id="offers-grid" class="category-grid">
+                    <!-- Dynamic offers will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <section class="all-items">
+            <div class="container">
+                <h2>All Items</h2>
+                <div class="filters">
+                    <input type="text" id="searchInput" placeholder="Search items..." onkeyup="filterItems()">
+                    <select id="categoryFilter" onchange="filterItems()">
+                        <option value="">All Categories</option>
+                        <option value="Tools">Tools</option>
+                        <option value="Cosmetics">Cosmetics</option>
+                        <option value="Blueprints">Blueprints</option>
+                    </select>
+                </div>
+                <div id="items-grid" class="category-grid">
+                    <!-- All marketplace items will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Games Universe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        fetch('nav_main.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+            });
+
+        let allItems = [];
+
+        async function fetchItems() {
+            try {
+                const response = await fetch('/api/marketplace/');
+                allItems = await response.json();
+                displayItems(allItems);
+            } catch (error) {
+                console.error('Error fetching marketplace items:', error);
+            }
+        }
+
+        async function fetchOffers() {
+            try {
+                // For demonstration, we use 'whale' segment to show something interesting
+                const response = await fetch('/api/marketplace/offers/dynamic?user_segment=whale');
+                const offers = await response.json();
+                displayOffers(offers);
+            } catch (error) {
+                console.error('Error fetching dynamic offers:', error);
+            }
+        }
+
+        function displayItems(items) {
+            const grid = document.getElementById('items-grid');
+            grid.innerHTML = '';
+            items.forEach(item => {
+                grid.appendChild(createItemCard(item));
+            });
+        }
+
+        function displayOffers(offers) {
+            const grid = document.getElementById('offers-grid');
+            grid.innerHTML = '';
+            offers.forEach(offer => {
+                const card = createItemCard(offer);
+                card.classList.add('offer-card');
+                const badge = document.createElement('span');
+                badge.className = 'offer-badge';
+                badge.textContent = 'Special Offer';
+                card.prepend(badge);
+                grid.appendChild(card);
+            });
+        }
+
+        function createItemCard(item) {
+            const card = document.createElement('div');
+            card.className = 'category-card';
+            card.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" style="width:100%; border-radius: 8px 8px 0 0;">
+                <div style="padding: 15px;">
+                    <h3>${item.name}</h3>
+                    <p><strong>${item.category}</strong></p>
+                    <p>${item.description}</p>
+                    <p class="price">$${(item.price / 100).toFixed(2)}</p>
+                    <button class="cta-button">Buy Now</button>
+                </div>
+            `;
+            return card;
+        }
+
+        function filterItems() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+
+            const filtered = allItems.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = category === '' || item.category === category;
+                return matchesSearch && matchesCategory;
+            });
+
+            displayItems(filtered);
+        }
+
+        window.onload = () => {
+            fetchItems();
+            fetchOffers();
+        };
+    </script>
+    <style>
+        .filters {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .filters input, .filters select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .offer-card {
+            border: 2px solid #ff9800;
+            position: relative;
+        }
+        .offer-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4caf50;
+            margin: 10px 0;
+        }
+    </style>
+</body>
+</html>
