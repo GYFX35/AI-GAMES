@@ -1,0 +1,6 @@
+[
+    {"id": "s1", "user_name": "ProGamer123", "user_login": "progamer123", "game_id": "2", "title": "Ranked climb to Master!", "viewer_count": 1250},
+    {"id": "s2", "user_name": "ChillVibes", "user_login": "chillvibes", "game_id": "1", "title": "Coffee and Chat", "viewer_count": 450},
+    {"id": "s3", "user_name": "BlockMaster", "user_login": "blockmaster", "game_id": "4", "title": "Building a mega city", "viewer_count": 890},
+    {"id": "s4", "user_name": "FastReflex", "user_login": "fastreflex", "game_id": "3", "title": "Radiant grind", "viewer_count": 2100}
+]

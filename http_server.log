@@ -1,0 +1,36 @@
+127.0.0.1 - - [18/Apr/2026 06:15:47] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:47] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:47] "GET /firebase-init.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:47] "GET /nav_main.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] code 404, message File not found
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /api/twitch/streams HTTP/1.1" 404 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /manga_games.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /casino_games.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /ai_mmo_games.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /global_gambles.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /forums.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /affiliates.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /esport_games.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /instant_games.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /partnerships.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /camera_features.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] code 404, message File not found
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /icons/icon-512x512.png HTTP/1.1" 404 -
+127.0.0.1 - - [18/Apr/2026 06:15:48] code 404, message File not found
+127.0.0.1 - - [18/Apr/2026 06:15:48] "GET /icons/icon-192x192.png HTTP/1.1" 404 -
+127.0.0.1 - - [18/Apr/2026 06:15:50] "GET /twitch.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:51] code 404, message File not found
+127.0.0.1 - - [18/Apr/2026 06:15:51] "GET /api/twitch/games HTTP/1.1" 404 -
+127.0.0.1 - - [18/Apr/2026 06:15:51] code 404, message File not found
+127.0.0.1 - - [18/Apr/2026 06:15:51] "GET /api/twitch/streams HTTP/1.1" 404 -
+127.0.0.1 - - [18/Apr/2026 06:15:52] "GET /sw.js HTTP/1.1" 304 -
+127.0.0.1 - - [18/Apr/2026 06:15:53] "GET /cloud_gaming.html HTTP/1.1" 200 -
+127.0.0.1 - - [18/Apr/2026 06:15:53] code 404, message File not found
+127.0.0.1 - - [18/Apr/2026 06:15:53] "GET /api/geforce-now/games HTTP/1.1" 404 -
+127.0.0.1 - - [18/Apr/2026 06:15:53] code 404, message File not found
+127.0.0.1 - - [18/Apr/2026 06:15:53] "GET /api/amazon-luna/games HTTP/1.1" 404 -
+127.0.0.1 - - [18/Apr/2026 06:15:55] "GET /sw.js HTTP/1.1" 304 -

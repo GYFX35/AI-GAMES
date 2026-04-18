@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitch Games - Games Universe</title>
-    <meta name="description" content="Discover Twitch games and streams on the Games Universe platform.">
-    <meta name="keywords" content="twitch, games, streams, twitch games">
+    <title>Live Streaming - Games Universe</title>
+    <meta name="description" content="Watch live gaming streams on Games Universe.">
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
@@ -22,16 +20,33 @@
     </header>
 
     <main>
-        <section class="all-games">
+        <section class="hero" style="min-height: 200px;">
+            <div class="hero-content">
+                <h2>Live Gaming Streams</h2>
+                <p>Watch your favorite creators or discover new ones right here.</p>
+            </div>
+        </section>
+
+        <section class="featured-categories">
             <div class="container">
-                <h2>Top Twitch Games</h2>
-                <div id="gameResults" class="category-grid">
-                    <!-- Top games will be displayed here -->
+                <div id="player-container" style="display: none; margin-bottom: 4rem;">
+                    <div style="background: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg);">
+                        <div id="twitch-embed"></div>
+                        <div id="stream-info" style="padding: 1.5rem;">
+                             <!-- Filled by embedPlayer -->
+                        </div>
+                    </div>
                 </div>
-                <hr>
-                <h2>Streams</h2>
+
+                <h2>Recommended Channels</h2>
                 <div id="streamResults" class="category-grid">
                     <!-- Stream results will be displayed here -->
+                    <div class="category-card"><p>Loading live streams...</p></div>
+                </div>
+
+                <h2 style="margin-top: 4rem;">Popular Categories</h2>
+                <div id="gameResults" class="category-grid">
+                    <!-- Top games will be displayed here -->
                 </div>
             </div>
         </section>
@@ -43,67 +58,65 @@
         </div>
     </footer>
 
+    <script src="https://player.twitch.tv/js/embed/v1.js"></script>
     <script>
-      fetch('nav_senary.html')
+      fetch('nav_main.html')
         .then(response => response.text())
         .then(data => {
           document.getElementById('nav-placeholder').innerHTML = data;
         });
-        async function fetchTwitchGames() {
+
+        async function fetchInitialData() {
             try {
-                const response = await fetch('/api/twitch/games', {
-                    headers: {
-                        'X-API-Key': 'test-api-key'
-                    }
-                });
-                const games = await response.json();
+                const [gamesRes, streamsRes] = await Promise.all([
+                    fetch('/api/twitch/games', { headers: { 'X-API-Key': 'test-api-key' } }),
+                    fetch('/api/twitch/streams', { headers: { 'X-API-Key': 'test-api-key' } })
+                ]);
+
+                const games = await gamesRes.json();
+                const streams = await streamsRes.json();
+
                 displayGames(games);
+                displayStreams(streams);
             } catch (error) {
-                console.error('Error fetching Twitch games:', error);
+                console.error('Error fetching Twitch data:', error);
             }
         }
 
-        function displayGames(gamesToDisplay) {
+        function displayGames(games) {
             const gameResults = document.getElementById('gameResults');
             gameResults.innerHTML = '';
-
-            if (gamesToDisplay.length === 0) {
-                gameResults.innerHTML = '<p>No Twitch games found.</p>';
-                return;
-            }
-
-            gamesToDisplay.forEach(game => {
+            games.slice(0, 8).forEach(game => {
                 const gameCard = document.createElement('div');
                 gameCard.className = 'category-card';
                 gameCard.innerHTML = `
                     <h3>${game.name}</h3>
                     <p>${game.category}</p>
-                    <a href="#" onclick="fetchStreams('${game.id}')">View Streams</a>
+                    <a href="#" onclick="fetchStreamsForGame('${game.id}', '${game.name}')">Browse Streams</a>
                 `;
                 gameResults.appendChild(gameCard);
             });
         }
 
-        async function fetchStreams(gameId) {
+        async function fetchStreamsForGame(gameId, gameName) {
             try {
                 const response = await fetch(`/api/twitch/streams?game_id=${gameId}`, {
-                    headers: {
-                        'X-API-Key': 'test-api-key'
-                    }
+                    headers: { 'X-API-Key': 'test-api-key' }
                 });
                 const streams = await response.json();
-                displayStreams(streams);
+                displayStreams(streams, `Streams for ${gameName}`);
+                window.scrollTo({ top: document.getElementById('streamResults').offsetTop - 100, behavior: 'smooth' });
             } catch (error) {
                 console.error('Error fetching Twitch streams:', error);
             }
         }
 
-        function displayStreams(streams) {
+        function displayStreams(streams, title = "Recommended Channels") {
             const streamResults = document.getElementById('streamResults');
             streamResults.innerHTML = '';
 
             if (streams.length === 0) {
-                streamResults.innerHTML = '<p>No live streams for this game.</p>';
+                streamResults.innerHTML = '<p>No live streams found.</p>';
                 return;
             }
 
@@ -111,41 +124,41 @@
                 const streamCard = document.createElement('div');
                 streamCard.className = 'category-card';
                 streamCard.innerHTML = `
-                    <h3>${stream.title}</h3>
-                    <p>User: ${stream.user_name}</p>
-                    <p>Viewers: ${stream.viewer_count}</p>
-                    <a href="#" onclick="embedPlayer('${stream.user_login}')">Watch Now</a>
+                    <div style="background: #000; height: 120px; border-radius: 8px; margin-bottom: 1rem; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                         <div style="position: absolute; top: 10px; left: 10px; background: red; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">LIVE</div>
+                         <span style="color: var(--text-secondary);">Preview</span>
+                    </div>
+                    <h3 style="font-size: 1.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${stream.title}</h3>
+                    <p style="font-size: 0.9rem;">${stream.user_name} • ${stream.viewer_count} viewers</p>
+                    <a href="javascript:void(0)" onclick="embedPlayer('${stream.user_login}', '${stream.title}', '${stream.user_name}')">Watch Now</a>
                 `;
                 streamResults.appendChild(streamCard);
             });
         }
 
-        function embedPlayer(channel) {
-            const streamResults = document.getElementById('streamResults');
-            streamResults.innerHTML = `
-                <iframe
-                    src="https://player.twitch.tv/?channel=${channel}&parent=localhost"
-                    height="480"
-                    width="100%"
-                    allowfullscreen>
-                </iframe>
+        let currentEmbed = null;
+
+        function embedPlayer(channel, title, user) {
+            const container = document.getElementById('player-container');
+            container.style.display = 'block';
+
+            document.getElementById('twitch-embed').innerHTML = '';
+            document.getElementById('stream-info').innerHTML = `
+                <h2 style="margin: 0; font-size: 1.5rem;">${title}</h2>
+                <p style="color: var(--primary-color); font-weight: 600;">Streaming: ${user}</p>
             `;
-        }
 
-
-        window.onload = fetchTwitchGames;
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    })
-                    .catch(err => {
-                        console.log('ServiceWorker registration failed: ', err);
-                    });
+            new Twitch.Player("twitch-embed", {
+                channel: channel,
+                width: "100%",
+                height: 480,
+                parent: [window.location.hostname]
             });
+
+            window.scrollTo({ top: container.offsetTop - 120, behavior: 'smooth' });
         }
+
+        window.onload = fetchInitialData;
     </script>
 </body>
 </html>

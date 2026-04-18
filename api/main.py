@@ -37,6 +37,9 @@ from api import payment
 from api import gcs
 from api import monetag
 from api import marketplace
+from api import twitch
+from api import nintendo
+from api.auth import get_api_key
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -54,6 +57,8 @@ app.add_middleware(
 app.include_router(payment.router, prefix="/api/payment", tags=["payment"])
 app.include_router(monetag.router, prefix="/api/monetag", tags=["monetag"])
 app.include_router(marketplace.router, prefix="/api/marketplace", tags=["marketplace"])
+app.include_router(twitch.router, prefix="/api/twitch", tags=["twitch"])
+app.include_router(nintendo.router, prefix="/api/nintendo", tags=["nintendo"])
 
 @app.on_event("startup")
 async def startup_event():
