@@ -1,0 +1,6 @@
+[
+    {"id": "1", "name": "Just Chatting", "category": "IRL"},
+    {"id": "2", "name": "League of Legends", "category": "MOBA"},
+    {"id": "3", "name": "Valorant", "category": "FPS"},
+    {"id": "4", "name": "Minecraft", "category": "Sandbox"}
+]

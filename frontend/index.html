@@ -30,7 +30,7 @@
             <div id="nav-placeholder"></div>
             <div id="auth-container">
                 <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true"></div>
-                <a href="https://id.twitch.tv/oauth2/authorize?client_id=gp762nuuo5f0n3h9a56i0pp1g6z8g2&redirect_uri=http://localhost/twitch_auth_callback.html&response_type=code&scope=user:read:email" class="cta-button">Login with Twitch</a>
+                <a href="https://id.twitch.tv/oauth2/authorize?client_id=gp762nuuo5f0n3h9a56i0pp1g6z8g2&redirect_uri=http://localhost/twitch_auth_callback.html&response_type=code&scope=user:read:email" class="cta-button" style="padding: 10px 20px; font-size: 0.9rem;">Login with Twitch</a>
             </div>
         </div>
     </header>
@@ -38,180 +38,57 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h2>Welcome to the Universe of Games</h2>
-                <p>Explore, play, and connect with a global community of gamers.</p>
-                <a href="games.html" class="cta-button">Browse Games</a>
+                <h2>The Ultimate Gaming Universe</h2>
+                <p>Stream, play, and connect with a global community. Experience the future of gaming with AI and Cloud technology.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                    <a href="games.html" class="cta-button">Browse All Games</a>
+                    <a href="cloud_gaming.html" class="cta-button" style="background: var(--glass-bg); border: 1px solid var(--glass-border);">Try Cloud Gaming</a>
+                </div>
             </div>
         </section>
 
         <section class="featured-categories">
             <div class="container">
-                <h2>Featured Categories</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h2 style="margin: 0; text-align: left;">Live Streams</h2>
+                    <a href="twitch.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">View All Streams →</a>
+                </div>
+                <div id="liveStreamsGrid" class="category-grid">
+                    <!-- Live streams will be loaded here -->
+                    <div class="category-card" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <p>Loading live content...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-categories" style="background: rgba(255, 255, 255, 0.02);">
+            <div class="container">
+                <h2>Discover Your Next Favorite</h2>
                 <div class="category-grid">
                     <div class="category-card">
-                        <h3>AI MMO Games</h3>
-                        <p>Explore vast worlds with intelligent creatures and dynamic quests.</p>
-                        <a href="ai_mmo_games.html">Explore</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Manga-Based Games</h3>
-                        <p>Live your favorite manga stories and battle alongside iconic characters.</p>
-                        <a href="manga_games.html">Discover</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Esports</h3>
-                        <p>Compete at the highest level or watch the pros in action.</p>
-                        <a href="esport_games.html">Watch Now</a>
-                    </div>
-                     <div class="category-card">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">🎮</div>
                         <h3>Instant Games</h3>
-                        <p>Jump right into the action with our collection of instant games.</p>
+                        <p>Jump right into the action with our collection of instant games. No downloads required.</p>
                         <a href="instant_games.html">Play Now</a>
                     </div>
                     <div class="category-card">
-                        <h3>Africa AR</h3>
-                        <p>Explore the vibrant cultures of Africa in augmented reality.</p>
-                        <a href="africa_ar_game.html">Explore</a>
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">☁️</div>
+                        <h3>Cloud Gaming</h3>
+                        <p>Play high-end PC and console games on any device via our streaming technology.</p>
+                        <a href="cloud_gaming.html">Stream Now</a>
                     </div>
                     <div class="category-card">
-                        <h3>Shovel Master</h3>
-                        <p>Experience the ultimate AR/VR shoveling challenge with AI and blockchain.</p>
-                        <a href="shovel_master_game.html">Play Now</a>
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
+                        <h3>AI MMO Games</h3>
+                        <p>Explore vast worlds with intelligent creatures and dynamic, AI-driven quests.</p>
+                        <a href="ai_mmo_games.html">Explore</a>
                     </div>
                     <div class="category-card">
-                        <h3>Health & Fitness Games</h3>
-                        <p>Stay active and have fun with our collection of fitness games.</p>
-                        <a href="health_fitness_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Neuroscience & Psychotherapy Games</h3>
-                        <p>Engage your mind with games designed to improve cognitive function and mental well-being.</p>
-                        <a href="neuroscience_psychotherapy_games.html">Explore</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Web3 Games</h3>
-                        <p>Explore the future of gaming with our collection of Web3 and blockchain games.</p>
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">⛓️</div>
+                        <h3>Web3 & NFT</h3>
+                        <p>Own your in-game assets and earn rewards through blockchain-integrated gameplay.</p>
                         <a href="web3_games.html">Discover</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Racing Games</h3>
-                        <p>Experience high-speed action and compete for the win.</p>
-                        <a href="racing_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Vehicle Simulation</h3>
-                        <p>Experience realistic driving, flying, and sailing.</p>
-                        <a href="vehicle_simulation_games.html">Explore</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Bicycle Games</h3>
-                        <p>Experience the thrill of cycling, from extreme downhill to professional racing.</p>
-                        <a href="bicycle_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Sports Games</h3>
-                        <p>Play your favorite sports and lead your team to victory.</p>
-                        <a href="sports_games.html">Compete</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Football Games</h3>
-                        <p>Play your favorite football games and lead your team to victory.</p>
-                        <a href="football_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Battle and Fight Games</h3>
-                        <p>Engage in intense combat and emerge victorious.</p>
-                        <a href="battle_and_fight_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Casual Games</h3>
-                        <p>Easy to pick up and play, perfect for a quick break.</p>
-                        <a href="casual_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Children Games</h3>
-                        <p>Fun and educational games for children of all ages.</p>
-                        <a href="children_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Puzzle Games</h3>
-                        <p>Challenge your mind with our collection of puzzle games.</p>
-                        <a href="puzzle_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Action Games</h3>
-                        <p>Experience non-stop thrills and adventure.</p>
-                        <a href="action_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Shooting Games</h3>
-                        <p>Test your aim and reflexes in high-octane combat.</p>
-                        <a href="shooting_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Music Games</h3>
-                        <p>Test your rhythm and timing with our music games.</p>
-                        <a href="music_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Adventure Games</h3>
-                        <p>Embark on epic journeys and explore vast worlds.</p>
-                        <a href="adventure_games.html">Explore</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Female Protagonist Games</h3>
-                        <p>Lead the way with strong and compelling female characters.</p>
-                        <a href="female_protagonist_games.html">Discover</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Filmmaking Games</h3>
-                        <p>Create your own movies and bring your stories to life.</p>
-                        <a href="filmmaking_games.html">Create</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Photography Games</h3>
-                        <p>Capture the moment and explore the art of photography.</p>
-                        <a href="photography_games.html">Capture</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Science Games</h3>
-                        <p>Explore the world of science through interactive gameplay.</p>
-                        <a href="science_games.html">Learn</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Literature Games</h3>
-                        <p>Experience classic stories in a new and interactive way.</p>
-                        <a href="literature_games.html">Read</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Geography Games</h3>
-                        <p>Explore the world and test your geography knowledge.</p>
-                        <a href="geography_games.html">Explore</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Language Games</h3>
-                        <p>Learn a new language through fun and interactive games.</p>
-                        <a href="language_games.html">Learn</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Cooking Games</h3>
-                        <p>Cook up some fun with our collection of cooking games.</p>
-                        <a href="cooking_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Art Games</h3>
-                        <p>Unleash your creativity with our collection of art games.</p>
-                        <a href="art_games.html">Explore</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Red Bull Games</h3>
-                        <p>Play the latest games from Red Bull.</p>
-                        <a href="redbull_games.html">Play Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Junglee Games</h3>
-                        <p>Play online rummy games from Junglee Games.</p>
-                        <a href="junglee_games.html">Play Now</a>
                     </div>
                 </div>
             </div>
@@ -219,27 +96,30 @@
 
         <section class="featured-categories">
             <div class="container">
-                <h2>News & Entertainment</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h2 style="margin: 0; text-align: left;">Popular Categories</h2>
+                    <a href="games.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">See All →</a>
+                </div>
                 <div class="category-grid">
                     <div class="category-card">
-                        <h3>HTML5 Videos</h3>
-                        <p>Watch the latest HTML5 videos from the gaming world.</p>
-                        <a href="html5_videos.html">Watch Now</a>
+                        <h3>Esports</h3>
+                        <p>Watch professional tournaments or compete in our organized leagues.</p>
+                        <a href="esport_games.html">Join Now</a>
                     </div>
                     <div class="category-card">
-                        <h3>Music Entertainment</h3>
-                        <p>Listen to the latest music from the gaming world.</p>
-                        <a href="music_entertainment.html">Listen Now</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>Nexon Games</h3>
-                        <p>Explore the latest news and updates from Nexon Games.</p>
-                        <a href="nexon_games.html">Read More</a>
-                    </div>
-                    <div class="category-card">
-                        <h3>VR/AR Games</h3>
-                        <p>Experience the future of gaming with our collection of VR and AR games.</p>
+                        <h3>VR/AR Experience</h3>
+                        <p>Immerse yourself in virtual and augmented reality games.</p>
                         <a href="vrar_games.html">Explore</a>
+                    </div>
+                    <div class="category-card">
+                        <h3>Sports & Racing</h3>
+                        <p>From high-speed racing to professional sports simulations.</p>
+                        <a href="sports_games.html">Play Now</a>
+                    </div>
+                    <div class="category-card">
+                        <h3>Battle & Combat</h3>
+                        <p>Test your skills in intense combat and strategic battle games.</p>
+                        <a href="battle_and_fight_games.html">Enter Arena</a>
                     </div>
                 </div>
             </div>
@@ -248,6 +128,28 @@
 
     <footer>
         <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; text-align: left; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: #fff;">Games Universe</h3>
+                    <p>The global portal for discovery, playing, and developing next-gen games.</p>
+                </div>
+                <div>
+                    <h4 style="color: #fff;">Platform</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="games.html" style="color: var(--text-secondary); text-decoration: none;">Games</a></li>
+                        <li><a href="cloud_gaming.html" style="color: var(--text-secondary); text-decoration: none;">Streaming</a></li>
+                        <li><a href="marketplace.html" style="color: var(--text-secondary); text-decoration: none;">Marketplace</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #fff;">Developers</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="developers.html" style="color: var(--text-secondary); text-decoration: none;">Tools</a></li>
+                        <li><a href="forums.html" style="color: var(--text-secondary); text-decoration: none;">Community</a></li>
+                        <li><a href="github_explorer.html" style="color: var(--text-secondary); text-decoration: none;">Open Source</a></li>
+                    </ul>
+                </div>
+            </div>
             <p>&copy; 2024 Games Universe. All rights reserved.</p>
         </div>
     </footer>
@@ -258,6 +160,36 @@
         .then(data => {
           document.getElementById('nav-placeholder').innerHTML = data;
         });
+
+      async function fetchFeaturedStreams() {
+          try {
+              const response = await fetch('/api/twitch/streams', {
+                  headers: { 'X-API-Key': 'test-api-key' }
+              });
+              const streams = await response.json();
+              const grid = document.getElementById('liveStreamsGrid');
+              grid.innerHTML = '';
+
+              streams.slice(0, 4).forEach(stream => {
+                  const card = document.createElement('div');
+                  card.className = 'category-card';
+                  card.innerHTML = `
+                      <div style="background: #000; height: 150px; border-radius: 8px; margin-bottom: 1rem; position: relative; overflow: hidden;">
+                         <div style="position: absolute; top: 10px; left: 10px; background: red; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">LIVE</div>
+                         <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-secondary);">Stream Preview</div>
+                      </div>
+                      <h4 style="margin: 0 0 0.5rem 0; color: #fff;">${stream.title}</h4>
+                      <p style="font-size: 0.85rem; margin-bottom: 1rem;">${stream.user_name}</p>
+                      <a href="twitch.html" style="font-size: 0.8rem;">Watch Live</a>
+                  `;
+                  grid.appendChild(card);
+              });
+          } catch (e) {
+              console.error('Error fetching streams:', e);
+          }
+      }
+
+      window.addEventListener('DOMContentLoaded', fetchFeaturedStreams);
 
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
