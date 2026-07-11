@@ -1,0 +1,42 @@
+[
+    {
+        "id": "ali_001",
+        "name": "Bulk Custom RGB Gaming Mouse",
+        "category": "Input Devices",
+        "price": 5.50,
+        "moq": "100 pcs",
+        "rating": 4.5,
+        "image_emoji": "🖱️",
+        "link": "https://www.alibaba.com/product-detail/Bulk-Custom-RGB-Gaming-Mouse_12345.html"
+    },
+    {
+        "id": "ali_002",
+        "name": "Wholesale Ergonomic Office/Gaming Chair",
+        "category": "Furniture",
+        "price": 45.00,
+        "moq": "50 pcs",
+        "rating": 4.6,
+        "image_emoji": "💺",
+        "link": "https://www.alibaba.com/product-detail/Wholesale-Ergonomic-Office-Gaming-Chair_23456.html"
+    },
+    {
+        "id": "ali_003",
+        "name": "Custom Logo Mechanical Keyboards",
+        "category": "Keyboards",
+        "price": 12.00,
+        "moq": "200 pcs",
+        "rating": 4.7,
+        "image_emoji": "⌨️",
+        "link": "https://www.alibaba.com/product-detail/Custom-Logo-Mechanical-Keyboards_34567.html"
+    },
+    {
+        "id": "ali_004",
+        "name": "Bulk Wireless Gaming Headset with Mic",
+        "category": "Audio",
+        "price": 8.50,
+        "moq": "150 pcs",
+        "rating": 4.4,
+        "image_emoji": "🎧",
+        "link": "https://www.alibaba.com/product-detail/Bulk-Wireless-Gaming-Headset-with-Mic_45678.html"
+    }
+]

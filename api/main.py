@@ -39,6 +39,7 @@ from api import monetag
 from api import marketplace
 from api import twitch
 from api import nintendo
+from api import ecommerce
 from api.auth import get_api_key
 from dotenv import load_dotenv
 
@@ -59,6 +60,7 @@ app.include_router(monetag.router, prefix="/api/monetag", tags=["monetag"])
 app.include_router(marketplace.router, prefix="/api/marketplace", tags=["marketplace"])
 app.include_router(twitch.router, prefix="/api/twitch", tags=["twitch"])
 app.include_router(nintendo.router, prefix="/api/nintendo", tags=["nintendo"])
+app.include_router(ecommerce.router, prefix="/api/ecommerce", tags=["ecommerce"])
 
 @app.on_event("startup")
 async def startup_event():

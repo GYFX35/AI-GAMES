@@ -15,5 +15,5 @@ class TestAmazonLuna(unittest.TestCase):
 
     def test_get_amazon_luna_games_no_api_key(self):
         response = self.client.get("/api/amazon-luna/games")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
         self.assertEqual(response.json()["detail"], "Not authenticated")

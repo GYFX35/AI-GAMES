@@ -8,54 +8,392 @@
     <meta name="keywords" content="game development partnerships, research collaboration, academic partnership, game industry, sponsorship">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
+    <style>
+        /* Custom Styles for E-commerce Partnerships */
+        .partnership-join-container {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin: 2rem 0;
+            background: linear-gradient(135deg, rgba(255, 69, 0, 0.15), rgba(255, 140, 0, 0.05));
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .partnership-join-container h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .partnership-join-container p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .showcase-section {
+            display: none;
+            margin-top: 3rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Tabs Styling */
+        .tabs-header {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--glass-bg);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .platform-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            background: rgba(255, 69, 0, 0.1);
+            color: var(--primary-color);
+            border: 1px solid rgba(255, 69, 0, 0.2);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            line-height: 1.3;
+            min-height: 3.1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .product-rating {
+            color: #ffbc0b;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .product-action-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+
+        .product-action-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Partner With Us</h1>
+        <div class="container">
+            <h1 class="logo">Games Universe</h1>
+            <div id="nav-placeholder"></div>
+        </div>
     </header>
-    <div id="nav-placeholder"></div>
-    <main>
-        <section id="why-partner">
-            <h2>Why Partner with Game Portal?</h2>
-            <p>Game Portal is a growing community of gamers and enthusiasts. Partnering with us offers you a platform to showcase your games to a dedicated audience.</p>
+    <main class="container">
+        <section id="why-partner" style="margin-top: 3rem;">
+            <h2>Why Partner with Games Universe?</h2>
+            <p>Games Universe is a rapidly growing international community of gamers, researchers, and game developers. Partnering with us offers you an unprecedented platform to showcase your games, physical hardware, and affiliate merchandise directly to a dedicated and highly active audience.</p>
             <p>Benefits include:</p>
             <ul>
-                <li>Exposure to a targeted gaming audience.</li>
-                <li>Opportunities for featured game placements (details to be discussed).</li>
-                <li>Collaboration on promotional events.</li>
-                <!-- Add more benefits as you define them -->
+                <li><strong>Exposure:</strong> Connect directly with a targeted, tech-savvy gaming audience.</li>
+                <li><strong>Premium Placement:</strong> Opportunities for high-visibility featured placements across categories.</li>
+                <li><strong>Dynamic Synergy:</strong> Collaborate on unique promotional events, game testings, and brand campaigns.</li>
+                <li><strong>Integrated Dropshipping:</strong> List and sell co-branded merchandise and gear with zero friction.</li>
             </ul>
         </section>
 
         <section id="who-we-look-for">
             <h2>Who We're Looking For</h2>
-            <p>We are interested in partnering with:</p>
+            <p>We are actively seeking strategic partnerships with:</p>
             <ul>
-                <li>Independent game developers.</li>
-                <li>Game studios of all sizes.</li>
-                <li>Publishers looking to promote their titles.
-                <li>Gaming communities and content creators.</li>
+                <li>Independent game developers and innovative software studios of all sizes.</li>
+                <li>Global game publishers looking to launch new titles with custom interactive promos.</li>
+                <li>Leading hardware, gear, and gaming accessory e-commerce suppliers.</li>
+                <li>Gaming communities, influencers, and high-quality content creators.</li>
             </ul>
         </section>
 
-        <section id="get-in-touch">
-            <h2>Get in Touch</h2>
-            <p>If you are interested in exploring a partnership with Game Portal, please reach out to us with your proposal or for more information.</p>
-            <p>Contact Email: <strong>[Your Partnership Email Address Here]</strong></p>
-            <p><em>(Alternatively, you can mention a contact form if you plan to add one later)</em></p>
+        <!-- Dynamic Join Our Partnership Action Container -->
+        <section id="join-partnership-action">
+            <div class="partnership-join-container">
+                <h3>Ready to Take the Next Step?</h3>
+                <p>Join our thriving partnership network today! Instantly explore and import catalog products from major global e-commerce systems including Alibaba, Amazon, Shopline, and Shopify to sell and promote.</p>
+                <button id="join-partnership-btn" class="cta-button" style="border: none; cursor: pointer;">Join Our Partnership</button>
+            </div>
+
+            <!-- Products Showcase View -->
+            <div id="showcase" class="showcase-section">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Partner Product Catalogs</h2>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    We have direct API integrations with leading global e-commerce platforms. Select a platform tab below to browse hot items and synchronize your partnership inventory.
+                </p>
+
+                <!-- Platform Tabs -->
+                <div class="tabs-header">
+                    <button class="tab-btn active" onclick="switchPlatform('alibaba')">Alibaba (Wholesale)</button>
+                    <button class="tab-btn" onclick="switchPlatform('amazon')">Amazon (Retail)</button>
+                    <button class="tab-btn" onclick="switchPlatform('shopline')">Shopline Storefront</button>
+                    <button class="tab-btn" onclick="switchPlatform('shopify')">Shopify Merchant</button>
+                </div>
+
+                <!-- Products Display Area -->
+                <div id="products-container">
+                    <div class="loading-spinner">Initializing connection...</div>
+                </div>
+            </div>
         </section>
 
+        <section id="get-in-touch" style="margin-top: 4rem;">
+            <h2>Get in Touch</h2>
+            <p>If you prefer a traditional proposal or would like to explore custom academic/industry collaborations, please reach out to our team directly.</p>
+            <p>Contact Email: <strong>partnerships@gamesuniverse.io</strong></p>
+        </section>
     </main>
     <footer>
-        <p>&copy; 2023 Game Portal</p>
+        <div class="container">
+            <p>&copy; 2024 Games Universe. All rights reserved.</p>
+        </div>
     </footer>
     <script src="modal.js" defer></script>
     <script>
+      // Load unified navigation
       fetch('nav_secondary.html')
         .then(response => response.text())
         .then(data => {
           document.getElementById('nav-placeholder').innerHTML = data;
         });
+
+      // API and State Config
+      const API_KEY = "test-api-key";
+      let currentPlatform = "alibaba";
+      const productsData = {
+          alibaba: null,
+          amazon: null,
+          shopline: null,
+          shopify: null
+      };
+
+      // Join button interaction
+      const joinBtn = document.getElementById('join-partnership-btn');
+      const showcaseSection = document.getElementById('showcase');
+
+      joinBtn.addEventListener('click', () => {
+          showcaseSection.style.display = 'block';
+          // Scroll smoothly to showcase
+          showcaseSection.scrollIntoView({ behavior: 'smooth' });
+          // Load the initial platform products
+          loadPlatformProducts(currentPlatform);
+      });
+
+      // Tab switcher function
+      window.switchPlatform = function(platform) {
+          currentPlatform = platform;
+
+          // Update active tab buttons
+          const buttons = document.querySelectorAll('.tab-btn');
+          buttons.forEach(btn => {
+              if (btn.getAttribute('onclick').includes(platform)) {
+                  btn.classList.add('active');
+              } else {
+                  btn.classList.remove('active');
+              }
+          });
+
+          loadPlatformProducts(platform);
+      }
+
+      // Fetch and display product catalogs
+      async function loadPlatformProducts(platform) {
+          const container = document.getElementById('products-container');
+
+          // Use cached data if available
+          if (productsData[platform]) {
+              displayProducts(productsData[platform], platform);
+              return;
+          }
+
+          container.innerHTML = '<div class="loading-spinner">Connecting securely to ' + platform.toUpperCase() + ' API...</div>';
+
+          try {
+              const response = await fetch(`/api/ecommerce/${platform}`, {
+                  headers: {
+                      'X-API-Key': API_KEY,
+                      'Accept': 'application/json'
+                  }
+              });
+
+              if (!response.ok) {
+                  throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
+              }
+
+              const data = await response.json();
+              productsData[platform] = data;
+              displayProducts(data, platform);
+          } catch (error) {
+              console.error(`Error fetching products for ${platform}:`, error);
+              container.innerHTML = `
+                  <div style="text-align: center; padding: 2rem; color: #ff4500;">
+                      <p>⚠️ Error loading ${platform} products. Please verify your connection or API configuration.</p>
+                      <button onclick="loadPlatformProducts('${platform}')" class="tab-btn" style="margin-top: 1rem; border-color: var(--primary-color);">Retry Connection</button>
+                  </div>
+              `;
+          }
+      }
+
+      // Render products inside grid
+      function displayProducts(products, platform) {
+          const container = document.getElementById('products-container');
+          if (!products || products.length === 0) {
+              container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No products available for this platform currently.</p>';
+              return;
+          }
+
+          let html = '<div class="products-grid">';
+
+          products.forEach(prod => {
+              const emoji = prod.image_emoji || "📦";
+              const priceLabel = prod.price ? `$${prod.price.toFixed(2)}` : "Contact for Price";
+
+              // Custom metadata badge depending on platform characteristics
+              let extraBadge = '';
+              if (platform === 'alibaba' && prod.moq) {
+                  extraBadge = `<div class="product-meta"><b>MOQ:</b> ${prod.moq}</div>`;
+              } else if (platform === 'shopline' && prod.store) {
+                  extraBadge = `<div class="product-meta"><b>Store:</b> ${prod.store}</div>`;
+              } else if (platform === 'shopify' && prod.vendor) {
+                  extraBadge = `<div class="product-meta"><b>Vendor:</b> ${prod.vendor}</div>`;
+              } else {
+                  extraBadge = `<div class="product-meta"><b>Category:</b> ${prod.category}</div>`;
+              }
+
+              // Stars for rating
+              const ratingVal = prod.rating || 5.0;
+              const stars = '★'.repeat(Math.round(ratingVal)) + '☆'.repeat(5 - Math.round(ratingVal));
+
+              html += `
+                  <div class="product-card">
+                      <span class="platform-badge">${platform}</span>
+                      <div class="product-icon">${emoji}</div>
+                      <h4 class="product-title">${prod.name}</h4>
+                      ${extraBadge}
+                      <div class="product-rating">${stars} <span style="color: var(--text-secondary); font-size: 0.8rem;">(${ratingVal})</span></div>
+                      <div class="product-price">${priceLabel}</div>
+                      <a href="${prod.link}" target="_blank" class="product-action-btn">Partner & Promote</a>
+                  </div>
+              `;
+          });
+
+          html += '</div>';
+          container.innerHTML = html;
+      }
     </script>
 </body>
 </html>
