@@ -1,0 +1,38 @@
+[
+    {
+        "id": "amz_001",
+        "name": "Logitech G502 HERO High Performance Gaming Mouse",
+        "category": "Gaming Mice",
+        "price": 39.99,
+        "rating": 4.8,
+        "image_emoji": "🖱️",
+        "link": "https://www.amazon.com/Logitech-G502-High-Performance-Gaming-Mouse/dp/B07GBZ4Q68"
+    },
+    {
+        "id": "amz_002",
+        "name": "Razer BlackWidow V4 Mechanical Keyboard",
+        "category": "Keyboards",
+        "price": 169.99,
+        "rating": 4.6,
+        "image_emoji": "⌨️",
+        "link": "https://www.amazon.com/Razer-BlackWidow-Mechanical-Gaming-Keyboard/dp/B0BWSG4D67"
+    },
+    {
+        "id": "amz_003",
+        "name": "SteelSeries Arctis Nova 7 Wireless Gaming Headset",
+        "category": "Audio",
+        "price": 179.99,
+        "rating": 4.7,
+        "image_emoji": "🎧",
+        "link": "https://www.amazon.com/SteelSeries-Arctis-Wireless-Gaming-Headset/dp/B0B1MGGV2B"
+    },
+    {
+        "id": "amz_004",
+        "name": "Secretlab TITAN Evo Gaming Chair",
+        "category": "Furniture",
+        "price": 549.00,
+        "rating": 4.9,
+        "image_emoji": "💺",
+        "link": "https://www.amazon.com/Secretlab-TITAN-Evo-Gaming-Chair/dp/B098765432"
+    }
+]

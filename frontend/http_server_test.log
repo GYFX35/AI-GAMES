@@ -1,0 +1,5 @@
+127.0.0.1 - - [11/Jul/2026 16:28:54] "GET /partnerships.html HTTP/1.1" 200 -
+127.0.0.1 - - [11/Jul/2026 16:28:55] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Jul/2026 16:28:55] "GET /modal.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Jul/2026 16:28:55] "GET /modal.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Jul/2026 16:28:55] "GET /nav_secondary.html HTTP/1.1" 200 -

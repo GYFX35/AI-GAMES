@@ -1,0 +1,42 @@
+[
+    {
+        "id": "shp_001",
+        "name": "Cyberpunk LED Visor Glasses",
+        "category": "Wearables",
+        "price": 34.99,
+        "vendor": "FutureTech Wear",
+        "rating": 4.6,
+        "image_emoji": "👓",
+        "link": "https://futuretech-wear.myshopify.com/products/cyberpunk-led-visor"
+    },
+    {
+        "id": "shp_002",
+        "name": "Desk RGB Ambient Smart Light Bars",
+        "category": "Smart Lighting",
+        "price": 49.99,
+        "vendor": "Lumina Labs",
+        "rating": 4.7,
+        "image_emoji": "💡",
+        "link": "https://lumina-labs.myshopify.com/products/rgb-smart-light-bars"
+    },
+    {
+        "id": "shp_003",
+        "name": "Carbon Fiber Desk Headphone Hanger",
+        "category": "Desk Organizers",
+        "price": 22.50,
+        "vendor": "ModuDesk",
+        "rating": 4.4,
+        "image_emoji": "📐",
+        "link": "https://modudesk.myshopify.com/products/carbon-headphone-hanger"
+    },
+    {
+        "id": "shp_004",
+        "name": "Premium Gamer Energy Mix (Tub)",
+        "category": "Nutrition",
+        "price": 39.99,
+        "vendor": "Respawn Fuel",
+        "rating": 4.8,
+        "image_emoji": "🥤",
+        "link": "https://respawn-fuel.myshopify.com/products/gamer-energy-tub"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "id": "shl_001",
+        "name": "E-Sports Pro Jersey (Limited Edition)",
+        "category": "Apparel",
+        "price": 29.99,
+        "store": "Apex Gear Store",
+        "rating": 4.7,
+        "image_emoji": "👕",
+        "link": "https://apexgear.shoplineapp.com/products/esports-pro-jersey"
+    },
+    {
+        "id": "shl_002",
+        "name": "Neon Grid XXL Gaming Mousepad",
+        "category": "Desk Accessories",
+        "price": 19.99,
+        "store": "PixelArt Shop",
+        "rating": 4.8,
+        "image_emoji": "🗺️",
+        "link": "https://pixelart.shoplineapp.com/products/neon-grid-mousepad"
+    },
+    {
+        "id": "shl_003",
+        "name": "USB-C Coiled Cable for Mechanical Keyboards",
+        "category": "Cables",
+        "price": 14.99,
+        "store": "CableModz",
+        "rating": 4.5,
+        "image_emoji": "🔌",
+        "link": "https://cablemodz.shoplineapp.com/products/coiled-usb-c-cable"
+    },
+    {
+        "id": "shl_004",
+        "name": "Retro Console Enamel Pin Set",
+        "category": "Collectibles",
+        "price": 9.99,
+        "store": "PinForge",
+        "rating": 4.6,
+        "image_emoji": "📌",
+        "link": "https://pinforge.shoplineapp.com/products/retro-console-pins"
+    }
+]
